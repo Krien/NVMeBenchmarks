@@ -1,0 +1,29 @@
+3zones: (g=0): rw=write, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=spdk, iodepth=16
+...
+fio-3.32
+Starting 3 threads
+
+3zones: (groupid=0, jobs=3): err= 0: pid=466554: Mon Nov 21 12:37:56 2022
+  write: IOPS=134k, BW=522MiB/s (547MB/s)(15.3GiB/30002msec); 0 zone resets
+    slat (nsec): min=360, max=31178, avg=569.82, stdev=112.83
+    clat (usec): min=234, max=1338, avg=358.54, stdev=30.81
+     lat (usec): min=234, max=1339, avg=359.11, stdev=30.81
+    clat percentiles (usec):
+     |  1.00th=[  302],  5.00th=[  318], 10.00th=[  326], 20.00th=[  334],
+     | 30.00th=[  343], 40.00th=[  351], 50.00th=[  359], 60.00th=[  363],
+     | 70.00th=[  371], 80.00th=[  379], 90.00th=[  392], 95.00th=[  404],
+     | 99.00th=[  474], 99.50th=[  523], 99.90th=[  562], 99.95th=[  578],
+     | 99.99th=[  676]
+   bw (  KiB/s): min=527400, max=538814, per=100.00%, avg=534189.40, stdev=984.64, samples=180
+   iops        : min=131850, max=134703, avg=133547.23, stdev=246.16, samples=180
+  lat (usec)   : 250=0.01%, 500=99.24%, 750=0.76%, 1000=0.01%
+  lat (msec)   : 2=0.01%
+  cpu          : usr=99.99%, sys=0.00%, ctx=123, majf=0, minf=0
+  IO depths    : 1=0.0%, 2=0.0%, 4=0.0%, 8=0.0%, 16=100.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.1%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=0,4005391,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=16
+
+Run status group 0 (all jobs):
+  WRITE: bw=522MiB/s (547MB/s), 522MiB/s-522MiB/s (547MB/s-547MB/s), io=15.3GiB (16.4GB), run=30002-30002msec

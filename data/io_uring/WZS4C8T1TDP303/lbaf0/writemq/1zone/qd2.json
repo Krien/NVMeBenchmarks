@@ -1,0 +1,27 @@
+1zones: (g=0): rw=write, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=spdk, iodepth=2
+fio-3.32
+Starting 1 thread
+
+1zones: (groupid=0, jobs=1): err= 0: pid=470155: Mon Nov 21 13:54:23 2022
+  write: IOPS=72.0k, BW=281MiB/s (295MB/s)(8437MiB/30001msec); 0 zone resets
+    slat (nsec): min=450, max=16756, avg=547.07, stdev=102.92
+    clat (usec): min=14, max=254, avg=26.90, stdev= 3.98
+     lat (usec): min=15, max=254, avg=27.45, stdev= 3.97
+    clat percentiles (usec):
+     |  1.00th=[   23],  5.00th=[   25], 10.00th=[   25], 20.00th=[   26],
+     | 30.00th=[   26], 40.00th=[   26], 50.00th=[   26], 60.00th=[   27],
+     | 70.00th=[   28], 80.00th=[   29], 90.00th=[   31], 95.00th=[   33],
+     | 99.00th=[   38], 99.50th=[   40], 99.90th=[   52], 99.95th=[  131],
+     | 99.99th=[  157]
+   bw (  KiB/s): min=287568, max=288544, per=100.00%, avg=288055.72, stdev=200.79, samples=60
+   iops        : min=71892, max=72136, avg=72013.95, stdev=50.10, samples=60
+  lat (usec)   : 20=0.04%, 50=99.85%, 100=0.05%, 250=0.06%, 500=0.01%
+  cpu          : usr=100.00%, sys=0.00%, ctx=35, majf=0, minf=0
+  IO depths    : 1=0.0%, 2=100.0%, 4=0.0%, 8=0.0%, 16=0.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=0,2159870,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=2
+
+Run status group 0 (all jobs):
+  WRITE: bw=281MiB/s (295MB/s), 281MiB/s-281MiB/s (295MB/s-295MB/s), io=8437MiB (8847MB), run=30001-30001msec
