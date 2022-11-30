@@ -79,6 +79,8 @@ default_args=(
     --time_based=1
     --runtime=30s
     --ramp_time=10s
+    --numa_cpu_nodes="$numa"
+    --numa_mem_policy="bind:${numa}"
 )
 if [[ "$type" == "ZNS"  ]]; then
     default_args+=(
