@@ -64,11 +64,12 @@ class DataPath:
     mode: str
     lbaf: str
     operation: str
-    concurrent_zones: str
-    qd: str
+    concurrent_zones: int
+    qd: int
+    bs: int
 
     def Path(self) -> str:
-        return f"{self.engine}/{self.mode}/{self.lbaf}/{self.operation}/{self.concurrent_zones}/{self.qd}qd.json"
+        return f"{self.engine}/{self.mode}/{self.lbaf}/{self.operation}/{self.bs}bs/{self.concurrent_zones}zone/{self.qd}.json"
 
 
 def parse_fio_file(fio_data_path_definition):

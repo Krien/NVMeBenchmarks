@@ -22,7 +22,8 @@ def plot_lot_kiops(
     lbafs: List[str],
     operations: List[str],
     engines: List[str],
-    concurrent_zones: List[str],
+    concurrent_zones: List[int],
+    block_sizes: List[int],
     queue_depth_limit: int,
     lower_limit: int,
     upper_limit: int,
@@ -34,16 +35,28 @@ def plot_lot_kiops(
     pick_color = iter(colors)
     qds = [qd for qd in ALLOWED_QDS if qd < queue_depth_limit]
 
-    merged_dat = zip(labels, models, engines, lbafs, operations, concurrent_zones)
+    merged_dat = zip(
+        labels, models, engines, lbafs, operations, concurrent_zones, block_sizes
+    )
     plot_data = {}
-    for label, model, engine, lbaf, operation, concurrent_zone in merged_dat:
+    for (
+        label,
+        model,
+        engine,
+        lbaf,
+        operation,
+        concurrent_zone,
+        block_size,
+    ) in merged_dat:
         plot_data[label] = LatKIOPSSpec([], [], next(pick_color))
         for qd in qds:
             print(
-                f"Adding to plot: label={label}, model={model}, engine={engine}, lbaf={lbaf}, op={operation}, zones={concurrent_zone}, qd={qd}"
+                f"Adding to plot: label={label}, model={model}, engine={engine}, lbaf={lbaf}, op={operation}, zones={concurrent_zone}, qd={qd}, block_size={block_size}"
             )
             fio_dat = parse_fio_file(
-                DataPath(engine, model, lbaf, operation, concurrent_zone, qd)
+                DataPath(
+                    engine, model, lbaf, operation, concurrent_zone, qd, block_size
+                )
             )
             plot_data[label].kiops.append(
                 prep_function(prep_function_x, fio_dat.iops_mean)
@@ -92,7 +105,8 @@ if __name__ == "__main__":
         required=True,
     )
     parser.add_argument("-o", "--operations", type=str, nargs="+", required=True)
-    parser.add_argument("-c", "--concurrent_zones", type=str, nargs="+", required=True)
+    parser.add_argument("-c", "--concurrent_zones", type=int, nargs="+", required=True)
+    parser.add_argument("-b", "--block_sizes", type=int, nargs="+", required=True)
     parser.add_argument(
         "-q", "--queue_depth_limit", type=int, required=False, default=256
     )
@@ -120,12 +134,14 @@ if __name__ == "__main__":
     lbafs = args.lbafs
     operations = args.operations
     concurrent_zones = args.concurrent_zones
+    block_sizes = args.block_sizes
     if (
         len(labels) != len(models)
         or len(models) != len(lbafs)
         or len(engines) != len(lbafs)
         or len(engines) != len(operations)
         or len(operations) != len(concurrent_zones)
+        or len(concurrent_zones) != len(block_sizes)
     ):
         print("List args must have equal length")
         exit(1)
@@ -138,6 +154,7 @@ if __name__ == "__main__":
         operations,
         engines,
         concurrent_zones,
+        block_sizes,
         args.queue_depth_limit,
         args.lower_limit,
         args.upper_limit,
