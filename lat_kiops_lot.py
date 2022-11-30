@@ -25,8 +25,10 @@ def plot_lot_kiops(
     concurrent_zones: List[int],
     block_sizes: List[int],
     queue_depth_limit: int,
-    lower_limit: int,
-    upper_limit: int,
+    lower_limit_y: int,
+    upper_limit_y: int,
+    lower_limit_x: int,
+    upper_limit_x: int,
     prep_function_x: str,
     prep_function_y: str,
 ):
@@ -71,8 +73,10 @@ def plot_lot_kiops(
             title,
             "Througput (KIOPS)",
             "Latency (micros)",
-            lower_limit,
-            upper_limit,
+            lower_limit_y,
+            upper_limit_y,
+            lower_limit_x,
+            upper_limit_x,
         )
     )
 
@@ -110,8 +114,10 @@ if __name__ == "__main__":
     parser.add_argument(
         "-q", "--queue_depth_limit", type=int, required=False, default=256
     )
-    parser.add_argument("--lower_limit", type=int, required=False, default=0)
-    parser.add_argument("--upper_limit", type=int, required=False, default=550)
+    parser.add_argument("--lower_limit_y", type=int, required=False, default=0)
+    parser.add_argument("--upper_limit_y", type=int, required=False, default=550)
+    parser.add_argument("--lower_limit_x", type=int, required=False, default=0)
+    parser.add_argument("--upper_limit_x", type=int, required=False, default=300)
     parser.add_argument(
         "--transform_x",
         type=str,
@@ -156,8 +162,10 @@ if __name__ == "__main__":
         concurrent_zones,
         block_sizes,
         args.queue_depth_limit,
-        args.lower_limit,
-        args.upper_limit,
+        args.lower_limit_y,
+        args.upper_limit_y,
+        args.lower_limit_x,
+        args.upper_limit_x,
         args.transform_x,
         args.transform_y,
     )

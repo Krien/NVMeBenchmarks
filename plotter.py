@@ -25,7 +25,8 @@ class PlotDefinition:
     ylabel: str
     miny: int
     maxy: int
-
+    minx: int
+    maxx: int
 
 @dataclass
 class SubplotDefinition:
@@ -42,8 +43,10 @@ class GenericPlot:
         plt.xlabel(self.plotdefinition.xlabel)
         plt.ylabel(self.plotdefinition.ylabel)
         plt.title(self.plotdefinition.title)
+        self.ax.grid(True)
 
     def save_to_disk(self):
+        plt.xlim(self.plotdefinition.minx, self.plotdefinition.maxx)
         plt.ylim(self.plotdefinition.miny, self.plotdefinition.maxy)
         plt.legend()
         savefig_to_path(plt, self.plotdefinition.path)
