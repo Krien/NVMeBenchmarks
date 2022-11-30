@@ -120,6 +120,9 @@ done
 for qd in "${qds[@]}"; do
     if [[ "$type" == "ZNS" ]]; then
         for bs in "${bss[@]}"; do
+            if [[ ${bs} -lt $page_size ]]; then
+                continue;
+            fi;
             output_dir="${DATA_DIR}/io_uring/${model}/${lbaf}/writemq/${bs}bs";
             mkdir -p "${output_dir}";
             for concurrent_zones in "${czones[@]}"; do
@@ -140,6 +143,9 @@ for qd in "${qds[@]}"; do
         done
     else
         for bs in "${bss[@]}"; do
+            if [[ ${bs} -lt $page_size ]]; then
+                continue;
+            fi;
             output_dir="${DATA_DIR}/io_uring/${model}/${lbaf}/write/${bs}bs";
             mkdir -p "${output_dir}";
             output_dir="${DATA_DIR}/io_uring/${model}/${lbaf}/write/${bs}bs/1zone";
@@ -157,6 +163,9 @@ for qd in "${qds[@]}"; do
 done
 if [[ "$type" == "ZNS"  ]]; then
     for bs in "${bss[@]}"; do
+        if [[ ${bs} -lt $page_size ]]; then
+            continue;
+        fi;
         sudo nvme zns reset-zone -a /dev/${nvme_dev}
         output_dir="${DATA_DIR}/io_uring/${model}/${lbaf}/write/${bs}bs";
         mkdir -p "${output_dir}";
@@ -177,6 +186,9 @@ sudo PCI_ALLOWED="${addr}" ${SPDK_DIR}/scripts/setup.sh
 for qd in "${qds[@]}"; do
     if [[ "$type" == "ZNS"  ]]; then
         for bs in "${bss[@]}"; do
+            if [[ ${bs} -lt $page_size ]]; then
+                continue;
+            fi;
             output_dir="${DATA_DIR}/spdk/${model}/${lbaf}/append/${bs}bs"
             mkdir -p "${output_dir}";
             for concurrent_zones in "${czones[@]}"; do
@@ -198,6 +210,9 @@ for qd in "${qds[@]}"; do
         done
     else
         for bs in "${bss[@]}"; do
+            if [[ ${bs} -lt $page_size ]]; then
+                continue;
+            fi;
             output_dir="${DATA_DIR}/spdk/${model}/${lbaf}/write/${bs}bs"
             mkdir -p "${output_dir}";
             output_dir="${DATA_DIR}/spdk/${model}/${lbaf}/write/${bs}bs/1zone"
@@ -215,6 +230,9 @@ for qd in "${qds[@]}"; do
 done
 if [[ "$type" == "ZNS" ]]; then
     for bs in "${bss[@]}"; do
+        if [[ ${bs} -lt $page_size ]]; then
+            continue;
+        fi;
         output_dir="${DATA_DIR}/spdk/${model}/${lbaf}/write/${bs}bs"
         mkdir -p "${output_dir}";
         output_dir="${DATA_DIR}/spdk/${model}/${lbaf}/write/${bs}bs/1zone"
