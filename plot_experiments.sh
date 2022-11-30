@@ -4,6 +4,11 @@
 DIR=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
 cd "$DIR" || exit
 
+# Tests
+sudo FIO_DIR=/home/krijn/opt/fio/ SPDK_DIR=/home/krijn/opt/spdk/  ./run.sh nvme4n1 NVMe 1 lbaf0 512
+sudo FIO_DIR=/home/krijn/opt/fio/ SPDK_DIR=/home/krijn/opt/spdk/  ./run.sh nvme6n1 NVMe 1 lbaf3 4096
+
+# Create plot dir
 mkdir -p plots
 
 # KIOP latency plots
