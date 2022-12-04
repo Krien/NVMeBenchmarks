@@ -1,5 +1,5 @@
 from parse_fio import *
-from plotter import *
+from plot_util import *
 from typing import List
 import argparse
 
@@ -33,7 +33,8 @@ def plot_lot_kiops(
     prep_function_y: str,
 ):
     # Plot
-    colors = ["cyan", "magenta", "green", "red", "orange", "black", "gray", "yellow"]
+    colors = ["cyan", "magenta", "green", "red",
+              "orange", "black", "gray", "yellow"]
     pick_color = iter(colors)
     qds = [qd for qd in ALLOWED_QDS if qd < queue_depth_limit]
 
@@ -108,16 +109,21 @@ if __name__ == "__main__":
         choices=["spdk", "io_uring"],
         required=True,
     )
-    parser.add_argument("-o", "--operations", type=str, nargs="+", required=True)
-    parser.add_argument("-c", "--concurrent_zones", type=int, nargs="+", required=True)
-    parser.add_argument("-b", "--block_sizes", type=int, nargs="+", required=True)
+    parser.add_argument("-o", "--operations", type=str,
+                        nargs="+", required=True)
+    parser.add_argument("-c", "--concurrent_zones",
+                        type=int, nargs="+", required=True)
+    parser.add_argument("-b", "--block_sizes", type=int,
+                        nargs="+", required=True)
     parser.add_argument(
         "-q", "--queue_depth_limit", type=int, required=False, default=256
     )
     parser.add_argument("--lower_limit_y", type=int, required=False, default=0)
-    parser.add_argument("--upper_limit_y", type=int, required=False, default=550)
+    parser.add_argument("--upper_limit_y", type=int,
+                        required=False, default=550)
     parser.add_argument("--lower_limit_x", type=int, required=False, default=0)
-    parser.add_argument("--upper_limit_x", type=int, required=False, default=300)
+    parser.add_argument("--upper_limit_x", type=int,
+                        required=False, default=300)
     parser.add_argument(
         "--transform_x",
         type=str,
