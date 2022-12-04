@@ -40,8 +40,7 @@ def plot_lot_kiops(
     prep_function_y: str,
 ):
     # Plot
-    colors = ["cyan", "magenta", "green", "red",
-              "orange", "black", "gray", "yellow"]
+    colors = ["cyan", "magenta", "green", "red", "orange", "black", "gray", "yellow"]
     pick_color = iter(colors)
 
     merged_dat = zip(
@@ -95,8 +94,7 @@ def plot_lot_kiops(
     for label in labels:
         qd_kiops = plot_data[label]
         plot.plot_line(
-            SubplotDefinition(
-                label, qd_kiops.plot_color), qd_kiops.qds, qd_kiops.kiops
+            SubplotDefinition(label, qd_kiops.plot_color), qd_kiops.qds, qd_kiops.kiops
         )
 
     plot.save_to_disk()
@@ -118,12 +116,9 @@ if __name__ == "__main__":
         choices=["spdk", "io_uring"],
         required=True,
     )
-    parser.add_argument("-o", "--operations", type=str,
-                        nargs="+", required=True)
-    parser.add_argument("-c", "--concurrent_zones",
-                        type=int, nargs="+", required=True)
-    parser.add_argument("-b", "--block_sizes", type=int,
-                        nargs="+", required=True)
+    parser.add_argument("-o", "--operations", type=str, nargs="+", required=True)
+    parser.add_argument("-c", "--concurrent_zones", type=int, nargs="+", required=True)
+    parser.add_argument("-b", "--block_sizes", type=int, nargs="+", required=True)
     parser.add_argument(
         "-q",
         "--queue_depths",
@@ -133,8 +128,7 @@ if __name__ == "__main__":
         default=[1, 2, 4, 8.16, 32, 64, 128, 256, 512],
     )
     parser.add_argument("--lower_limit_y", type=int, required=False, default=0)
-    parser.add_argument("--upper_limit_y", type=int,
-                        required=False, default=550)
+    parser.add_argument("--upper_limit_y", type=int, required=False, default=550)
     parser.add_argument(
         "--transform_y",
         type=str,

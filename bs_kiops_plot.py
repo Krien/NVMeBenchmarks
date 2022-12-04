@@ -6,12 +6,16 @@ import argparse
 
 class BSThroughputPlot(GenericPlot):
     def plot_line(self, subplotdefinition, bss, kiops, width, offset):
-        plt.bar([x + offset for x in range(len(bss))], kiops,
-                width=width, label=subplotdefinition.label, color=subplotdefinition.color)
+        plt.bar(
+            [x + offset for x in range(len(bss))],
+            kiops,
+            width=width,
+            label=subplotdefinition.label,
+            color=subplotdefinition.color,
+        )
 
     def plot_axis(self, bss):
-        plt.xticks([x + 0.5 for x in range(len(bss))], [str(bs)
-                   for bs in bss])
+        plt.xticks([x + 0.5 for x in range(len(bss))], [str(bs) for bs in bss])
 
 
 @dataclass
@@ -38,8 +42,7 @@ def plot_lot_kiops(
     prep_function_y: str,
 ):
     # Plot
-    colors = ["cyan", "magenta", "green", "red",
-              "orange", "black", "gray", "yellow"]
+    colors = ["cyan", "magenta", "green", "red", "orange", "black", "gray", "yellow"]
     pick_color = iter(colors)
 
     merged_dat = zip(
@@ -69,9 +72,7 @@ def plot_lot_kiops(
             )
             try:
                 fio_dat = parse_fio_file(
-                    DataPath(
-                        engine, model, lbaf, operation, concurrent_zone, qd, bs
-                    )
+                    DataPath(engine, model, lbaf, operation, concurrent_zone, qd, bs)
                 )
                 plot_data[label].bss.append(bs)
                 plot_data[label].kiops.append(
@@ -79,9 +80,7 @@ def plot_lot_kiops(
                 )
             except:
                 plot_data[label].bss.append(bs)
-                plot_data[label].kiops.append(
-                    prep_function(prep_function_y, 0)
-                )
+                plot_data[label].kiops.append(prep_function(prep_function_y, 0))
 
     plot = BSThroughputPlot(
         PlotDefinition(
@@ -100,8 +99,11 @@ def plot_lot_kiops(
     for label in labels:
         bs_kiops = plot_data[label]
         plot.plot_line(
-            SubplotDefinition(
-                label, bs_kiops.plot_color), bs_kiops.bss, bs_kiops.kiops, 0.5 / len(labels), offset
+            SubplotDefinition(label, bs_kiops.plot_color),
+            bs_kiops.bss,
+            bs_kiops.kiops,
+            0.5 / len(labels),
+            offset,
         )
         offset += 0.5 / len(labels)
     plot.plot_axis(block_sizes)
@@ -125,23 +127,19 @@ if __name__ == "__main__":
         choices=["spdk", "io_uring"],
         required=True,
     )
-    parser.add_argument("-o", "--operations", type=str,
-                        nargs="+", required=True)
-    parser.add_argument("-c", "--concurrent_zones",
-                        type=int, nargs="+", required=True)
+    parser.add_argument("-o", "--operations", type=str, nargs="+", required=True)
+    parser.add_argument("-c", "--concurrent_zones", type=int, nargs="+", required=True)
     parser.add_argument(
         "-b",
         "--block_sizes",
         type=str,
         nargs="+",
         required=False,
-        default=[512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072]
+        default=[512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072],
     )
-    parser.add_argument("-q", "--queue_depths", type=int,
-                        nargs="+", required=True)
+    parser.add_argument("-q", "--queue_depths", type=int, nargs="+", required=True)
     parser.add_argument("--lower_limit_y", type=int, required=False, default=0)
-    parser.add_argument("--upper_limit_y", type=int,
-                        required=False, default=550)
+    parser.add_argument("--upper_limit_y", type=int, required=False, default=550)
     parser.add_argument(
         "--transform_y",
         type=str,
