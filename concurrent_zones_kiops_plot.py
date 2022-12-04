@@ -3,15 +3,25 @@ from plot_util import *
 from typing import List
 import argparse
 
-ALLOWED_QDS = [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]
+
+class ConcurrentZonesThroughputPlot(GenericPlot):
+    def plot_line(self, subplotdefinition, concurrent_zones, kiops):
+        plt.plot(
+            range(len(concurrent_zones)),
+            kiops,
+            linewidth=3,
+            label=subplotdefinition.label,
+            color=subplotdefinition.color,
+        )
+        plt.xticks(range(len(concurrent_zones)), concurrent_zones)
 
 
 @dataclass
-class LatKIOPSSpec:
+class ConcurrentZonesKIOPSSpec:
     """A specification for the data lat_kiops needs"""
 
+    concurrent_zones: List[int]
     kiops: List[int]
-    lats: List[int]
     plot_color: str
 
 
@@ -24,35 +34,37 @@ def plot_lot_kiops(
     engines: List[str],
     concurrent_zones: List[int],
     block_sizes: List[int],
-    queue_depth_limit: int,
+    queue_depths: List[int],
     lower_limit_y: int,
     upper_limit_y: int,
-    lower_limit_x: int,
-    upper_limit_x: int,
-    prep_function_x: str,
     prep_function_y: str,
 ):
     # Plot
-    colors = ["cyan", "magenta", "green", "red",
-              "orange", "black", "gray", "yellow"]
+    colors = ["cyan", "magenta", "green", "red", "orange", "black", "gray", "yellow"]
     pick_color = iter(colors)
-    qds = [qd for qd in ALLOWED_QDS if qd < queue_depth_limit]
 
     merged_dat = zip(
-        labels, models, engines, lbafs, operations, concurrent_zones, block_sizes
+        labels,
+        models,
+        engines,
+        lbafs,
+        operations,
+        queue_depths,
+        block_sizes,
     )
     plot_data = {}
+
     for (
         label,
         model,
         engine,
         lbaf,
         operation,
-        concurrent_zone,
+        qd,
         block_size,
     ) in merged_dat:
-        plot_data[label] = LatKIOPSSpec([], [], next(pick_color))
-        for qd in qds:
+        plot_data[label] = ConcurrentZonesKIOPSSpec([], [], next(pick_color))
+        for concurrent_zone in concurrent_zones:
             print(
                 f"Adding to plot: label={label}, model={model}, engine={engine}, lbaf={lbaf}, op={operation}, zones={concurrent_zone}, qd={qd}, block_size={block_size}"
             )
@@ -61,33 +73,30 @@ def plot_lot_kiops(
                     engine, model, lbaf, operation, concurrent_zone, qd, block_size
                 )
             )
+            plot_data[label].concurrent_zones.append(concurrent_zone)
             plot_data[label].kiops.append(
-                prep_function(prep_function_x, fio_dat.iops_mean)
-            )
-            plot_data[label].lats.append(
-                prep_function(prep_function_y, fio_dat.lat_mean)
+                prep_function(prep_function_y, fio_dat.iops_mean)
             )
 
-    plot = LatencyThroughputPlot(
+    plot = ConcurrentZonesThroughputPlot(
         PlotDefinition(
             get_plot_path(title),
             title,
+            "Concurrent zones (striped)",
             "Througput (KIOPS)",
-            "Latency (micros)",
             lower_limit_y,
             upper_limit_y,
-            lower_limit_x,
-            upper_limit_x,
+            0,
+            len(concurrent_zones),
         )
     )
 
     for label in labels:
-        lat_kiops = plot_data[label]
+        concurrent_zones_kiops = plot_data[label]
         plot.plot_line(
-            SubplotDefinition(label, lat_kiops.plot_color),
-            lat_kiops.kiops,
-            lat_kiops.lats,
-            qds,
+            SubplotDefinition(label, concurrent_zones_kiops.plot_color),
+            concurrent_zones_kiops.concurrent_zones,
+            concurrent_zones_kiops.kiops,
         )
 
     plot.save_to_disk()
@@ -95,7 +104,7 @@ def plot_lot_kiops(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Plot latency and throughput of NVMe SSDs in one graph"
+        description="Plot queue depth and throughput of NVMe SSDs in one graph"
     )
     parser.add_argument("-t", "--title", type=str, required=True)
     parser.add_argument("-l", "--labels", type=str, nargs="+", required=True)
@@ -109,28 +118,12 @@ if __name__ == "__main__":
         choices=["spdk", "io_uring"],
         required=True,
     )
-    parser.add_argument("-o", "--operations", type=str,
-                        nargs="+", required=True)
-    parser.add_argument("-c", "--concurrent_zones",
-                        type=int, nargs="+", required=True)
-    parser.add_argument("-b", "--block_sizes", type=int,
-                        nargs="+", required=True)
-    parser.add_argument(
-        "-q", "--queue_depth_limit", type=int, required=False, default=256
-    )
+    parser.add_argument("-o", "--operations", type=str, nargs="+", required=True)
+    parser.add_argument("-c", "--concurrent_zones", type=int, nargs="+", required=True)
+    parser.add_argument("-b", "--block_sizes", type=int, nargs="+", required=True)
+    parser.add_argument("-q", "--queue_depths", type=int, nargs="+", required=True)
     parser.add_argument("--lower_limit_y", type=int, required=False, default=0)
-    parser.add_argument("--upper_limit_y", type=int,
-                        required=False, default=550)
-    parser.add_argument("--lower_limit_x", type=int, required=False, default=0)
-    parser.add_argument("--upper_limit_x", type=int,
-                        required=False, default=300)
-    parser.add_argument(
-        "--transform_x",
-        type=str,
-        required=False,
-        choices=["none", "div1000", "div1000log"],
-        default="div1000",
-    )
+    parser.add_argument("--upper_limit_y", type=int, required=False, default=550)
     parser.add_argument(
         "--transform_y",
         type=str,
@@ -147,13 +140,14 @@ if __name__ == "__main__":
     operations = args.operations
     concurrent_zones = args.concurrent_zones
     block_sizes = args.block_sizes
+    queue_depths = args.queue_depths
     if (
         len(labels) != len(models)
         or len(models) != len(lbafs)
         or len(engines) != len(lbafs)
         or len(engines) != len(operations)
-        or len(operations) != len(concurrent_zones)
-        or len(concurrent_zones) != len(block_sizes)
+        or len(operations) != len(block_sizes)
+        or len(block_sizes) != len(queue_depths)
     ):
         print("List args must have equal length")
         exit(1)
@@ -167,11 +161,8 @@ if __name__ == "__main__":
         engines,
         concurrent_zones,
         block_sizes,
-        args.queue_depth_limit,
+        queue_depths,
         args.lower_limit_y,
         args.upper_limit_y,
-        args.lower_limit_x,
-        args.upper_limit_x,
-        args.transform_x,
         args.transform_y,
     )

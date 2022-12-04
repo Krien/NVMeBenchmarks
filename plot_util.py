@@ -28,6 +28,7 @@ class PlotDefinition:
     minx: int
     maxx: int
 
+
 @dataclass
 class SubplotDefinition:
     """A target for plotting"""
@@ -50,17 +51,3 @@ class GenericPlot:
         plt.ylim(self.plotdefinition.miny, self.plotdefinition.maxy)
         plt.legend()
         savefig_to_path(plt, self.plotdefinition.path)
-
-
-class LatencyThroughputPlot(GenericPlot):
-    def plot_line(self, subplotdefinition, kiops, lats, qds):
-        plt.plot(
-            kiops,
-            lats,
-            linewidth=3,
-            label=subplotdefinition.label,
-            color=subplotdefinition.color,
-        )
-        for i in range(len(kiops)):
-            plt.plot(kiops[i], lats[i], "o", color=subplotdefinition.color)
-            plt.text(kiops[i] * (1.01), lats[i] * (1.01), s=str(qds[i]), fontsize=9)
