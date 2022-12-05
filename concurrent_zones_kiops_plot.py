@@ -25,6 +25,7 @@ class ConcurrentZonesKIOPSSpec:
 
 
 def plot_lot_kiops(
+    filename: str,
     title: str,
     labels: List[str],
     models: List[str],
@@ -80,7 +81,7 @@ def plot_lot_kiops(
 
     plot = ConcurrentZonesThroughputPlot(
         PlotDefinition(
-            get_plot_path(title),
+            get_plot_path(filename),
             title,
             "Concurrent zones (striped)",
             "Througput (KIOPS)",
@@ -121,7 +122,7 @@ if __name__ == "__main__":
     parser.add_argument("-o", "--operations", type=str,
                         nargs="+", required=True)
     parser.add_argument("-c", "--concurrent_zones",
-                        type=int, nargs="+", required=True)
+                        type=int, nargs="+", required=False, default=[1, 2, 3, 4, 5])
     parser.add_argument("-b", "--block_sizes", type=int,
                         nargs="+", required=True)
     parser.add_argument("-q", "--queue_depths", type=int,
@@ -135,6 +136,12 @@ if __name__ == "__main__":
         required=False,
         choices=["none", "div1000", "div1000log"],
         default="div1000",
+    )
+    parser.add_argument(
+        "--filename",
+        type=str,
+        required=False,
+        default="out"
     )
 
     args = parser.parse_args()
@@ -158,6 +165,7 @@ if __name__ == "__main__":
         exit(1)
 
     plot_lot_kiops(
+        args.filename,
         args.title,
         labels,
         models,

@@ -17,7 +17,7 @@ class LatencyThroughputPlot(GenericPlot):
         for i in range(len(kiops)):
             plt.plot(kiops[i], lats[i], "o", color=subplotdefinition.color)
             plt.text(kiops[i] * (1.01), lats[i] *
-                     (1.01), s=str(qds[i]), fontsize=9)
+                     (1.01), s='qd='+str(qds[i]), fontsize=9)
 
 
 @dataclass
@@ -30,6 +30,7 @@ class LatKIOPSSpec:
 
 
 def plot_lot_kiops(
+    filename: str,
     title: str,
     labels: List[str],
     models: List[str],
@@ -84,7 +85,7 @@ def plot_lot_kiops(
 
     plot = LatencyThroughputPlot(
         PlotDefinition(
-            get_plot_path(title),
+            get_plot_path(filename),
             title,
             "Througput (KIOPS)",
             "Latency (micros)",
@@ -152,6 +153,12 @@ if __name__ == "__main__":
         choices=["none", "div1000", "div1000log"],
         default="div1000",
     )
+    parser.add_argument(
+        "--filename",
+        type=str,
+        required=False,
+        default="out"
+    )
 
     args = parser.parse_args()
     labels = args.labels
@@ -173,6 +180,7 @@ if __name__ == "__main__":
         exit(1)
 
     plot_lot_kiops(
+        args.filename,
         args.title,
         labels,
         models,

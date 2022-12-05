@@ -27,6 +27,7 @@ class BSKIOPSSpec:
 
 
 def plot_lot_kiops(
+    filename: str,
     title: str,
     labels: List[str],
     models: List[str],
@@ -86,7 +87,7 @@ def plot_lot_kiops(
 
     plot = BSThroughputPlot(
         PlotDefinition(
-            get_plot_path(title),
+            get_plot_path(filename),
             title,
             "Block size (bytes)",
             "Througput (KIOPS)",
@@ -153,6 +154,12 @@ if __name__ == "__main__":
         choices=["none", "div1000", "div1000log"],
         default="div1000",
     )
+    parser.add_argument(
+        "--filename",
+        type=str,
+        required=False,
+        default="out"
+    )
 
     args = parser.parse_args()
     labels = args.labels
@@ -175,6 +182,7 @@ if __name__ == "__main__":
         exit(1)
 
     plot_lot_kiops(
+        args.filename,
         args.title,
         labels,
         models,
