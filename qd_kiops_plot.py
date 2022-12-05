@@ -125,7 +125,7 @@ if __name__ == "__main__":
         type=int,
         nargs="+",
         required=False,
-        default=[1, 2, 4, 8.16, 32, 64, 128, 256, 512],
+        default=[1, 2, 4, 8, 16, 32, 64, 128, 256, 512],
     )
     parser.add_argument("--lower_limit_y", type=int, required=False, default=0)
     parser.add_argument("--upper_limit_y", type=int, required=False, default=550)
