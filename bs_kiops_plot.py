@@ -1,5 +1,4 @@
-from parse_fio import *
-from plot_util import *
+from nvmeutils import *
 from typing import List
 import argparse
 
@@ -42,7 +41,8 @@ def plot_lot_kiops(
     prep_function_y: str,
 ):
     # Plot
-    colors = ["cyan", "magenta", "green", "red", "orange", "black", "gray", "yellow"]
+    colors = ["cyan", "magenta", "green", "red",
+              "orange", "black", "gray", "yellow"]
     pick_color = iter(colors)
 
     merged_dat = zip(
@@ -72,7 +72,8 @@ def plot_lot_kiops(
             )
             try:
                 fio_dat = parse_fio_file(
-                    DataPath(engine, model, lbaf, operation, concurrent_zone, qd, bs)
+                    DataPath(engine, model, lbaf, operation,
+                             concurrent_zone, qd, bs)
                 )
                 plot_data[label].bss.append(bs)
                 plot_data[label].kiops.append(
@@ -80,7 +81,8 @@ def plot_lot_kiops(
                 )
             except:
                 plot_data[label].bss.append(bs)
-                plot_data[label].kiops.append(prep_function(prep_function_y, 0))
+                plot_data[label].kiops.append(
+                    prep_function(prep_function_y, 0))
 
     plot = BSThroughputPlot(
         PlotDefinition(
@@ -127,8 +129,10 @@ if __name__ == "__main__":
         choices=["spdk", "io_uring"],
         required=True,
     )
-    parser.add_argument("-o", "--operations", type=str, nargs="+", required=True)
-    parser.add_argument("-c", "--concurrent_zones", type=int, nargs="+", required=True)
+    parser.add_argument("-o", "--operations", type=str,
+                        nargs="+", required=True)
+    parser.add_argument("-c", "--concurrent_zones",
+                        type=int, nargs="+", required=True)
     parser.add_argument(
         "-b",
         "--block_sizes",
@@ -137,9 +141,11 @@ if __name__ == "__main__":
         required=False,
         default=[512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072],
     )
-    parser.add_argument("-q", "--queue_depths", type=int, nargs="+", required=True)
+    parser.add_argument("-q", "--queue_depths", type=int,
+                        nargs="+", required=True)
     parser.add_argument("--lower_limit_y", type=int, required=False, default=0)
-    parser.add_argument("--upper_limit_y", type=int, required=False, default=550)
+    parser.add_argument("--upper_limit_y", type=int,
+                        required=False, default=550)
     parser.add_argument(
         "--transform_y",
         type=str,

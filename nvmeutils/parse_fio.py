@@ -3,7 +3,7 @@ import math
 import json
 from dataclasses import dataclass
 
-DATA_PATH = f"{os.path.realpath(os.path.dirname(__file__))}/data"
+DATA_PATH = f"{os.path.realpath(os.path.dirname(__file__))}/../data"
 
 
 def get_json(path):

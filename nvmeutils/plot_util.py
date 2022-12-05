@@ -8,7 +8,7 @@ def savefig_to_path(fig, path):
     fig.savefig(path + ".svg")
 
 
-PLOT_PATH = f"{os.path.realpath(os.path.dirname(__file__))}/plots"
+PLOT_PATH = f"{os.path.realpath(os.path.dirname(__file__))}/../plots"
 
 
 def get_plot_path(name):
