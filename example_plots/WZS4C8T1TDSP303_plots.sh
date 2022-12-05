@@ -61,6 +61,52 @@ ${python_bin} lat_kiops_plot.py --filename="$modelname/tql/lbaf2 bs=8192 log10" 
     --transform_y div1000log \
     -q 512 \
     -b 8192 8192
+${python_bin} lat_kiops_plot.py --filename="$modelname/tql/lbaf0 bs=4096" \
+     -t "Latency and KIOPS of ${modelname} lbaf0, bs=4096" \
+     -l 'spdk' 'io_uring' \
+     -m ${model} ${model} \
+     -f lbaf0 lbaf0 \
+     -e spdk io_uring \
+     -o append writemq \
+     -c 1 1 \
+     --upper_limit_x=350 --upper_limit_y=250 \
+     -q 128 \
+     -b 4096 4096
+${python_bin} lat_kiops_plot.py --filename="$modelname/tql/lbaf0 bs=4096 log10" \
+    -t "Latency (log10) and KIOPS of ${modelname} lbaf0, bs=4096" \
+    -l 'spdk' 'io_uring' \
+    -m ${model} ${model} \
+    -f lbaf0 lbaf0 \
+    -e spdk io_uring \
+    -o append writemq \
+    -c 1 1 \
+    --upper_limit_x=350 --upper_limit_y=12 \
+    --transform_y div1000log \
+    -q 256 \
+    -b 4096 4096
+${python_bin} lat_kiops_plot.py --filename="$modelname/tql/lbaf0 bs=8192" \
+    -t "Latency and KIOPS of ${modelname} lbaf0, bs=8192" \
+    -l 'spdk' 'io_uring' \
+    -m ${model} ${model} \
+    -f lbaf0 lbaf0 \
+    -e spdk io_uring \
+    -o append writemq \
+    -c 1 1 \
+    --upper_limit_x=350 --upper_limit_y=250 \
+    -q 128 \
+    -b 8192 8192
+${python_bin} lat_kiops_plot.py --filename="$modelname/tql/lbaf0 bs=8192 log10" \
+    -t "Latency (log10) and KIOPS of ${modelname} lbaf0, bs=8192" \
+    -l 'spdk' 'io_uring' \
+    -m ${model} ${model} \
+    -f lbaf0 lbaf0 \
+    -e spdk io_uring \
+    -o append writemq \
+    -c 1 1 \
+    --upper_limit_x=350 --upper_limit_y=12 \
+    --transform_y div1000log \
+    -q 256 \
+    -b 8192 8192
 
 mkdir -p "plots/$modelname/bs"
 # Throughput for various blocksizes plots
