@@ -108,9 +108,9 @@ ${python_bin} lat_kiops_plot.py --filename="$modelname/tql/lbaf0 bs=8192 log10" 
     -q 256 \
     -b 8192 8192
 
-mkdir -p "plots/$modelname/bs"
+mkdir -p "plots/$modelname/bs_kiops"
 # Throughput for various blocksizes plots
-${python_bin} bs_kiops_plot.py --filename="$modelname/bs/bs=4096 QD=1" \
+${python_bin} bs_kiops_plot.py --filename="$modelname/bs_kiops/bs=4096 QD=1" \
     -t "KIOPS of ${modelname} (QD=1)" \
     -l 'spdk appends lbaf0' 'io_uring writemq lbaf0' 'spdk appends lbaf2' 'io_uring writemq lbaf2' \
     -m ${model} ${model} ${model} ${model} \
@@ -120,7 +120,7 @@ ${python_bin} bs_kiops_plot.py --filename="$modelname/bs/bs=4096 QD=1" \
     -c 1 1 1 1 \
     --upper_limit_y=150 \
     -q 1 1 1 1
-${python_bin} bs_kiops_plot.py --filename="$modelname/bs/bs=4096 QD=1 noscheduler" \
+${python_bin} bs_kiops_plot.py --filename="$modelname/bs_kiops/bs=4096 QD=1 noscheduler" \
     -t "KIOPS of ${modelname} (QD=1) no scheduler" \
     -l 'spdk writes lbaf0' 'io_uring writes lbaf0' 'spdk writes lbaf2' 'io_uring writes lbaf2' \
     -m ${model} ${model} ${model} ${model} \
@@ -130,7 +130,7 @@ ${python_bin} bs_kiops_plot.py --filename="$modelname/bs/bs=4096 QD=1 noschedule
     -c 1 1 1 1 \
     --upper_limit_y=250 \
     -q 1 1 1 1
-${python_bin} bs_kiops_plot.py --filename="$modelname/bs/bs=4096 QD=2" \
+${python_bin} bs_kiops_plot.py --filename="$modelname/bs_kiops/bs=4096 QD=2" \
     -t "KIOPS of ${modelname} (QD=2)" \
     -l 'spdk appends lbaf0' 'io_uring writemq lbaf0' 'spdk appends lbaf2' 'io_uring writemq lbaf2' \
     -m ${model} ${model} ${model} ${model} \
@@ -140,7 +140,7 @@ ${python_bin} bs_kiops_plot.py --filename="$modelname/bs/bs=4096 QD=2" \
     -c 1 1 1 1 \
     --upper_limit_y=150 \
     -q 2 2 2 2
-${python_bin} bs_kiops_plot.py --filename="$modelname/bs/bs=4096 QD=4" \
+${python_bin} bs_kiops_plot.py --filename="$modelname/bs_kiops/bs=4096 QD=4" \
     -t "KIOPS of ${modelname} (QD=4)" \
     -l 'spdk appends lbaf0' 'io_uring writemq lbaf0' 'spdk appends lbaf2' 'io_uring writemq lbaf2' \
     -m ${model} ${model} ${model} ${model} \
@@ -150,7 +150,7 @@ ${python_bin} bs_kiops_plot.py --filename="$modelname/bs/bs=4096 QD=4" \
     -c 1 1 1 1 \
     --upper_limit_y=150 \
     -q 4 4 4 4
-${python_bin} bs_kiops_plot.py --filename="$modelname/bs/bs=4096 QD=8" \
+${python_bin} bs_kiops_plot.py --filename="$modelname/bs_kiops/bs=4096 QD=8" \
     -t "KIOPS of ${modelname} (QD=8)" \
     -l 'spdk appends lbaf0' 'io_uring writemq lbaf0' 'spdk appends lbaf2' 'io_uring writemq lbaf2' \
     -m ${model} ${model} ${model} ${model} \
@@ -160,7 +160,7 @@ ${python_bin} bs_kiops_plot.py --filename="$modelname/bs/bs=4096 QD=8" \
     -c 1 1 1 1 \
     --upper_limit_y=200 \
     -q 8 8 8 8
-${python_bin} bs_kiops_plot.py --filename="$modelname/bs/bs=4096 QD=16" \
+${python_bin} bs_kiops_plot.py --filename="$modelname/bs_kiops/bs=4096 QD=16" \
     -t "KIOPS of ${modelname} (QD=16)" \
     -l 'spdk appends lbaf0' 'io_uring writemq lbaf0' 'spdk appends lbaf2' 'io_uring writemq lbaf2' \
     -m ${model} ${model} ${model} ${model} \
@@ -170,7 +170,7 @@ ${python_bin} bs_kiops_plot.py --filename="$modelname/bs/bs=4096 QD=16" \
     -c 1 1 1 1 \
     --upper_limit_y=350 \
     -q 16 16 16 16
-${python_bin} bs_kiops_plot.py --filename="$modelname/bs/bs=4096 QD=32" \
+${python_bin} bs_kiops_plot.py --filename="$modelname/bs_kiops/bs=4096 QD=32" \
     -t "KIOPS of ${modelname} (QD=32)" \
     -l 'spdk appends lbaf0' 'io_uring writemq lbaf0' 'spdk appends lbaf2' 'io_uring writemq lbaf2' \
     -m ${model} ${model} ${model} ${model} \
@@ -180,7 +180,7 @@ ${python_bin} bs_kiops_plot.py --filename="$modelname/bs/bs=4096 QD=32" \
     -c 1 1 1 1 \
     --upper_limit_y=350 \
     -q 32 32 32 32
-${python_bin} bs_kiops_plot.py --filename="$modelname/bs/bs=4096 QD=64" \
+${python_bin} bs_kiops_plot.py --filename="$modelname/bs_kiops/bs=4096 QD=64" \
     -t "KIOPS of ${modelname} (QD=64)" \
     -l 'spdk appends lbaf0' 'io_uring writemq lbaf0' 'spdk appends lbaf2' 'io_uring writemq lbaf2' \
     -m ${model} ${model} ${model} ${model} \
@@ -190,7 +190,7 @@ ${python_bin} bs_kiops_plot.py --filename="$modelname/bs/bs=4096 QD=64" \
     -c 1 1 1 1 \
     --upper_limit_y=350 \
     -q 64 64 64 64
-${python_bin} bs_kiops_plot.py --filename="$modelname/bs/bs=4096 QD=128" \
+${python_bin} bs_kiops_plot.py --filename="$modelname/bs_kiops/bs=4096 QD=128" \
     -t "KIOPS of ${modelname} (QD=128)" \
     -l 'spdk appends lbaf0' 'io_uring writemq lbaf0' 'spdk appends lbaf2' 'io_uring writemq lbaf2' \
     -m ${model} ${model} ${model} ${model} \
@@ -199,6 +199,99 @@ ${python_bin} bs_kiops_plot.py --filename="$modelname/bs/bs=4096 QD=128" \
     -o append writemq append writemq \
     -c 1 1 1 1 \
     --upper_limit_y=350 \
+    -q 128 128 128 128
+
+mkdir -p "plots/$modelname/bs_lats"
+# Throughput for various blocksizes plots
+${python_bin} bs_lats_plot.py --filename="$modelname/bs_lats/bs=4096 QD=1" \
+    -t "KIOPS of ${modelname} (QD=1)" \
+    -l 'spdk appends lbaf0' 'io_uring writemq lbaf0' 'spdk appends lbaf2' 'io_uring writemq lbaf2' \
+    -m ${model} ${model} ${model} ${model} \
+    -f lbaf0 lbaf0 lbaf3 lbaf3 \
+    -e spdk io_uring spdk io_uring \
+    -o append writemq append writemq \
+    -c 1 1 1 1 \
+    --upper_limit_y=350 \
+    -q 1 1 1 1
+${python_bin} bs_lats_plot.py --filename="$modelname/bs_lats/bs=4096 QD=1 noscheduler" \
+    -t "KIOPS of ${modelname} (QD=1) no scheduler" \
+    -l 'spdk writes lbaf0' 'io_uring writes lbaf0' 'spdk writes lbaf2' 'io_uring writes lbaf2' \
+    -m ${model} ${model} ${model} ${model} \
+    -f lbaf0 lbaf0 lbaf3 lbaf3 \
+    -e spdk io_uring spdk io_uring \
+    -o write write write write \
+    -c 1 1 1 1 \
+    --upper_limit_y=150 \
+    -q 1 1 1 1
+${python_bin} bs_lats_plot.py --filename="$modelname/bs_lats/bs=4096 QD=2" \
+    -t "KIOPS of ${modelname} (QD=2)" \
+    -l 'spdk appends lbaf0' 'io_uring writemq lbaf0' 'spdk appends lbaf2' 'io_uring writemq lbaf2' \
+    -m ${model} ${model} ${model} ${model} \
+    -f lbaf0 lbaf0 lbaf3 lbaf3 \
+    -e spdk io_uring spdk io_uring \
+    -o append writemq append writemq \
+    -c 1 1 1 1 \
+    --upper_limit_y=350 \
+    -q 2 2 2 2
+${python_bin} bs_lats_plot.py --filename="$modelname/bs_lats/bs=4096 QD=4" \
+    -t "KIOPS of ${modelname} (QD=4)" \
+    -l 'spdk appends lbaf0' 'io_uring writemq lbaf0' 'spdk appends lbaf2' 'io_uring writemq lbaf2' \
+    -m ${model} ${model} ${model} ${model} \
+    -f lbaf0 lbaf0 lbaf3 lbaf3 \
+    -e spdk io_uring spdk io_uring \
+    -o append writemq append writemq \
+    -c 1 1 1 1 \
+    --upper_limit_y=350 \
+    -q 4 4 4 4
+${python_bin} bs_lats_plot.py --filename="$modelname/bs_lats/bs=4096 QD=8" \
+    -t "KIOPS of ${modelname} (QD=8)" \
+    -l 'spdk appends lbaf0' 'io_uring writemq lbaf0' 'spdk appends lbaf2' 'io_uring writemq lbaf2' \
+    -m ${model} ${model} ${model} ${model} \
+    -f lbaf0 lbaf0 lbaf3 lbaf3 \
+    -e spdk io_uring spdk io_uring \
+    -o append writemq append writemq \
+    -c 1 1 1 1 \
+    --upper_limit_y=500 \
+    -q 8 8 8 8
+${python_bin} bs_lats_plot.py --filename="$modelname/bs_lats/bs=4096 QD=16" \
+    -t "KIOPS of ${modelname} (QD=16)" \
+    -l 'spdk appends lbaf0' 'io_uring writemq lbaf0' 'spdk appends lbaf2' 'io_uring writemq lbaf2' \
+    -m ${model} ${model} ${model} ${model} \
+    -f lbaf0 lbaf0 lbaf3 lbaf3 \
+    -e spdk io_uring spdk io_uring \
+    -o append writemq append writemq \
+    -c 1 1 1 1 \
+    --upper_limit_y=1000 \
+    -q 16 16 16 16
+${python_bin} bs_lats_plot.py --filename="$modelname/bs_lats/bs=4096 QD=32" \
+    -t "KIOPS of ${modelname} (QD=32)" \
+    -l 'spdk appends lbaf0' 'io_uring writemq lbaf0' 'spdk appends lbaf2' 'io_uring writemq lbaf2' \
+    -m ${model} ${model} ${model} ${model} \
+    -f lbaf0 lbaf0 lbaf3 lbaf3 \
+    -e spdk io_uring spdk io_uring \
+    -o append writemq append writemq \
+    -c 1 1 1 1 \
+    --upper_limit_y=5000 \
+    -q 32 32 32 32
+${python_bin} bs_lats_plot.py --filename="$modelname/bs_lats/bs=4096 QD=64" \
+    -t "KIOPS of ${modelname} (QD=64)" \
+    -l 'spdk appends lbaf0' 'io_uring writemq lbaf0' 'spdk appends lbaf2' 'io_uring writemq lbaf2' \
+    -m ${model} ${model} ${model} ${model} \
+    -f lbaf0 lbaf0 lbaf3 lbaf3 \
+    -e spdk io_uring spdk io_uring \
+    -o append writemq append writemq \
+    -c 1 1 1 1 \
+    --upper_limit_y=10000 \
+    -q 64 64 64 64
+${python_bin} bs_lats_plot.py --filename="$modelname/bs_lats/bs=4096 QD=128" \
+    -t "KIOPS of ${modelname} (QD=128)" \
+    -l 'spdk appends lbaf0' 'io_uring writemq lbaf0' 'spdk appends lbaf2' 'io_uring writemq lbaf2' \
+    -m ${model} ${model} ${model} ${model} \
+    -f lbaf0 lbaf0 lbaf3 lbaf3 \
+    -e spdk io_uring spdk io_uring \
+    -o append writemq append writemq \
+    -c 1 1 1 1 \
+    --upper_limit_y=20000 \
     -q 128 128 128 128
 
 mkdir -p "plots/$modelname/qd"
