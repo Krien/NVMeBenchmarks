@@ -4,10 +4,11 @@ import argparse
 
 
 class BSThroughputPlot(GenericPlot):
-    def plot_line(self, subplotdefinition, bss, kiops, width, offset):
+    def plot_line(self, subplotdefinition, bss, kiops, kiops_std, width, offset):
         plt.bar(
             [x + offset for x in range(len(bss))],
             kiops,
+            yerr=kiops_std,
             width=width,
             label=subplotdefinition.label,
             color=subplotdefinition.color,
@@ -23,6 +24,7 @@ class BSKIOPSSpec:
 
     bss: List[int]
     kiops: List[int]
+    kiops_std: List[int]
     plot_color: str
 
 
@@ -66,7 +68,7 @@ def plot_lot_kiops(
         concurrent_zone,
         qd,
     ) in merged_dat:
-        plot_data[label] = BSKIOPSSpec([], [], next(pick_color))
+        plot_data[label] = BSKIOPSSpec([], [], [], next(pick_color))
         for bs in block_sizes:
             print(
                 f"Adding to plot: label={label}, model={model}, engine={engine}, lbaf={lbaf}, op={operation}, zones={concurrent_zone}, qd={qd}, block_size={bs}"
@@ -80,11 +82,16 @@ def plot_lot_kiops(
                 plot_data[label].kiops.append(
                     prep_function(prep_function_y, fio_dat.iops_mean)
                 )
+                plot_data[label].kiops_std.append(
+                    prep_function(prep_function_y, fio_dat.iops_stddev)
+                )
             except:
                 plot_data[label].bss.append(bs)
                 plot_data[label].kiops.append(
                     prep_function(prep_function_y, 0))
-
+                plot_data[label].kiops_std.append(
+                    prep_function(prep_function_y, 0)
+                )
     plot = BSThroughputPlot(
         PlotDefinition(
             get_plot_path(filename),
@@ -105,6 +112,7 @@ def plot_lot_kiops(
             SubplotDefinition(label, bs_kiops.plot_color),
             bs_kiops.bss,
             bs_kiops.kiops,
+            bs_kiops.kiops_std,
             0.5 / len(labels),
             offset,
         )
