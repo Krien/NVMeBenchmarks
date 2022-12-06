@@ -16,19 +16,19 @@ python_bin=python3
 mkdir -p "plots/$modelname/tql"
 # Throughput/Queuedepth/Latency plots
 ${python_bin} lat_kiops_plot.py --filename="$modelname/tql/lbaf2 bs=4096" \
-     -t "Latency and KIOPS of ${modelname} lbaf2, bs=4096" \
-     -l 'spdk' 'io_uring' \
-     -m ${model} ${model} \
-     -f lbaf3 lbaf3 \
-     -e spdk io_uring \
-     -o append writemq \
-     -c 1 1 \
-     --upper_limit_x=350 --upper_limit_y=250 \
-     -q 128 \
-     -b 4096 4096
+    -t "Latency and KIOPS of ${modelname} lbaf2, bs=4096" \
+    -l 'spdk append' 'io_uring writemq' \
+    -m ${model} ${model} \
+    -f lbaf3 lbaf3 \
+    -e spdk io_uring \
+    -o append writemq \
+    -c 1 1 \
+    --upper_limit_x=350 --upper_limit_y=250 \
+    -q 128 \
+    -b 4096 4096
 ${python_bin} lat_kiops_plot.py --filename="$modelname/tql/lbaf2 bs=4096 log10" \
     -t "Latency (log10) and KIOPS of ${modelname} lbaf2, bs=4096" \
-    -l 'spdk' 'io_uring' \
+    -l 'spdk append' 'io_uring writemq' \
     -m ${model} ${model} \
     -f lbaf3 lbaf3 \
     -e spdk io_uring \
@@ -40,7 +40,7 @@ ${python_bin} lat_kiops_plot.py --filename="$modelname/tql/lbaf2 bs=4096 log10" 
     -b 4096 4096
 ${python_bin} lat_kiops_plot.py --filename="$modelname/tql/lbaf2 bs=8192" \
     -t "Latency and KIOPS of ${modelname} lbaf2, bs=8192" \
-    -l 'spdk' 'io_uring' \
+    -l 'spdk append' 'io_uring writemq' \
     -m ${model} ${model} \
     -f lbaf3 lbaf3 \
     -e spdk io_uring \
@@ -51,7 +51,7 @@ ${python_bin} lat_kiops_plot.py --filename="$modelname/tql/lbaf2 bs=8192" \
     -b 8192 8192
 ${python_bin} lat_kiops_plot.py --filename="$modelname/tql/lbaf2 bs=8192 log10" \
     -t "Latency (log10) and KIOPS of ${modelname} lbaf2, bs=8192" \
-    -l 'spdk' 'io_uring' \
+    -l 'spdk append' 'io_uring writemq' \
     -m ${model} ${model} \
     -f lbaf3 lbaf3 \
     -e spdk io_uring \
@@ -61,20 +61,43 @@ ${python_bin} lat_kiops_plot.py --filename="$modelname/tql/lbaf2 bs=8192 log10" 
     --transform_y div1000log \
     -q 512 \
     -b 8192 8192
+${python_bin} lat_kiops_plot.py --filename="$modelname/tql/lbaf0 bs=512" \
+    -t "Latency and KIOPS of ${modelname} lbaf0, bs=512" \
+    -l 'spdk append' 'io_uring writemq' \
+    -m ${model} ${model} \
+    -f lbaf0 lbaf0 \
+    -e spdk io_uring \
+    -o append writemq \
+    -c 1 1 \
+    --upper_limit_x=350 --upper_limit_y=250 \
+    -q 128 \
+    -b 512 512
+${python_bin} lat_kiops_plot.py --filename="$modelname/tql/lbaf0 bs=512 log10" \
+    -t "Latency (log10) and KIOPS of ${modelname} lbaf0, bs=512" \
+    -l 'spdk append' 'io_uring writemq' \
+    -m ${model} ${model} \
+    -f lbaf0 lbaf0 \
+    -e spdk io_uring \
+    -o append writemq \
+    -c 1 1 \
+    --upper_limit_x=350 --upper_limit_y=12 \
+    --transform_y div1000log \
+    -q 256 \
+    -b 512 512
 ${python_bin} lat_kiops_plot.py --filename="$modelname/tql/lbaf0 bs=4096" \
-     -t "Latency and KIOPS of ${modelname} lbaf0, bs=4096" \
-     -l 'spdk' 'io_uring' \
-     -m ${model} ${model} \
-     -f lbaf0 lbaf0 \
-     -e spdk io_uring \
-     -o append writemq \
-     -c 1 1 \
-     --upper_limit_x=350 --upper_limit_y=250 \
-     -q 128 \
-     -b 4096 4096
+    -t "Latency and KIOPS of ${modelname} lbaf0, bs=4096" \
+    -l 'spdk append' 'io_uring writemq' \
+    -m ${model} ${model} \
+    -f lbaf0 lbaf0 \
+    -e spdk io_uring \
+    -o append writemq \
+    -c 1 1 \
+    --upper_limit_x=350 --upper_limit_y=250 \
+    -q 128 \
+    -b 4096 4096
 ${python_bin} lat_kiops_plot.py --filename="$modelname/tql/lbaf0 bs=4096 log10" \
     -t "Latency (log10) and KIOPS of ${modelname} lbaf0, bs=4096" \
-    -l 'spdk' 'io_uring' \
+    -l 'spdk append' 'io_uring writemq' \
     -m ${model} ${model} \
     -f lbaf0 lbaf0 \
     -e spdk io_uring \
@@ -86,7 +109,7 @@ ${python_bin} lat_kiops_plot.py --filename="$modelname/tql/lbaf0 bs=4096 log10" 
     -b 4096 4096
 ${python_bin} lat_kiops_plot.py --filename="$modelname/tql/lbaf0 bs=8192" \
     -t "Latency and KIOPS of ${modelname} lbaf0, bs=8192" \
-    -l 'spdk' 'io_uring' \
+    -l 'spdk append' 'io_uring writemq' \
     -m ${model} ${model} \
     -f lbaf0 lbaf0 \
     -e spdk io_uring \
@@ -97,7 +120,7 @@ ${python_bin} lat_kiops_plot.py --filename="$modelname/tql/lbaf0 bs=8192" \
     -b 8192 8192
 ${python_bin} lat_kiops_plot.py --filename="$modelname/tql/lbaf0 bs=8192 log10" \
     -t "Latency (log10) and KIOPS of ${modelname} lbaf0, bs=8192" \
-    -l 'spdk' 'io_uring' \
+    -l 'spdk append' 'io_uring writemq' \
     -m ${model} ${model} \
     -f lbaf0 lbaf0 \
     -e spdk io_uring \
@@ -107,6 +130,29 @@ ${python_bin} lat_kiops_plot.py --filename="$modelname/tql/lbaf0 bs=8192 log10" 
     --transform_y div1000log \
     -q 256 \
     -b 8192 8192
+${python_bin} lat_kiops_plot.py --filename="$modelname/tql/lbaf0 bs=131072" \
+    -t "Latency and KIOPS of ${modelname} lbaf0, bs=131072" \
+    -l 'spdk append' 'io_uring writemq' \
+    -m ${model} ${model} \
+    -f lbaf0 lbaf0 \
+    -e spdk io_uring \
+    -o append writemq \
+    -c 1 1 \
+    --upper_limit_x=350 --upper_limit_y=250 \
+    -q 128 \
+    -b 131072 131072
+${python_bin} lat_kiops_plot.py --filename="$modelname/tql/lbaf0 bs=131072 log10" \
+    -t "Latency (log10) and KIOPS of ${modelname} lbaf0, bs=131072" \
+    -l 'spdk append' 'io_uring writemq' \
+    -m ${model} ${model} \
+    -f lbaf0 lbaf0 \
+    -e spdk io_uring \
+    -o append writemq \
+    -c 1 1 \
+    --upper_limit_x=350 --upper_limit_y=20 \
+    --transform_y div1000log \
+    -q 256 \
+    -b 131072 131072
 
 mkdir -p "plots/$modelname/bs_kiops"
 # Throughput for various blocksizes plots
@@ -241,7 +287,7 @@ ${python_bin} bs_lats_plot.py --filename="$modelname/bs_lats/bs=4096 QD=4" \
     -e spdk io_uring spdk io_uring \
     -o append writemq append writemq \
     -c 1 1 1 1 \
-    --upper_limit_y=350 \
+    --upper_limit_y=1000 \
     -q 4 4 4 4
 ${python_bin} bs_lats_plot.py --filename="$modelname/bs_lats/bs=4096 QD=8" \
     -t "KIOPS of ${modelname} (QD=8)" \
@@ -251,7 +297,7 @@ ${python_bin} bs_lats_plot.py --filename="$modelname/bs_lats/bs=4096 QD=8" \
     -e spdk io_uring spdk io_uring \
     -o append writemq append writemq \
     -c 1 1 1 1 \
-    --upper_limit_y=500 \
+    --upper_limit_y=1000 \
     -q 8 8 8 8
 ${python_bin} bs_lats_plot.py --filename="$modelname/bs_lats/bs=4096 QD=16" \
     -t "KIOPS of ${modelname} (QD=16)" \
@@ -296,6 +342,17 @@ ${python_bin} bs_lats_plot.py --filename="$modelname/bs_lats/bs=4096 QD=128" \
 
 mkdir -p "plots/$modelname/qd"
 # Throughput for various queue depths plots
+${python_bin} qd_kiops_plot.py --filename="$modelname/qd/bs=512" \
+    -t "KIOPS of ${modelname} (bs=512)" \
+    -l 'spdk appends lbaf0' 'io_uring writemq lbaf0' \
+    -m ${model} ${model} \
+    -f lbaf0 lbaf0 \
+    -e spdk io_uring \
+    -o append writemq \
+    -c 1 1 \
+    --upper_limit_y=350 \
+    -b 512 512 \
+    -q 1 2 4 8 16 32 64 128
 ${python_bin} qd_kiops_plot.py --filename="$modelname/qd/bs=4096" \
     -t "KIOPS of ${modelname} (bs=4096)" \
     -l 'spdk appends lbaf0' 'io_uring writemq lbaf0' 'spdk appends lbaf3' 'io_uring writemq lbaf3' \
@@ -317,6 +374,17 @@ ${python_bin} qd_kiops_plot.py --filename="$modelname/qd/bs=8192" \
     -c 1 1 1 1 \
     --upper_limit_y=350 \
     -b 8192 8192 8192 8192 \
+    -q 1 2 4 8 16 32 64 128
+${python_bin} qd_kiops_plot.py --filename="$modelname/qd/bs=8192 lbaf0" \
+    -t "KIOPS of ${modelname} (bs=8192)" \
+    -l 'spdk appends lbaf0' 'io_uring writemq lbaf0' \
+    -m ${model} ${model} \
+    -f lbaf0 lbaf0 \
+    -e spdk io_uring \
+    -o append writemq \
+    -c 1 1 \
+    --upper_limit_y=350 \
+    -b 8192 8192 \
     -q 1 2 4 8 16 32 64 128
 ${python_bin} qd_kiops_plot.py --filename="$modelname/qd/bs=16384" \
     -t "KIOPS of ${modelname} (bs=16384)" \
