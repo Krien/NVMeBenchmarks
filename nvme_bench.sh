@@ -177,6 +177,7 @@ if [[ "$type" == "ZNS"  ]]; then
             ${io_uring_default_args[@]} \
             --output="${output_dir}/1.json" \
             --ioscheduler=none \
+            --bs=${bs} \
             --iodepth=1;
     done;
 fi
@@ -246,7 +247,6 @@ if [[ "$type" == "ZNS" ]]; then
             --zone_append=0 \
             --initial_zone_reset=1 \
             --iodepth=1 \
-            --numjobs=${concurrent_zones} \
             --bs=${bs} \
             --offset_increment=20z;
     done;
