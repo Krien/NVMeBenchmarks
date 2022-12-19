@@ -15,6 +15,9 @@ if [ -z "$SPDK_DIR" ]; then
     echo "Please provide a path to the SPDK_DIR";
     exit 1;
 fi
+
+source ./scripts/precondition.sh;
+
 fio="LD_PRELOAD=${SPDK_DIR}/build/fio/spdk_nvme  ${FIO_DIR}/fio";
 
 DATA_DIR=data;
@@ -126,7 +129,7 @@ for qd in "${qds[@]}"; do
             output_dir="${DATA_DIR}/io_uring/${model}/${lbaf}/writemq/${bs}bs";
             mkdir -p "${output_dir}";
             for concurrent_zones in "${czones[@]}"; do
-                sudo nvme zns reset-zone -a /dev/${nvme_dev}
+                sudo nvme zns reset-zone -a /dev/${nvme_dev};
                 output_dir="${DATA_DIR}/io_uring/${model}/${lbaf}/writemq/${bs}bs/${concurrent_zones}zone";
                 mkdir -p "${output_dir}";
                 sudo $fio \
@@ -146,6 +149,8 @@ for qd in "${qds[@]}"; do
             if [[ ${bs} -lt $page_size ]]; then
                 continue;
             fi;
+            # Purge for fairness
+            sudo nvme format -s 1 /dev/${nvme_dev};
             output_dir="${DATA_DIR}/io_uring/${model}/${lbaf}/write/${bs}bs";
             mkdir -p "${output_dir}";
             output_dir="${DATA_DIR}/io_uring/${model}/${lbaf}/write/${bs}bs/1zone";
@@ -180,6 +185,33 @@ if [[ "$type" == "ZNS"  ]]; then
             --bs=${bs} \
             --iodepth=1;
     done;
+else
+    output_dir="${DATA_DIR}/io_uring/${model}/${lbaf}/writerand";
+    mkdir -p "${output_dir}";
+    output_dir="${DATA_DIR}/io_uring/${model}/${lbaf}/writerand/4096bs";
+    mkdir -p "${output_dir}";
+    output_dir="${DATA_DIR}/io_uring/${model}/${lbaf}/writerand/4096bs/1zone";
+    mkdir -p "${output_dir}";
+    precondition_fill_nvme /dev/${nvme_dev}
+    precondition_rand_nvme /dev/${nvme_dev} "4K"
+    steady_state_nvme /dev/${nvme_dev} "4K" "5%"
+    sudo $fio \
+            --name="writerand" \
+            --rw=randwrite \
+            --direct=1  \
+            --group_reporting=1 \
+            --thread=1 \
+            --output-format=json \
+            --time_based=1 \
+            --runtime=30s \
+            --ramp_time=10s \
+            --numa_cpu_nodes="$numa" \
+            --numa_mem_policy="bind:${numa}"  \
+            ${io_uring_default_args[@]} \
+            --output="${output_dir}/1.json" \
+            --ioscheduler=none \
+            --bs=4096 \
+            --iodepth=1;
 fi
 
 # ... SPDK tests ...
@@ -218,6 +250,9 @@ for qd in "${qds[@]}"; do
             mkdir -p "${output_dir}";
             output_dir="${DATA_DIR}/spdk/${model}/${lbaf}/write/${bs}bs/1zone"
             mkdir -p "${output_dir}";
+            sudo ${SPDK_DIR}/scripts/setup.sh reset
+            sudo nvme format -s 1 /dev/${nvme_dev};
+            sudo PCI_ALLOWED="${addr}" ${SPDK_DIR}/scripts/setup.sh
             sudo $fio \
                 --name="qd${qd}" \
                 ${default_args[@]} \
@@ -250,5 +285,35 @@ if [[ "$type" == "ZNS" ]]; then
             --bs=${bs} \
             --offset_increment=20z;
     done;
+else
+    sudo ${SPDK_DIR}/scripts/setup.sh reset
+    output_dir="${DATA_DIR}/spdk/${model}/${lbaf}/writerand";
+    mkdir -p "${output_dir}";
+    output_dir="${DATA_DIR}/spdk/${model}/${lbaf}/writerand/4096bs";
+    mkdir -p "${output_dir}";
+    output_dir="${DATA_DIR}/spdk/${model}/${lbaf}/writerand/4096bs/1zone";
+    mkdir -p "${output_dir}";
+    precondition_fill_nvme /dev/${nvme_dev}
+    precondition_rand_nvme /dev/${nvme_dev} "4K"
+    steady_state_nvme /dev/${nvme_dev} "4K" "5%"
+    sudo $fio \
+            --name="writerand" \
+            --rw=randwrite \
+            --direct=1  \
+            --group_reporting=1 \
+            --thread=1 \
+            --output-format=json \
+            --time_based=1 \
+            --runtime=30s \
+            --ramp_time=10s \
+            --numa_cpu_nodes="$numa" \
+            --numa_mem_policy="bind:${numa}"  \
+            --ioengine=spdk \
+            --filename="trtype=PCIe traddr=${spdk_addr} ns=${ns}" \
+            --output="${output_dir}/1.json" \
+            --ioscheduler=none \
+            --bs=4096 \
+            --iodepth=1;
 fi
+
 sudo ${SPDK_DIR}/scripts/setup.sh reset
