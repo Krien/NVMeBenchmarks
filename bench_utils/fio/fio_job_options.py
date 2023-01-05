@@ -131,9 +131,9 @@ class JobOption(FioOption):
                 "rw",
                 {
                     JobWorkload.SEQ_WRITE: "write",
-                    JobWorkload.RAN_WRITE: "write",
-                    JobWorkload.SEQ_READ: "write",
-                    JobWorkload.RAN_READ: "write",
+                    JobWorkload.RAN_WRITE: "writerand",
+                    JobWorkload.SEQ_READ: "read",
+                    JobWorkload.RAN_READ: "readrand",
                 }.get(self.workload, "read"),
             )
         ]

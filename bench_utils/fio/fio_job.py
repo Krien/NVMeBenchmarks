@@ -3,21 +3,6 @@ from enum import Enum
 from dataclasses import dataclass
 from .fio_job_options import FioOption
 
-# ...EXAMPLE...
-# jo = FioGlobalJob()
-# jo.add_option2("io_engine", "io_uring")
-# jo.add_option("hipri")
-#
-# jo1 = FioSubJob("test")
-# jo1.add_option2("size","2G")
-# jo.add_job(jo1)
-#
-# print(jo.stringify())
-#
-# jobg = FioJobGenerator()
-# jobg.generate_job_file('test', jo)
-
-
 class FioJobDescription:
     """Structure to hold Fio jobs"""
 
