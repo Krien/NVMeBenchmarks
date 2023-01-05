@@ -1,10 +1,11 @@
 import os
 from dataclasses import dataclass
 
-ROOT_PATH = f'{os.path.realpath(os.path.dirname(__file__))}/..'
-DATA_PATH = f'{ROOT_PATH}/data'
-JOB_PATH = f'{ROOT_PATH}/jobs'
-PLOT_PATH = f'{ROOT_PATH}/plots'
+ROOT_PATH = f"{os.path.realpath(os.path.dirname(__file__))}/.."
+DATA_PATH = f"{ROOT_PATH}/data"
+JOB_PATH = f"{ROOT_PATH}/jobs"
+PLOT_PATH = f"{ROOT_PATH}/plots"
+
 
 @dataclass
 class BenchPath:
@@ -19,16 +20,16 @@ class BenchPath:
     bs: int
 
     def RelPathDir(self) -> str:
-        return f'{self.engine}/{self.model}/{self.lbaf}/{self.operation}/{self.bs}bs/{self.concurrent_zones}zone'
+        return f"{self.engine}/{self.model}/{self.lbaf}/{self.operation}/{self.bs}bs/{self.concurrent_zones}zone"
 
     def RelPathOut(self) -> str:
-        return f'{self.RelPathDir()}/{self.qd}.json'
+        return f"{self.RelPathDir()}/{self.qd}.json"
 
     def RelPathJob(self):
-        return f'{self.RelPathDir()}/{self.qd}.fio'
+        return f"{self.RelPathDir()}/{self.qd}.fio"
 
     def AbsPathOut(self) -> str:
-        return f'{DATA_PATH}/{self.RelPathOut()}'
+        return f"{DATA_PATH}/{self.RelPathOut()}"
 
     def AbsPathJob(self) -> str:
-        return f'{JOB_PATH}/{self.RelPathJob()}'
+        return f"{JOB_PATH}/{self.RelPathJob()}"

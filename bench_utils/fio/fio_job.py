@@ -14,59 +14,62 @@ import os
 # jobg = FioJobGenerator()
 # jobg.generate_job_file('test', jo)
 
+
 class FioJobDescription:
     """Structure to hold Fio jobs"""
 
     def __init__(self):
-        self.options=[]
-        self.header="[?]"
+        self.options = []
+        self.header = "[?]"
 
-    def add_option(self, opt:str):
+    def add_option(self, opt: str):
         self.options.append(opt)
 
-    def add_option2(self, opt:str, val:str):
-        self.options.append(f'{opt}={val}')
+    def add_option2(self, opt: str, val: str):
+        self.options.append(f"{opt}={val}")
 
-    def add_options(self, opts:list[(str,str)]):
-        for opt,val in opts:
-            self.options.append(f'{opt}={val}' if val is not None else opt)
+    def add_options(self, opts: list[(str, str)]):
+        for opt, val in opts:
+            self.options.append(f"{opt}={val}" if val is not None else opt)
 
     def stringify(self) -> str:
-        lines=[self.header]
+        lines = [self.header]
         lines += self.options
-        st = '\n'.join(lines) + '\n'
+        st = "\n".join(lines) + "\n"
         return st
+
 
 class FioSubJob(FioJobDescription):
     """Structure to hold a sub Fio job"""
 
     def __init__(self, name):
         FioJobDescription.__init__(self)
-        self.header = f'[{name}]'
+        self.header = f"[{name}]"
+
 
 class FioGlobalJob(FioJobDescription):
     """Structure to hold the main Fio job"""
 
-    GLOBAL_HEADER="[global]"
+    GLOBAL_HEADER = "[global]"
 
     def __init__(self):
         FioJobDescription.__init__(self)
-        self.subjobs=[]
+        self.subjobs = []
         self.header = self.GLOBAL_HEADER
 
-    def add_job(self, job:FioSubJob):
+    def add_job(self, job: FioSubJob):
         self.subjobs.append(job)
 
     def stringify(self) -> str:
         st = FioJobDescription.stringify(self)
         for job in self.subjobs:
-            st += '\n'
+            st += "\n"
             st += job.stringify()
         return st
 
 
-class FioJobGenerator():
-    """ Generates Fio jobs """
+class FioJobGenerator:
+    """Generates Fio jobs"""
 
     def __init__(self):
         pass
@@ -76,8 +79,7 @@ class FioJobGenerator():
         os.makedirs(jobpath, exist_ok=True)
         self.jobpath = jobpath
 
-    def generate_job_file(self, path:str, job:FioJobDescription):
+    def generate_job_file(self, path: str, job: FioJobDescription):
         self.__setup_dirs(path)
-        with open(f'{path}', 'w') as f:
+        with open(f"{path}", "w") as f:
             f.write(job.stringify())
-
