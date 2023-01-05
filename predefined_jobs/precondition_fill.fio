@@ -1,0 +1,11 @@
+[precondition_fill_nvme]
+filename=${FILENAME}
+size=100%
+bs=128K
+direct=1
+rw=write
+thread=1
+ioengine=io_uring
+fixedbufs=1
+registerfiles=1
+hipri
