@@ -4,6 +4,7 @@ from dataclasses import dataclass
 ROOT_PATH = f"{os.path.realpath(os.path.dirname(__file__))}/.."
 DATA_PATH = f"{ROOT_PATH}/data"
 JOB_PATH = f"{ROOT_PATH}/jobs"
+PREDEFINED_JOB_PATH = f"{ROOT_PATH}/predefined_jobs"
 PLOT_PATH = f"{ROOT_PATH}/plots"
 
 

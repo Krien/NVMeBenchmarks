@@ -1,4 +1,7 @@
 import os
+from enum import Enum
+from dataclasses import dataclass
+from .fio_job_options import FioOption
 
 # ...EXAMPLE...
 # jo = FioGlobalJob()
@@ -28,9 +31,13 @@ class FioJobDescription:
     def add_option2(self, opt: str, val: str):
         self.options.append(f"{opt}={val}")
 
-    def add_options(self, opts: list[(str, str)]):
+    def add_raw_options(self, opts: list[(str, str)]):
         for opt, val in opts:
             self.options.append(f"{opt}={val}" if val is not None else opt)
+
+    def add_options(self, opts: list[FioOption]):
+        for opt in opts:
+            self.add_raw_options([t for t in opt.to_opt()])
 
     def stringify(self) -> str:
         lines = [self.header]

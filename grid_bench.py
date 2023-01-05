@@ -14,9 +14,6 @@ JOB_CZONES = [1, 2, 3, 4, 5]
 
 
 def main(fio: str, spdk_dir: str, model: str, device: str, lbaf: str, mock: bool):
-    data_dir = os.path.join(os.path.join(os.getcwd(), "data"))
-    os.makedirs(data_dir, exist_ok=True)
-
     # Setup tools
     job_gen = FioJobGenerator()
     fio = FioRunner(fio)
@@ -42,31 +39,27 @@ def main(fio: str, spdk_dir: str, model: str, device: str, lbaf: str, mock: bool
 
     # Setup default job args
     job_defaults = [
-        ("rw", "write"),
-        ("direct", "1"),
-        ("group_reporting", "1"),
-        ("thread", "1"),
-        ("time_based", "1"),
-        ("runtime", f"{JOB_RUN}"),
-        ("ramp_time", f"{JOB_RAMP}"),
-        ("numa_cpu_nodes", f"{numa_node}"),
-        ("numa_mem_policy", f"bind:{numa_node}"),
+        JobOption(JobWorkload.SEQ_WRITE),
+        DirectOption(True),
+        GroupReportingOption(True),
+        JsonOption(),
+        ThreadOption(True),
+        TimedOption(f"{JOB_RUN}", f"{JOB_RAMP}"),
+        NumaPinOption(numa_node),
     ]
     if zns:
-        job_defaults.append(("size", "20z"))
-        job_defaults.append(("zonemode", "zbd"))
+        job_defaults.append(SizeOption(JOB_SIZE_ZNS))
+        job_defaults.append(ZnsOption())
     else:
-        job_defaults.append(("size", "40G"))
+        job_defaults.append(SizeOption(JOB_SIZE_NVME))
+
     io_uring_args = [
-        ("ioengine", "io_uring"),
-        ("filename", f"/dev/{device}"),
-        ("fixedbufs", "1"),
-        ("registerfiles", "1"),
-        ("hipri", "1"),
-        ("sqthread_poll", "1"),
+        IOEngineOption(IOEngine.IO_URING),
+        DefaultIOUringOption(),
+        TargetOption(f"/dev/{device}"),
     ]
     spdk_filename = spdk.get_spdk_traddress(device)
-    spdk_args = [("io_engine", "spdk"), ("filename", spdk_filename)]
+    spdk_args = [IOEngineOption(IOEngine.SPDK), TargetOption(spdk_filename)]
 
     # Setup grid
     qds = JOB_QDS
@@ -82,16 +75,20 @@ def main(fio: str, spdk_dir: str, model: str, device: str, lbaf: str, mock: bool
         sjob = FioSubJob(f"qd{qd}")
         sjob.add_options(job_defaults)
         sjob.add_options(io_uring_args)
-        sjob.add_option2("iodepth", f"{qd}")
-        sjob.add_option2("numjobs", f"{concurrent_zones}")
-        sjob.add_option2("bs", f"{bs}")
+        sjob.add_options(
+            [
+                QDOption(qd),
+                ConcurrentWorkerOption(concurrent_zones),
+                RequestSizeOption(f"{bs}"),
+            ]
+        )
         operation = "?"
         if zns:
-            sjob.add_option2("ioscheduler", "mq-deadline")
-            sjob.add_option2("offset_increment", "20z")
+            sjob.add_options([SchedulerOption(Scheduler.MQ_DEADLINE)])
+            sjob.add_option2("offset_increment", JOB_SIZE_ZNS)
             operation = "writemq"
         else:
-            sjob.add_option2("ioscheduler", "none")
+            sjob.add_options([SchedulerOption(Scheduler.NONE)])
             operation = "write"
         job.add_job(sjob)
 
@@ -112,11 +109,15 @@ def main(fio: str, spdk_dir: str, model: str, device: str, lbaf: str, mock: bool
             sjob = FioSubJob(f"qd{qd}")
             sjob.add_options(job_defaults)
             sjob.add_options(io_uring_args)
-            sjob.add_option2("iodepth", f"{qd}")
-            sjob.add_option2("numjobs", f"{concurrent_zones}")
-            sjob.add_option2("bs", f"{bs}")
-            sjob.add_option2("ioscheduler", "none")
-            sjob.add_option2("offset_increment", "20z")
+            sjob.add_options(
+                [
+                    QDOption(qd),
+                    ConcurrentWorkerOption(concurrent_zones),
+                    RequestSizeOption(bs),
+                ]
+            )
+            sjob.add_options([SchedulerOption(Scheduler.NONE)])
+            sjob.add_option2("offset_increment", JOB_SIZE_ZNS)
             job.add_job(sjob)
 
             # paths
@@ -137,14 +138,18 @@ def main(fio: str, spdk_dir: str, model: str, device: str, lbaf: str, mock: bool
         sjob = FioSubJob(f"qd{qd}")
         sjob.add_options(job_defaults)
         sjob.add_options(spdk_args)
-        sjob.add_option2("iodepth", f"{qd}")
-        sjob.add_option2("numjobs", f"{concurrent_zones}")
-        sjob.add_option2("bs", f"{bs}")
+        sjob.add_options(
+            [
+                QDOption(qd),
+                ConcurrentWorkerOption(concurrent_zones),
+                RequestSizeOption(bs),
+            ]
+        )
         operation = "?"
         if zns:
-            sjob.add_option2("zone_append", "1")
-            sjob.add_option2("initial_zone_reset", "1")
-            sjob.add_option2("offset_increment", "20z")
+            sjob.add_option2("zone_append", fio_truthy(True))
+            sjob.add_option2("initial_zone_reset", fio_truthy(True))
+            sjob.add_option2("offset_increment", JOB_SIZE_ZNS)
             operation = "append"
         else:
             operation = "write"
@@ -169,12 +174,16 @@ def main(fio: str, spdk_dir: str, model: str, device: str, lbaf: str, mock: bool
             sjob = FioSubJob(f"qd{qd}")
             sjob.add_options(job_defaults)
             sjob.add_options(spdk_args)
-            sjob.add_option2("iodepth", f"{qd}")
-            sjob.add_option2("numjobs", f"{concurrent_zones}")
-            sjob.add_option2("bs", f"{bs}")
-            sjob.add_option2("zone_append", "0")
-            sjob.add_option2("initial_zone_reset", "1")
-            sjob.add_option2("offset_increment", "20z")
+            sjob.add_options(
+                [
+                    QDOption(qd),
+                    ConcurrentWorkerOption(concurrent_zones),
+                    RequestSizeOption(bs),
+                ]
+            )
+            sjob.add_option2("zone_append", fio_truthy(False))
+            sjob.add_option2("initial_zone_reset", fio_truthy(True))
+            sjob.add_option2("offset_increment", JOB_SIZE_ZNS)
             job.add_job(sjob)
 
             # paths
