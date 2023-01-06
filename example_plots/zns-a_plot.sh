@@ -1,7 +1,7 @@
 #!/bin/bash
 
-model=WZS4C8T1TDSP303_________________________
-modelname=WZS4C8T1TDSP303
+model=zns-a
+modelname=zns-a
 
 DIR=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
 cd "$DIR" || exit

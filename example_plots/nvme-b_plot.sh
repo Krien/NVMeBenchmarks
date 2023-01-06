@@ -1,7 +1,7 @@
 #!/bin/bash
 
-model=Samsung_SSD_980_PRO_2TB_________________
-modelname=Samsung_SSD_980_PRO_2TB
+model=nvme-b
+modelname=nvme-b
 
 DIR=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
 cd "$DIR" || exit

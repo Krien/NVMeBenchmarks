@@ -1,7 +1,7 @@
 #!/bin/bash
 
-model=WUS4B7696DSP303_________________________
-modelname=WUS4B7696DSP303
+model=nvme-a
+modelname=nvme-a
 
 DIR=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
 cd "$DIR" || exit
