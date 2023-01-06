@@ -1,4 +1,4 @@
-from nvmeutils import *
+from bench_utils import *
 from typing import List
 import argparse
 
@@ -16,8 +16,9 @@ class LatencyThroughputPlot(GenericPlot):
         )
         for i in range(len(kiops)):
             plt.plot(kiops[i], lats[i], "o", color=subplotdefinition.color)
-            plt.text(kiops[i] * (1.01), lats[i] *
-                     (1.01), s='qd='+str(qds[i]), fontsize=9)
+            plt.text(
+                kiops[i] * (1.01), lats[i] * (1.01), s="qd=" + str(qds[i]), fontsize=9
+            )
 
 
 @dataclass
@@ -48,8 +49,7 @@ def plot_lot_kiops(
     prep_function_y: str,
 ):
     # Plot
-    colors = ["cyan", "magenta", "green", "red",
-              "orange", "black", "gray", "yellow"]
+    colors = ["cyan", "magenta", "green", "red", "orange", "black", "gray", "yellow"]
     pick_color = iter(colors)
     qds = [qd for qd in ALLOWED_QDS if qd < queue_depth_limit]
 
@@ -72,8 +72,14 @@ def plot_lot_kiops(
                 f"Adding to plot: label={label}, model={model}, engine={engine}, lbaf={lbaf}, op={operation}, zones={concurrent_zone}, qd={qd}, block_size={block_size}"
             )
             fio_dat = parse_fio_file(
-                DataPath(
-                    engine, model, lbaf, operation, concurrent_zone, qd, block_size
+                BenchPath(
+                    string_to_io_engine(engine),
+                    model,
+                    lbaf,
+                    operation,
+                    concurrent_zone,
+                    qd,
+                    block_size,
                 )
             )
             plot_data[label].kiops.append(
@@ -124,21 +130,16 @@ if __name__ == "__main__":
         choices=["spdk", "io_uring"],
         required=True,
     )
-    parser.add_argument("-o", "--operations", type=str,
-                        nargs="+", required=True)
-    parser.add_argument("-c", "--concurrent_zones",
-                        type=int, nargs="+", required=True)
-    parser.add_argument("-b", "--block_sizes", type=int,
-                        nargs="+", required=True)
+    parser.add_argument("-o", "--operations", type=str, nargs="+", required=True)
+    parser.add_argument("-c", "--concurrent_zones", type=int, nargs="+", required=True)
+    parser.add_argument("-b", "--block_sizes", type=int, nargs="+", required=True)
     parser.add_argument(
         "-q", "--queue_depth_limit", type=int, required=False, default=256
     )
     parser.add_argument("--lower_limit_y", type=int, required=False, default=0)
-    parser.add_argument("--upper_limit_y", type=int,
-                        required=False, default=550)
+    parser.add_argument("--upper_limit_y", type=int, required=False, default=550)
     parser.add_argument("--lower_limit_x", type=int, required=False, default=0)
-    parser.add_argument("--upper_limit_x", type=int,
-                        required=False, default=300)
+    parser.add_argument("--upper_limit_x", type=int, required=False, default=300)
     parser.add_argument(
         "--transform_x",
         type=str,
@@ -153,12 +154,7 @@ if __name__ == "__main__":
         choices=["none", "div1000", "div1000log"],
         default="div1000",
     )
-    parser.add_argument(
-        "--filename",
-        type=str,
-        required=False,
-        default="out"
-    )
+    parser.add_argument("--filename", type=str, required=False, default="out")
 
     args = parser.parse_args()
     labels = args.labels

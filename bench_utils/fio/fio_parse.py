@@ -55,10 +55,8 @@ def parse_data_from_json(json_output):
     )
 
 
-def parse_fio_file(fio_data_path_definition):
-    return parse_data_from_json(
-        get_json(f"{DATA_PATH}/{fio_data_path_definition.AbsPathOut()}")
-    )
+def parse_fio_file(fio_data_path_definition: BenchPath):
+    return parse_data_from_json(get_json(f"{fio_data_path_definition.AbsPathOut()}"))
 
 
 def divide_by_1000(x):

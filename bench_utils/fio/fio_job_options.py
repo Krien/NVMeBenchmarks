@@ -24,11 +24,18 @@ class Scheduler(Enum):
     MQ_DEADLINE = 2
 
 
-def io_engine_to_string(engine: IOEngine):
+def io_engine_to_string(engine: IOEngine) -> str:
     return {
         IOEngine.IO_URING: "io_uring",
         IOEngine.SPDK: "spdk",
     }.get(engine, "deadbeef")
+
+
+def string_to_io_engine(engine: str) -> IOEngine:
+    return {
+        "io_uring": IOEngine.IO_URING,
+        "spdk": IOEngine.SPDK,
+    }.get(engine, IOEngine.IO_URING)
 
 
 # Main Option
