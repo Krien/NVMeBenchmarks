@@ -2,8 +2,7 @@ import os
 import math
 import json
 from dataclasses import dataclass
-
-DATA_PATH = f"{os.path.realpath(os.path.dirname(__file__))}/../data"
+from ..path_utils import BenchPath
 
 
 def get_json(path):
@@ -56,26 +55,8 @@ def parse_data_from_json(json_output):
     )
 
 
-@dataclass
-class DataPath:
-    """Data dir structured"""
-
-    engine: str
-    mode: str
-    lbaf: str
-    operation: str
-    concurrent_zones: int
-    qd: int
-    bs: int
-
-    def Path(self) -> str:
-        return f"{self.engine}/{self.mode}/{self.lbaf}/{self.operation}/{self.bs}bs/{self.concurrent_zones}zone/{self.qd}.json"
-
-
-def parse_fio_file(fio_data_path_definition):
-    return parse_data_from_json(
-        get_json(f"{DATA_PATH}/{fio_data_path_definition.Path()}")
-    )
+def parse_fio_file(fio_data_path_definition: BenchPath):
+    return parse_data_from_json(get_json(f"{fio_data_path_definition.AbsPathOut()}"))
 
 
 def divide_by_1000(x):
@@ -93,4 +74,3 @@ def prep_function(q, x):
         return divide_by_1000(x)
     else:
         return divide_by1000_and_2log(x)
-

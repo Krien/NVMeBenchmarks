@@ -1,0 +1,15 @@
+[steady_state_nvme]
+filename=${FILENAME}
+runtime=30m
+ss=iops:${STEADY}
+ss_dur=30s
+ss_ramp=10s
+bs=${BLOCK_SIZE}
+direct=1
+rw=randwrite
+thread=1
+ioengine=io_uring
+fixedbufs=1
+registerfiles=1
+hipri
+write_bw_log=${BW_LOG}
