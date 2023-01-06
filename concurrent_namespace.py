@@ -13,10 +13,14 @@ DIS_RUN = "2m"
 JOB_SIZE_NVME = "40G"
 JOB_SIZE_ZNS = "20z"
 
-def dev_name(device:str, namespace:str)->str:
+
+def dev_name(device: str, namespace: str) -> str:
     return f"{device}n{namespace}"
 
-def operation_options(io_engine:IOEngine, operation:str, qd:int, zns: bool)->list[JobOption]:
+
+def operation_options(
+    io_engine: IOEngine, operation: str, qd: int, zns: bool
+) -> list[JobOption]:
     opts = []
     if "write" in operation:
         if "rand" in operation:
@@ -29,20 +33,20 @@ def operation_options(io_engine:IOEngine, operation:str, qd:int, zns: bool)->lis
             else:
                 opts.append(SchedulerOption(Scheduler.MQ_DEADLINE))
         elif IOEngine == IOEngine.IO_URING:
-                opts.append(SchedulerOption(Scheduler.NONE))
+            opts.append(SchedulerOption(Scheduler.NONE))
     else:
         if "rand" in operation:
             opts.append(JobOption(JobWorkload.RAN_READ))
         else:
             opts.append(JobOption(JobWorkload.SEQ_READ))
         if IOEngine == IOEngine.IO_URING:
-                opts.append(SchedulerOption(Scheduler.NONE))
+            opts.append(SchedulerOption(Scheduler.NONE))
     return opts
 
-    
+
 def main(
     fio: str,
-        spdk_dir: str,
+    spdk_dir: str,
     model: str,
     device: str,
     target_ns: str,
@@ -61,14 +65,17 @@ def main(
     # Devices
     target_device = dev_name(device, target_ns)
     disturbed_devices = [dev_name(device, ns) for ns in disturbed_nss]
-    devices =  disturbed_devices + [target_device]
+    devices = disturbed_devices + [target_device]
 
     # Setup tools
     job_gen = FioJobGenerator(overwrite)
     fio = FioRunner(fio, overwrite)
-    nvme = {device: NVMeRunnerCLI(device) if not mock else NVMeRunnerMock(device) for device in devices}
+    nvme = {
+        device: NVMeRunnerCLI(device) if not mock else NVMeRunnerMock(device)
+        for device in devices
+    }
     io_engine = string_to_io_engine(io_engine)
-    filename_func = lambda dev : f"/dev/{dev}"
+    filename_func = lambda dev: f"/dev/{dev}"
 
     # Investigate device (Be careful this might be different between namespaces)
     zns = nvme[target_device].is_zoned()
@@ -79,16 +86,25 @@ def main(
     spdk = {}
     if io_engine == IOEngine.SPDK:
         fio.LD_PRELOAD(f"{spdk_dir}/build/fio/spdk_nvme")
-        spdk = {device: (
-            SPDKRunnerCLI(
-                spdk_dir, [device], lambda dev: NVMeRunnerCLI(dev), {"numa": numa_node}
+        spdk = {
+            device: (
+                SPDKRunnerCLI(
+                    spdk_dir,
+                    [device],
+                    lambda dev: NVMeRunnerCLI(dev),
+                    {"numa": numa_node},
+                )
+                if not mock
+                else SPDKRunnerMock(
+                    spdk_dir,
+                    [device],
+                    lambda dev: NVMeRunnerMock(dev),
+                    {"numa": numa_node},
+                )
             )
-            if not mock
-            else SPDKRunnerMock(
-                    spdk_dir, [device], lambda dev: NVMeRunnerMock(dev), {"numa": numa_node}
-            )
-        ) for device in devices}
-        filename_func = lambda dev : spdk[dev].get_spdk_traddress(dev)
+            for device in devices
+        }
+        filename_func = lambda dev: spdk[dev].get_spdk_traddress(dev)
 
     # Setup default job args
     job_defaults = [
@@ -96,7 +112,7 @@ def main(
         GroupReportingOption(False),
         ThreadOption(True),
         NumaPinOption(numa_node),
-        IOEngineOption(io_engine)
+        IOEngineOption(io_engine),
     ]
     if zns:
         job_defaults.append(SizeOption(JOB_SIZE_ZNS))
@@ -106,17 +122,19 @@ def main(
     if io_engine == IOEngine.IO_URING:
         job_defaults.append(DefaultIOUringOption())
 
-
     job = FioGlobalJob()
     target_job = FioSubJob(f"target_{target_depth}")
     target_job.add_options(job_defaults)
-    target_job.add_options([
-        TimedOption(JOB_RUN, JOB_RAMP),
-        JsonOption(),
-        TargetOption(filename_func(target_device)),
-        RequestSizeOption(target_size),
-        QDOption(target_depth)
-    ] + operation_options(io_engine, target_op, target_depth, zns))
+    target_job.add_options(
+        [
+            TimedOption(JOB_RUN, JOB_RAMP),
+            JsonOption(),
+            TargetOption(filename_func(target_device)),
+            RequestSizeOption(target_size),
+            QDOption(target_depth),
+        ]
+        + operation_options(io_engine, target_op, target_depth, zns)
+    )
     # Do not leak paths in job file, use env var
     target_job.add_option2("write_bw_log", "${BW_PATH}")
     target_job.add_option2("write_lat_log", "${LOG_PATH}")
@@ -126,15 +144,26 @@ def main(
     for disturbed_dev in disturbed_devices:
         dis_job = FioSubJob(f"dis_{disturbed_dev}")
         dis_job.add_options(job_defaults)
-        dis_job.add_options([
-            DelayOption(DIS_DELAY),
-            TimedOption(DIS_RUN, DIS_RAMP),
-            TargetOption(filename_func(disturbed_dev))
-        ] + operation_options(io_engine, dis_op, dis_depth, zns))
+        dis_job.add_options(
+            [
+                DelayOption(DIS_DELAY),
+                TimedOption(DIS_RUN, DIS_RAMP),
+                TargetOption(filename_func(disturbed_dev)),
+            ]
+            + operation_options(io_engine, dis_op, dis_depth, zns)
+        )
         job.add_job(dis_job)
 
     # paths
-    path = BenchPath(io_engine, model, lbaf, f"concurrent_namespaces_{target_op}_{dis_op}", 1, target_depth, target_size)
+    path = BenchPath(
+        io_engine,
+        model,
+        lbaf,
+        f"concurrent_namespaces_{target_op}_{dis_op}",
+        1,
+        target_depth,
+        target_size,
+    )
 
     # Write job file
     job_gen.generate_job_file(path.AbsPathJob(), job)
