@@ -1,30 +1,30 @@
+import os, sys
+parent_dir = os.path.abspath('..')
+if parent_dir not in sys.path:
+    sys.path.append(parent_dir)
 from bench_utils import *
 from typing import List
 import argparse
 
 
-class BSThroughputPlot(GenericPlot):
-    def plot_line(self, subplotdefinition, bss, kiops, kiops_std, width, offset):
-        plt.bar(
-            [x + offset for x in range(len(bss))],
+class QDThroughputPlot(GenericPlot):
+    def plot_line(self, subplotdefinition, qds, kiops):
+        plt.plot(
+            range(len(qds)),
             kiops,
-            yerr=kiops_std,
-            width=width,
+            linewidth=3,
             label=subplotdefinition.label,
             color=subplotdefinition.color,
         )
-
-    def plot_axis(self, bss):
-        plt.xticks([x + 0.5 for x in range(len(bss))], [str(bs) for bs in bss])
+        plt.xticks(range(len(qds)), qds)
 
 
 @dataclass
-class BSKIOPSSpec:
+class QDKIOPSSpec:
     """A specification for the data lat_kiops needs"""
 
-    bss: List[int]
+    qds: List[int]
     kiops: List[int]
-    kiops_std: List[int]
     plot_color: str
 
 
@@ -54,7 +54,7 @@ def plot_lot_kiops(
         lbafs,
         operations,
         concurrent_zones,
-        queue_depths,
+        block_sizes,
     )
     plot_data = {}
 
@@ -65,62 +65,48 @@ def plot_lot_kiops(
         lbaf,
         operation,
         concurrent_zone,
-        qd,
+        block_size,
     ) in merged_dat:
-        plot_data[label] = BSKIOPSSpec([], [], [], next(pick_color))
-        for bs in block_sizes:
+        plot_data[label] = QDKIOPSSpec([], [], next(pick_color))
+        for qd in queue_depths:
             print(
-                f"Adding to plot: label={label}, model={model}, engine={engine}, lbaf={lbaf}, op={operation}, zones={concurrent_zone}, qd={qd}, block_size={bs}"
+                f"Adding to plot: label={label}, model={model}, engine={engine}, lbaf={lbaf}, op={operation}, zones={concurrent_zone}, qd={qd}, block_size={block_size}"
             )
-            try:
-                fio_dat = parse_fio_file(
-                    BenchPath(
-                        string_to_io_engine(engine),
-                        model,
-                        lbaf,
-                        operation,
-                        concurrent_zone,
-                        qd,
-                        bs,
-                    )
+            fio_dat = parse_fio_file(
+                BenchPath(
+                    string_to_io_engine(engine),
+                    model,
+                    lbaf,
+                    operation,
+                    concurrent_zone,
+                    qd,
+                    block_size,
                 )
-                plot_data[label].bss.append(bs)
-                plot_data[label].kiops.append(
-                    prep_function(prep_function_y, fio_dat.iops_mean)
-                )
-                plot_data[label].kiops_std.append(
-                    prep_function(prep_function_y, fio_dat.iops_stddev)
-                )
-            except:
-                plot_data[label].bss.append(bs)
-                plot_data[label].kiops.append(prep_function(prep_function_y, 0))
-                plot_data[label].kiops_std.append(prep_function(prep_function_y, 0))
-    plot = BSThroughputPlot(
+            )
+            plot_data[label].qds.append(qd)
+            plot_data[label].kiops.append(
+                prep_function(prep_function_y, fio_dat.iops_mean)
+            )
+
+    plot = QDThroughputPlot(
         PlotDefinition(
             get_plot_path(filename),
             title,
-            "Block size (bytes)",
+            "QD",
             "Througput (KIOPS)",
             lower_limit_y,
             upper_limit_y,
             0,
-            len(block_sizes),
+            len(queue_depths),
         )
     )
 
-    offset = 0.25 + (0.5 / len(labels)) / 2
     for label in labels:
-        bs_kiops = plot_data[label]
+        qd_kiops = plot_data[label]
         plot.plot_line(
-            SubplotDefinition(label, bs_kiops.plot_color),
-            bs_kiops.bss,
-            bs_kiops.kiops,
-            bs_kiops.kiops_std,
-            0.5 / len(labels),
-            offset,
+            SubplotDefinition(label, qd_kiops.plot_color), qd_kiops.qds, qd_kiops.kiops
         )
-        offset += 0.5 / len(labels)
-    plot.plot_axis(block_sizes)
+
     plot.save_to_disk()
 
 
@@ -142,15 +128,15 @@ if __name__ == "__main__":
     )
     parser.add_argument("-o", "--operations", type=str, nargs="+", required=True)
     parser.add_argument("-c", "--concurrent_zones", type=int, nargs="+", required=True)
+    parser.add_argument("-b", "--block_sizes", type=int, nargs="+", required=True)
     parser.add_argument(
-        "-b",
-        "--block_sizes",
-        type=str,
+        "-q",
+        "--queue_depths",
+        type=int,
         nargs="+",
         required=False,
-        default=[512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072],
+        default=[1, 2, 4, 8, 16, 32, 64, 128, 256, 512],
     )
-    parser.add_argument("-q", "--queue_depths", type=int, nargs="+", required=True)
     parser.add_argument("--lower_limit_y", type=int, required=False, default=0)
     parser.add_argument("--upper_limit_y", type=int, required=False, default=550)
     parser.add_argument(
@@ -170,14 +156,13 @@ if __name__ == "__main__":
     operations = args.operations
     concurrent_zones = args.concurrent_zones
     block_sizes = args.block_sizes
-    queue_depths = args.queue_depths
     if (
         len(labels) != len(models)
         or len(models) != len(lbafs)
         or len(engines) != len(lbafs)
         or len(engines) != len(operations)
         or len(operations) != len(concurrent_zones)
-        or len(concurrent_zones) != len(queue_depths)
+        or len(concurrent_zones) != len(block_sizes)
     ):
         print("List args must have equal length")
         exit(1)

@@ -7,7 +7,7 @@ model_zns_zns=zns-a
 
 DIR=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
 cd "$DIR" || exit
-cd .. || exit
+cd ../analysis || exit
 
 python_bin=python3
 
