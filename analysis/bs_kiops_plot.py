@@ -1,4 +1,9 @@
-from ..bench_utils import *
+import os, sys
+parent_dir = os.path.abspath('..')
+if parent_dir not in sys.path:
+    sys.path.append(parent_dir)
+from bench_utils import *
+from plot_utils import *
 from typing import List
 import argparse
 
