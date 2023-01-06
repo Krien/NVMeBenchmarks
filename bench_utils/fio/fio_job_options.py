@@ -24,6 +24,13 @@ class Scheduler(Enum):
     MQ_DEADLINE = 2
 
 
+def io_engine_to_string(engine: IOEngine):
+    return {
+        IOEngine.IO_URING: "io_uring",
+        IOEngine.SPDK: "spdk",
+    }.get(engine, "deadbeef")
+
+
 # Main Option
 @dataclass
 class FioOption:
@@ -120,6 +127,62 @@ class SizeOption(FioOption):
         return [("size", f"{self.size}")]
 
 
+@dataclass
+class OffsetOption(FioOption):
+    offset: str
+
+    def to_opt(self) -> [(str, str)]:
+        return [("offset_increment", f"{self.offset}")]
+
+
+@dataclass
+class StartupZoneResetOption(FioOption):
+    yes: bool
+
+    def to_opt(self) -> [(str, str)]:
+        return [("initial_zone_reset", f"{fio_truthy(self.yes)}")]
+
+
+@dataclass
+class ZNSAppendOption(FioOption):
+    yes: bool
+
+    def to_opt(self) -> [(str, str)]:
+        return [("zone_append", f"{fio_truthy(self.yes)}")]
+
+
+@dataclass
+class Io_uringFixedBufsOption(FioOption):
+    yes: bool
+
+    def to_opt(self) -> [(str, str)]:
+        return [("fixedbufs", f"{fio_truthy(self.yes)}")]
+
+
+@dataclass
+class Io_uringRegisterFilesOption(FioOption):
+    yes: bool
+
+    def to_opt(self) -> [(str, str)]:
+        return [("registerfiles", f"{fio_truthy(self.yes)}")]
+
+
+@dataclass
+class Io_uringHipriOption(FioOption):
+    yes: bool
+
+    def to_opt(self) -> [(str, str)]:
+        return [("fixedbufs", f"{fio_truthy(self.yes)}")]
+
+
+@dataclass
+class Io_uringSqthreadPollOption(FioOption):
+    yes: bool
+
+    def to_opt(self) -> [(str, str)]:
+        return [("sqthread_poll", f"{fio_truthy(self.yes)}")]
+
+
 # Enumerated types
 @dataclass
 class JobOption(FioOption):
@@ -147,10 +210,7 @@ class IOEngineOption(FioOption):
         return [
             (
                 "ioengine",
-                {
-                    IOEngine.IO_URING: "spdk",
-                    IOEngine.SPDK: "io_uring",
-                }.get(self.engine, "io_uring"),
+                io_engine_to_string(self.engine),
             )
         ]
 
@@ -179,7 +239,7 @@ class TimedOption(FioOption):
 
     def to_opt(self) -> [(str, str)]:
         return [
-            ("time_based", "0"),
+            ("time_based", fio_truthy(True)),
             ("ramp_time", self.warmup_period),
             ("runtime", self.measured_time),
         ]
@@ -188,12 +248,12 @@ class TimedOption(FioOption):
 @dataclass
 class DefaultIOUringOption(FioOption):
     def to_opt(self) -> [(str, str)]:
-        return [
-            ("fixedbufs", fio_truthy(True)),
-            ("registerfiles", fio_truthy(True)),
-            ("hipri", fio_truthy(True)),
-            ("sqthread_poll", fio_truthy(True)),
-        ]
+        return (
+            Io_uringFixedBufsOption(True).to_opt()
+            + Io_uringRegisterFilesOption(True).to_opt()
+            + Io_uringHipriOption(True).to_opt()
+            + Io_uringSqthreadPollOption(True).to_opt()
+        )
 
 
 @dataclass

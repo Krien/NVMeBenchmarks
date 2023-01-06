@@ -3,20 +3,36 @@ import os
 from bench_utils import *
 import argparse
 
-JOB_SIZE_ZNS = "20z"
-JOB_SIZE_NVME = "40G"
-JOB_RAMP = "10s"
-JOB_RUN = "30s"
+# Magic constants
+JOB_SIZE_ZNS: str = "20z"
+JOB_SIZE_NVME: str = "40G"
+JOB_RAMP: str = "10s"
+JOB_RUN: str = "30s"
 
-JOB_QDS = [1, 2, 4, 8, 16, 32, 64, 128, 256, 512]
-JOB_BSS = [512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072]
-JOB_CZONES = [1, 2, 3, 4, 5]
+# Grid
+JOB_QDS: list[int] = [1, 2, 4, 8, 16, 32, 64, 128, 256, 512]
+JOB_BSS: list[int] = [512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072]
+JOB_CZONES: list[int] = [1, 2, 3, 4, 5]
+
+# Out names
+SPDK_APPEND_OP: str = "append"
+SPDK_WRITE_OP: str = "write"
+IO_URING_WRITE_MQ_OPTION: str = "writemq"
+IO_URING_WRITE_NONE_OPTION: str = "write"
 
 
-def main(fio: str, spdk_dir: str, model: str, device: str, lbaf: str, mock: bool):
+def main(
+    fio: str,
+    spdk_dir: str,
+    model: str,
+    device: str,
+    lbaf: str,
+    overwrite: bool,
+    mock: bool,
+):
     # Setup tools
-    job_gen = FioJobGenerator()
-    fio = FioRunner(fio)
+    job_gen = FioJobGenerator(overwrite)
+    fio = FioRunner(fio, overwrite)
     fio.LD_PRELOAD(f"{spdk_dir}/build/fio/spdk_nvme")
     nvme = NVMeRunnerCLI(device) if not mock else NVMeRunnerMock(device)
 
@@ -44,7 +60,7 @@ def main(fio: str, spdk_dir: str, model: str, device: str, lbaf: str, mock: bool
         GroupReportingOption(True),
         JsonOption(),
         ThreadOption(True),
-        TimedOption(f"{JOB_RUN}", f"{JOB_RAMP}"),
+        TimedOption(JOB_RUN, JOB_RAMP),
         NumaPinOption(numa_node),
     ]
     if zns:
@@ -82,18 +98,21 @@ def main(fio: str, spdk_dir: str, model: str, device: str, lbaf: str, mock: bool
                 RequestSizeOption(f"{bs}"),
             ]
         )
-        operation = "?"
+        operation = "deadbeef"
         if zns:
-            sjob.add_options([SchedulerOption(Scheduler.MQ_DEADLINE)])
-            sjob.add_option2("offset_increment", JOB_SIZE_ZNS)
-            operation = "writemq"
+            sjob.add_options(
+                [SchedulerOption(Scheduler.MQ_DEADLINE), OffsetOption(JOB_SIZE_ZNS)]
+            )
+            operation = IO_URING_WRITE_MQ_OPTION
         else:
             sjob.add_options([SchedulerOption(Scheduler.NONE)])
-            operation = "write"
+            operation = IO_URING_WRITE_NONE_OPTION
         job.add_job(sjob)
 
         # paths
-        path = BenchPath("io_uring", model, lbaf, operation, concurrent_zones, qd, bs)
+        path = BenchPath(
+            IOEngine.IO_URING, model, lbaf, operation, concurrent_zones, qd, bs
+        )
         # Write job file
         job_gen.generate_job_file(path.AbsPathJob(), job)
         # Prepare device
@@ -114,14 +133,22 @@ def main(fio: str, spdk_dir: str, model: str, device: str, lbaf: str, mock: bool
                     QDOption(qd),
                     ConcurrentWorkerOption(concurrent_zones),
                     RequestSizeOption(bs),
+                    SchedulerOption(Scheduler.NONE),
+                    OffsetOption(JOB_SIZE_ZNS),
                 ]
             )
-            sjob.add_options([SchedulerOption(Scheduler.NONE)])
-            sjob.add_option2("offset_increment", JOB_SIZE_ZNS)
             job.add_job(sjob)
 
             # paths
-            path = BenchPath("io_uring", model, lbaf, "write", concurrent_zones, qd, bs)
+            path = BenchPath(
+                IOEngine.IO_URING,
+                model,
+                lbaf,
+                IO_URING_WRITE_NONE_OPTION,
+                concurrent_zones,
+                qd,
+                bs,
+            )
             # Write job file
             job_gen.generate_job_file(path.AbsPathJob(), job)
             # Prepare device
@@ -145,18 +172,24 @@ def main(fio: str, spdk_dir: str, model: str, device: str, lbaf: str, mock: bool
                 RequestSizeOption(bs),
             ]
         )
-        operation = "?"
+        operation = "deadbeef"
         if zns:
-            sjob.add_option2("zone_append", fio_truthy(True))
-            sjob.add_option2("initial_zone_reset", fio_truthy(True))
-            sjob.add_option2("offset_increment", JOB_SIZE_ZNS)
-            operation = "append"
+            sjob.add_options(
+                [
+                    ZNSAppendOption(True),
+                    StartupZoneResetOption(True),
+                    OffsetOption(JOB_SIZE_ZNS),
+                ]
+            )
+            operation = SPDK_APPEND_OP
         else:
-            operation = "write"
+            operation = SPDK_WRITE_OP
         job.add_job(sjob)
 
         # paths
-        path = BenchPath("SPDK", model, lbaf, operation, concurrent_zones, qd, bs)
+        path = BenchPath(
+            IOEngine.SPDK, model, lbaf, operation, concurrent_zones, qd, bs
+        )
         # Write job file
         job_gen.generate_job_file(path.AbsPathJob(), job)
         # Prepare device
@@ -179,15 +212,17 @@ def main(fio: str, spdk_dir: str, model: str, device: str, lbaf: str, mock: bool
                     QDOption(qd),
                     ConcurrentWorkerOption(concurrent_zones),
                     RequestSizeOption(bs),
+                    ZNSAppendOption(False),
+                    StartupZoneResetOption(True),
+                    OffsetOption(JOB_SIZE_ZNS),
                 ]
             )
-            sjob.add_option2("zone_append", fio_truthy(False))
-            sjob.add_option2("initial_zone_reset", fio_truthy(True))
-            sjob.add_option2("offset_increment", JOB_SIZE_ZNS)
             job.add_job(sjob)
 
             # paths
-            path = BenchPath("SPDK", model, lbaf, "write", concurrent_zones, qd, bs)
+            path = BenchPath(
+                IOEngine.SPDK, model, lbaf, SPDK_WRITE_OP, concurrent_zones, qd, bs
+            )
             # Write job file
             job_gen.generate_job_file(path.AbsPathJob(), job)
             # Prepare device
@@ -208,6 +243,15 @@ if __name__ == "__main__":
     parser.add_argument("-s", "--spdk_dir", type=str, required=True)
     parser.add_argument("-l", "--lbaf", type=str, required=True)
     parser.add_argument("--mock", type=bool, required=False, default=False)
+    parser.add_argument("-o", "--overwrite", type=str, required=False, default=False)
     args = parser.parse_args()
 
-    main(args.fio, args.spdk_dir, args.model, args.device, args.lbaf, args.mock)
+    main(
+        args.fio,
+        args.spdk_dir,
+        args.model,
+        args.device,
+        args.lbaf,
+        args.overwrite,
+        args.mock,
+    )

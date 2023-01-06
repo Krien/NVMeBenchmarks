@@ -1,13 +1,15 @@
 import os
 import subprocess
+import datetime
 
 
 class FioRunner:
     """Runner for fio"""
 
-    def __init__(self, fio_path):
+    def __init__(self, fio_path, overwrite=True):
         self.fio = fio_path
         self.preload = None
+        self.overwrite = overwrite
 
     def LD_PRELOAD(self, preload):
         self.preload = preload
@@ -28,6 +30,9 @@ class FioRunner:
     def run_job(
         self, jobpath, outpath, fio_shell_opts=[], fio_extra_opts=[], mock: bool = False
     ):
+        if not self.overwrite and os.path.exists(outpath):
+            print(f"Output file {outpath} already exists, enable overwrite to enable")
+            return
         outdir = os.path.dirname(outpath)
         os.makedirs(outdir, exist_ok=True)
         cmd = self.__generate_cmd(jobpath, outpath, fio_shell_opts, fio_extra_opts)
@@ -35,11 +40,6 @@ class FioRunner:
             subprocess.check_call(cmd, shell=True)
         else:
             with open(outpath, "w") as fi:
-                fi.writelines(["running command", f"{cmd}"])
-
-
-# ru = FioRunner('./fio')
-# ru.LD_PRELOAD('/home/kd/opt/fio/spdk_nvme')
-# ru.run_job('./predefined_jobs/precondition_fill.fio', './data/test',
-#           'hello', ["WAT=THIS", "FILENAME=/dev/nvmexn2"],
-#         ["hipri","time_based=1"])
+                fi.writelines(
+                    [f"running command at {datetime.datetime.now()}" "\n", f"{cmd}"]
+                )

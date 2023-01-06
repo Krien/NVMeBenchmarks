@@ -1,5 +1,6 @@
 import os
 from dataclasses import dataclass
+from .fio import IOEngine, io_engine_to_string
 
 ROOT_PATH = f"{os.path.realpath(os.path.dirname(__file__))}/.."
 DATA_PATH = f"{ROOT_PATH}/data"
@@ -12,7 +13,7 @@ PLOT_PATH = f"{ROOT_PATH}/plots"
 class BenchPath:
     """Data dir structured"""
 
-    engine: str
+    engine: IOEngine
     model: str
     lbaf: str
     operation: str
@@ -21,7 +22,7 @@ class BenchPath:
     bs: int
 
     def RelPathDir(self) -> str:
-        return f"{self.engine}/{self.model}/{self.lbaf}/{self.operation}/{self.bs}bs/{self.concurrent_zones}zone"
+        return f"{io_engine_to_string(self.engine)}/{self.model}/{self.lbaf}/{self.operation}/{self.bs}bs/{self.concurrent_zones}zone"
 
     def RelPathOut(self) -> str:
         return f"{self.RelPathDir()}/{self.qd}.json"
