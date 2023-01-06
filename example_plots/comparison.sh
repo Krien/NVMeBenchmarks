@@ -1,8 +1,8 @@
 #!/bin/bash
 
-model_nvme=Samsung_SSD_980_PRO_2TB_________________
-model_zns_nvme=WUS4B7696DSP303_________________________
-model_zns_zns=WZS4C8T1TDSP303_________________________
+model_nvme=nvme-b
+model_zns_nvme=nvme-a
+model_zns_zns=zns-a
 
 
 DIR=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
@@ -15,10 +15,10 @@ mkdir -p plots
 mkdir -p plots/comparison
 
 
-# WD NVMe ZNS SSD vs Samsung evo. Sanity check...
+# NVMe vs NVMe. Sanity check...
 ${python_bin} lat_kiops_plot.py --filename="comparison/1sanity" \
-    -t "Latency and KIOPS of Samsung_SSD_980_PRO_2TB and WUS4B7696DSP303" \
-    -l 'spdk WUS4B7696DSP303' 'spdk Samsung_SSD_980_PRO_2TB' \
+    -t "Latency and KIOPS of nvme-b and nvme-a" \
+    -l 'spdk nvme-a' 'spdk nvme-b' \
     -m ${model_zns_nvme} ${model_nvme} \
     -f lbaf0 lbaf0 \
     -e spdk spdk \
@@ -28,8 +28,8 @@ ${python_bin} lat_kiops_plot.py --filename="comparison/1sanity" \
     -q 128 \
     -b 512 512
 ${python_bin} lat_kiops_plot.py --filename="comparison/2sanity" \
-    -t "Latency and KIOPS of Samsung_SSD_980_PRO_2TB and WUS4B7696DSP303" \
-    -l 'spdk WUS4B7696DSP303' 'spdk Samsung_SSD_980_PRO_2TB' \
+    -t "Latency and KIOPS of nvme-b and nvme-a" \
+    -l 'spdk nvme-a' 'spdk nvme-b' \
     -m ${model_zns_nvme} ${model_nvme} \
     -f lbaf0 lbaf0 \
     -e spdk spdk \
@@ -39,8 +39,8 @@ ${python_bin} lat_kiops_plot.py --filename="comparison/2sanity" \
     -q 128 \
     -b 2048 2048
 ${python_bin} lat_kiops_plot.py --filename="comparison/3sanity" \
-    -t "Latency and KIOPS of Samsung_SSD_980_PRO_2TB and WUS4B7696DSP303" \
-    -l 'spdk WUS4B7696DSP303' 'spdk Samsung_SSD_980_PRO_2TB' \
+    -t "Latency and KIOPS of nvme-b and nvme-a" \
+    -l 'spdk nvme-a' 'spdk nvme-b' \
     -m ${model_zns_nvme} ${model_nvme} \
     -f lbaf0 lbaf0 \
     -e spdk spdk \
@@ -50,8 +50,8 @@ ${python_bin} lat_kiops_plot.py --filename="comparison/3sanity" \
     -q 128 \
     -b 4096 4096
 ${python_bin} lat_kiops_plot.py --filename="comparison/4sanity" \
-    -t "Latency and KIOPS of Samsung_SSD_980_PRO_2TB and WUS4B7696DSP303" \
-    -l 'spdk WUS4B7696DSP303' 'spdk Samsung_SSD_980_PRO_2TB' \
+    -t "Latency and KIOPS of nvme-b and nvme-a" \
+    -l 'spdk nvme-a' 'spdk nvme-b' \
     -m ${model_zns_nvme} ${model_nvme} \
     -f lbaf0 lbaf0 \
     -e spdk spdk \
@@ -61,8 +61,8 @@ ${python_bin} lat_kiops_plot.py --filename="comparison/4sanity" \
     -q 128 \
     -b 8192 8192
 ${python_bin} lat_kiops_plot.py --filename="comparison/5sanity" \
-    -t "Latency and KIOPS of Samsung_SSD_980_PRO_2TB and WUS4B7696DSP303" \
-    -l 'spdk WUS4B7696DSP303' 'spdk Samsung_SSD_980_PRO_2TB' \
+    -t "Latency and KIOPS of nvme-b and nvme-a" \
+    -l 'spdk nvme-a' 'spdk nvme-b' \
     -m ${model_zns_nvme} ${model_nvme} \
     -f lbaf0 lbaf0 \
     -e spdk spdk \
@@ -74,8 +74,8 @@ ${python_bin} lat_kiops_plot.py --filename="comparison/5sanity" \
 
 # Check NVMe vs ZNS namespace as best as we can
 ${python_bin} lat_kiops_plot.py --filename="comparison/zns_nvme_spdk_lbaf3" \
-     -t "Latency and KIOPS of WUS4B7696DSP303 and WZS4C8T1TDSP303" \
-     -l 'spdk write WUS4B7696DSP303' 'spdk append WZS4C8T1TDSP303' \
+     -t "Latency and KIOPS of nvme-a and zns-a" \
+     -l 'spdk write nvme-a' 'spdk append zns-a' \
      -m ${model_zns_nvme} ${model_zns_zns} \
      -f lbaf3 lbaf3 \
      -e spdk spdk \
@@ -85,8 +85,8 @@ ${python_bin} lat_kiops_plot.py --filename="comparison/zns_nvme_spdk_lbaf3" \
      -q 128 \
      -b 4096 4096
 ${python_bin} lat_kiops_plot.py --filename="comparison/zns_nvme_io_uring_lbaf3" \
-     -t "Latency and KIOPS of WUS4B7696DSP303 and WZS4C8T1TDSP303" \
-     -l 'io_uring write WUS4B7696DSP303' 'io_uring writemq WZS4C8T1TDSP303' \
+     -t "Latency and KIOPS of nvme-a and zns-a" \
+     -l 'io_uring write nvme-a' 'io_uring writemq zns-a' \
      -m ${model_zns_nvme} ${model_zns_zns} \
      -f lbaf3 lbaf3 \
      -e io_uring io_uring \
@@ -96,8 +96,8 @@ ${python_bin} lat_kiops_plot.py --filename="comparison/zns_nvme_io_uring_lbaf3" 
      -q 128 \
      -b 4096 4096
 ${python_bin} lat_kiops_plot.py --filename="comparison/zns_nvme_spdk_lbaf3 bs=8192" \
-     -t "Latency and KIOPS of WUS4B7696DSP303 and WZS4C8T1TDSP303" \
-     -l 'spdk write WUS4B7696DSP303' 'spdk append WZS4C8T1TDSP303' \
+     -t "Latency and KIOPS of nvme-a and zns-a" \
+     -l 'spdk write nvme-a' 'spdk append zns-a' \
      -m ${model_zns_nvme} ${model_zns_zns} \
      -f lbaf3 lbaf3 \
      -e spdk spdk \
@@ -107,8 +107,8 @@ ${python_bin} lat_kiops_plot.py --filename="comparison/zns_nvme_spdk_lbaf3 bs=81
      -q 128 \
      -b 8192 8192
 ${python_bin} lat_kiops_plot.py --filename="comparison/zns_nvme_io_uring_lbaf3 bs=8192" \
-     -t "Latency and KIOPS of WUS4B7696DSP303 and WZS4C8T1TDSP303" \
-     -l 'io_uring write WUS4B7696DSP303' 'io_uring writemq WZS4C8T1TDSP303' \
+     -t "Latency and KIOPS of nvme-a and zns-a" \
+     -l 'io_uring write nvme-a' 'io_uring writemq zns-a' \
      -m ${model_zns_nvme} ${model_zns_zns} \
      -f lbaf3 lbaf3 \
      -e io_uring io_uring \
@@ -118,8 +118,8 @@ ${python_bin} lat_kiops_plot.py --filename="comparison/zns_nvme_io_uring_lbaf3 b
      -q 128 \
      -b 8192 8192
 ${python_bin} lat_kiops_plot.py --filename="comparison/zns_nvme_spdk_lbaf0" \
-     -t "Latency and KIOPS of WUS4B7696DSP303 and WZS4C8T1TDSP303" \
-     -l 'spdk write WUS4B7696DSP303' 'spdk append WZS4C8T1TDSP303' \
+     -t "Latency and KIOPS of nvme-a and zns-a" \
+     -l 'spdk write nvme-a' 'spdk append zns-a' \
      -m ${model_zns_nvme} ${model_zns_zns} \
      -f lbaf0 lbaf0 \
      -e spdk spdk \
@@ -129,8 +129,8 @@ ${python_bin} lat_kiops_plot.py --filename="comparison/zns_nvme_spdk_lbaf0" \
      -q 128 \
      -b 4096 4096
 ${python_bin} lat_kiops_plot.py --filename="comparison/zns_nvme_io_uring_lbaf0" \
-     -t "Latency and KIOPS of WUS4B7696DSP303 and WZS4C8T1TDSP303" \
-     -l 'io_uring write WUS4B7696DSP303' 'io_uring writemq WZS4C8T1TDSP303' \
+     -t "Latency and KIOPS of nvme-a and zns-a" \
+     -l 'io_uring write nvme-a' 'io_uring writemq zns-a' \
      -m ${model_zns_nvme} ${model_zns_zns} \
      -f lbaf0 lbaf0 \
      -e io_uring io_uring \
@@ -140,8 +140,8 @@ ${python_bin} lat_kiops_plot.py --filename="comparison/zns_nvme_io_uring_lbaf0" 
      -q 128 \
      -b 4096 4096
 ${python_bin} lat_kiops_plot.py --filename="comparison/zns_nvme_spdk_lbaf0 bs=8192" \
-     -t "Latency and KIOPS of WUS4B7696DSP303 and WZS4C8T1TDSP303" \
-     -l 'spdk write WUS4B7696DSP303' 'spdk append WZS4C8T1TDSP303' \
+     -t "Latency and KIOPS of nvme-a and zns-a" \
+     -l 'spdk write nvme-a' 'spdk append zns-a' \
      -m ${model_zns_nvme} ${model_zns_zns} \
      -f lbaf0 lbaf0 \
      -e spdk spdk \
@@ -151,8 +151,8 @@ ${python_bin} lat_kiops_plot.py --filename="comparison/zns_nvme_spdk_lbaf0 bs=81
      -q 128 \
      -b 8192 8192
 ${python_bin} lat_kiops_plot.py --filename="comparison/zns_nvme_io_uring_lbaf0 bs=8192" \
-     -t "Latency and KIOPS of WUS4B7696DSP303 and WZS4C8T1TDSP303" \
-     -l 'io_uring write WUS4B7696DSP303' 'io_uring writemq WZS4C8T1TDSP303' \
+     -t "Latency and KIOPS of nvme-a and zns-a" \
+     -l 'io_uring write nvme-a' 'io_uring writemq zns-a' \
      -m ${model_zns_nvme} ${model_zns_zns} \
      -f lbaf0 lbaf0 \
      -e io_uring io_uring \
@@ -164,7 +164,7 @@ ${python_bin} lat_kiops_plot.py --filename="comparison/zns_nvme_io_uring_lbaf0 b
 
 ${python_bin} bs_kiops_plot.py --filename="comparison/zns_nvme_io_spdk_lbaf0 QD=1" \
     -t "KIOPS of ${modelname} (QD=1)" \
-    -l 'spdk write WUS4B7696DSP303' 'spdk append WZS4C8T1TDSP303' \
+    -l 'spdk write nvme-a' 'spdk append zns-a' \
     -m ${model_zns_nvme} ${model_zns_zns} \
     -f lbaf0 lbaf0 \
     -e spdk spdk \
@@ -174,7 +174,7 @@ ${python_bin} bs_kiops_plot.py --filename="comparison/zns_nvme_io_spdk_lbaf0 QD=
     -q 1 1
 ${python_bin} bs_kiops_plot.py --filename="comparison/zns_nvme_spdk_lbaf0 QD=4" \
     -t "KIOPS of ${modelname} (QD=4)" \
-    -l 'spdk write WUS4B7696DSP303' 'spdk append WZS4C8T1TDSP303' \
+    -l 'spdk write nvme-a' 'spdk append zns-a' \
     -m ${model_zns_nvme} ${model_zns_zns} \
     -f lbaf0 lbaf0 \
     -e spdk spdk \
@@ -184,7 +184,7 @@ ${python_bin} bs_kiops_plot.py --filename="comparison/zns_nvme_spdk_lbaf0 QD=4" 
     -q 4 4
 ${python_bin} bs_kiops_plot.py --filename="comparison/zns_nvme_spdk_lbaf0 QD=8" \
     -t "KIOPS of ${modelname} (QD=8)" \
-    -l 'spdk write WUS4B7696DSP303' 'spdk append WZS4C8T1TDSP303' \
+    -l 'spdk write nvme-a' 'spdk append zns-a' \
     -m ${model_zns_nvme} ${model_zns_zns} \
     -f lbaf0 lbaf0 \
     -e spdk spdk \
@@ -194,7 +194,7 @@ ${python_bin} bs_kiops_plot.py --filename="comparison/zns_nvme_spdk_lbaf0 QD=8" 
     -q 8 8
 ${python_bin} bs_kiops_plot.py --filename="comparison/zns_nvme_spdk_lbaf0 QD=16" \
     -t "KIOPS of ${modelname} (QD=16)" \
-    -l 'spdk write WUS4B7696DSP303' 'spdk append WZS4C8T1TDSP303' \
+    -l 'spdk write nvme-a' 'spdk append zns-a' \
     -m ${model_zns_nvme} ${model_zns_zns} \
     -f lbaf0 lbaf0 \
     -e spdk spdk \
@@ -205,7 +205,7 @@ ${python_bin} bs_kiops_plot.py --filename="comparison/zns_nvme_spdk_lbaf0 QD=16"
 
 ${python_bin} bs_kiops_plot.py --filename="comparison/zns_nvme_io_uring_lbaf0 QD=1" \
     -t "KIOPS of ${modelname} (QD=1)" \
-    -l 'io_uring write WUS4B7696DSP303' 'io_uring writemq WZS4C8T1TDSP303' \
+    -l 'io_uring write nvme-a' 'io_uring writemq zns-a' \
     -m ${model_zns_nvme} ${model_zns_zns} \
     -f lbaf0 lbaf0 \
     -e io_uring io_uring \
@@ -215,7 +215,7 @@ ${python_bin} bs_kiops_plot.py --filename="comparison/zns_nvme_io_uring_lbaf0 QD
     -q 1 1
 ${python_bin} bs_kiops_plot.py --filename="comparison/zns_nvme_io_uring_lbaf0 QD=4" \
     -t "KIOPS of ${modelname} (QD=4)" \
-    -l 'io_uring write WUS4B7696DSP303' 'io_uring writemq WZS4C8T1TDSP303' \
+    -l 'io_uring write nvme-a' 'io_uring writemq zns-a' \
     -m ${model_zns_nvme} ${model_zns_zns} \
     -f lbaf0 lbaf0 \
     -e io_uring io_uring \
@@ -225,7 +225,7 @@ ${python_bin} bs_kiops_plot.py --filename="comparison/zns_nvme_io_uring_lbaf0 QD
     -q 4 4
 ${python_bin} bs_kiops_plot.py --filename="comparison/zns_nvme_io_uring_lbaf0 QD=8" \
     -t "KIOPS of ${modelname} (QD=8)" \
-    -l 'io_uring write WUS4B7696DSP303' 'io_uring writemq WZS4C8T1TDSP303' \
+    -l 'io_uring write nvme-a' 'io_uring writemq zns-a' \
     -m ${model_zns_nvme} ${model_zns_zns} \
     -f lbaf0 io_uring \
     -e io_uring io_uring \
@@ -235,7 +235,7 @@ ${python_bin} bs_kiops_plot.py --filename="comparison/zns_nvme_io_uring_lbaf0 QD
     -q 8 8
 ${python_bin} bs_kiops_plot.py --filename="comparison/zns_nvme_io_uring_lbaf0 QD=16" \
     -t "KIOPS of ${modelname} (QD=16)" \
-    -l 'io_uring write WUS4B7696DSP303' 'io_uring writemq WZS4C8T1TDSP303' \
+    -l 'io_uring write nvme-a' 'io_uring writemq zns-a' \
     -m ${model_zns_nvme} ${model_zns_zns} \
     -f lbaf0 lbaf0 \
     -e io_uring io_uring \

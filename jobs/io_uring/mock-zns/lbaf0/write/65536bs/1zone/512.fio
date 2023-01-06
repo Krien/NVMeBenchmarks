@@ -1,0 +1,27 @@
+; -- CREATED ON 2023-01-06 12:15:33.250910 ---
+[global]
+
+[qd512]
+rw=write
+direct=1
+group_reporting=1
+output-format=json
+thread=1
+time_based=1
+ramp_time=30s
+runtime=10s
+numa_cpu_nodes=3
+numa_mem_policy=bind:3
+size=20z
+zonemode=zbd
+ioengine=io_uring
+fixedbufs=1
+registerfiles=1
+fixedbufs=1
+sqthread_poll=1
+filename=/dev/mockzns
+qd=512
+numjobs=1
+bs=65536
+ioscheduler=none
+offset_increment=20z
