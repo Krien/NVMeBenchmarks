@@ -2,7 +2,7 @@
 filename=${FILENAME}
 size=100%
 loops=2
-bs=$size_prec
+bs=${BS}
 direct=1
 rw=randwrite
 thread=1
@@ -11,3 +11,5 @@ fixedbufs=1
 registerfiles=1
 hipri
 write_bw_log=${BW_PATH}
+write_lat_log=${LAT_PATH}
+log_avg_msec=10ms

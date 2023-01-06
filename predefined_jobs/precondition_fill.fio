@@ -9,3 +9,6 @@ ioengine=io_uring
 fixedbufs=1
 registerfiles=1
 hipri
+write_bw_log=${BW_PATH}
+write_lat_log=${LAT_LOG}
+log_avg_msec=10ms

@@ -4,7 +4,7 @@ runtime=30m
 ss=iops:${STEADY}
 ss_dur=30s
 ss_ramp=10s
-bs=${BLOCK_SIZE}
+bs=${BS}
 direct=1
 rw=randwrite
 thread=1
@@ -13,3 +13,5 @@ fixedbufs=1
 registerfiles=1
 hipri
 write_bw_log=${BW_LOG}
+write_lat_log=${LAT_PATH}
+log_avg_msec=10ms
