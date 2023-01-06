@@ -2,8 +2,8 @@ import os
 import subprocess
 
 mock_nvme_database = {
-    "mockzns": {
-        "ns": 64,
+    "mockznsn0": {
+        "ns": 0,
         "zoned": True,
         "lba": 8192,
         "numa": 3,
@@ -11,7 +11,42 @@ mock_nvme_database = {
         "max_open": 3,
         "min": 8192 * 2,
     },
-    "mocknvme": {
+    "mockznsn1": {
+        "ns": 1,
+        "zoned": True,
+        "lba": 8192,
+        "numa": 3,
+        "address": "00:88:00.0",
+        "max_open": 3,
+        "min": 8192 * 2,
+    },
+     "mockznsn2": {
+        "ns": 2,
+        "zoned": True,
+        "lba": 8192,
+        "numa": 3,
+        "address": "00:88:00.0",
+        "max_open": 3,
+        "min": 8192 * 2,
+    },
+     "mockznsn3": {
+        "ns": 3,
+        "zoned": True,
+        "lba": 8192,
+        "numa": 3,
+        "address": "00:88:00.0",
+        "max_open": 3,
+        "min": 8192 * 2,
+    },
+    "mocknvmen0": {
+        "ns": 0,
+        "zoned": False,
+        "lba": 512,
+        "numa": 0,
+        "address": "00:00:09.0",
+        "min": 512,
+    },
+     "mocknvmen1": {
         "ns": 1,
         "zoned": False,
         "lba": 512,

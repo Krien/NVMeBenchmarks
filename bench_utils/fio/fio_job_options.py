@@ -141,6 +141,12 @@ class OffsetOption(FioOption):
     def to_opt(self) -> [(str, str)]:
         return [("offset_increment", f"{self.offset}")]
 
+@dataclass
+class DelayOption(FioOption):
+    delay: str
+
+    def to_opt(self) -> [(str, str)]:
+        return [("start_delay", f"{self.delay}")]
 
 @dataclass
 class StartupZoneResetOption(FioOption):
