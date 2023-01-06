@@ -15,7 +15,7 @@ mkdir -p plots
 mkdir -p plots/comparison
 
 
-# WD NVMe ZNS SSD vs Samsung evo. Sanity check...
+# NVMe vs NVMe. Sanity check...
 ${python_bin} lat_kiops_plot.py --filename="comparison/1sanity" \
     -t "Latency and KIOPS of nvme-b and nvme-a" \
     -l 'spdk nvme-a' 'spdk nvme-b' \
