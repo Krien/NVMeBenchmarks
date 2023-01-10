@@ -61,6 +61,7 @@ def main(
     dis_depth: str,
     overwrite: bool,
     mock: bool,
+    dry_run: bool,
 ):
     # Devices
     target_device = dev_name(device, target_ns)
@@ -69,7 +70,8 @@ def main(
 
     # Setup tools
     job_gen = FioJobGenerator(overwrite)
-    fio = FioRunner(fio, overwrite)
+    fio_opts = FioRunnerOptions(overwrite=overwrite, parse_only=dry_run)
+    fio = FioRunner(fio, fio_opts)
     nvme = {
         device: NVMeRunnerCLI(device) if not mock else NVMeRunnerMock(device)
         for device in devices
@@ -123,12 +125,11 @@ def main(
         job_defaults.append(DefaultIOUringOption())
 
     job = FioGlobalJob()
-    target_job = FioSubJob(f"target_{target_depth}")
-    target_job.add_options(job_defaults)
+    job.add_options(job_defaults)
+    target_job = FioSubJob(f"target_{target_device}")
     target_job.add_options(
         [
             TimedOption(JOB_RUN, JOB_RAMP),
-            JsonOption(),
             TargetOption(filename_func(target_device)),
             RequestSizeOption(target_size),
             QDOption(target_depth),
@@ -143,7 +144,6 @@ def main(
 
     for disturbed_dev in disturbed_devices:
         dis_job = FioSubJob(f"dis_{disturbed_dev}")
-        dis_job.add_options(job_defaults)
         dis_job.add_options(
             [
                 DelayOption(DIS_DELAY),
@@ -167,6 +167,56 @@ def main(
 
     # Write job file
     job_gen.generate_job_file(path.AbsPathJob(), job)
+    # If read job, first fill device
+    if "read" in target_op or "read" in dis_op:
+        fill_job_glob = FioGlobalJob()
+        fill_job_glob.add_options(job_defaults)
+        if "read" in target_op:
+            fill_job = FioSubJob(f"prefill_target")
+            fill_job.add_options(
+                [
+                    TargetOption(filename_func(target_device)),
+                    RequestSizeOption(target_size),
+                    JobOption(JobWorkload.SEQ_WRITE),
+                ]
+            )
+            fill_job_glob.add_job(fill_job)
+        if "read" in dis_op:
+            for disturbed_dev in disturbed_devices:
+                dis_job = FioSubJob(f"prefill_{disturbed_dev}")
+                dis_job.add_options(
+                    [
+                        TargetOption(filename_func(disturbed_dev)),
+                        RequestSizeOption(target_size),
+                        JobOption(JobWorkload.SEQ_WRITE),
+                    ]
+                )
+                fill_job_glob.add_job(dis_job)
+        path_fill = BenchPath(
+            io_engine,
+            model,
+            lbaf,
+            f"concurrent_namespaces_prefill_{target_op}_{dis_op}",
+            1,
+            1,
+            target_size,
+        )
+        job_gen.generate_job_file(path_fill.AbsPathJob(), fill_job_glob)
+        # Setup spdk
+        if io_engine == IOEngine.SPDK:
+            spdk[target_device].setup()
+        fio.run_job(
+            path.AbsPathJob(),
+            path.AbsPathOut(),
+            mock=mock,
+        )
+        if io_engine == IOEngine.SPDK:
+            spdk[target_device].reset()
+
+    # Setup spdk
+    if io_engine == IOEngine.SPDK:
+        spdk[target_device].setup()
+
     # run job
     fio.run_job(
         path.AbsPathJob(),
@@ -174,6 +224,8 @@ def main(
         [f"BW_PATH={path.AbsPathOut()}", f"LOG_PATH={path.AbsPathOut()}"],
         mock=mock,
     )
+    if io_engine == IOEngine.SPDK:
+        spdk[target_device].reset()
 
 
 if __name__ == "__main__":
@@ -196,6 +248,7 @@ if __name__ == "__main__":
     parser.add_argument("--dis_op", type=str, required=False, default="write")
     parser.add_argument("--mock", type=bool, required=False, default=False)
     parser.add_argument("-o", "--overwrite", type=str, required=False, default=False)
+    parser.add_argument("--dry_run", type=bool, required=False, default=False)
     args = parser.parse_args()
 
     main(
@@ -215,4 +268,5 @@ if __name__ == "__main__":
         args.dis_qd,
         args.overwrite,
         args.mock,
+        args.dry_run,
     )

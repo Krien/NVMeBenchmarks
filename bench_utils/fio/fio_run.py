@@ -1,15 +1,22 @@
 import os
 import subprocess
 import datetime
+from dataclasses import dataclass
+
+
+@dataclass
+class FioRunnerOptions:
+    overwrite: bool = True
+    parse_only: bool = False
 
 
 class FioRunner:
     """Runner for fio"""
 
-    def __init__(self, fio_path, overwrite=True):
+    def __init__(self, fio_path, options: FioRunnerOptions = FioRunnerOptions()):
         self.fio = fio_path
         self.preload = None
-        self.overwrite = overwrite
+        self.options = options
 
     def LD_PRELOAD(self, preload):
         self.preload = preload
@@ -18,6 +25,8 @@ class FioRunner:
         self, jobpath, outpath, fio_shell_opts=[], fio_extra_opts=[]
     ) -> str:
         extra_opts = fio_extra_opts + ["output-format=json", f"output={outpath}"]
+        if self.options.parse_only:
+            extra_opts = extra_opts + ["parse-only"]
         job_str = ""
         if self.preload != None:
             job_str += f"LD_PRELOAD={self.preload} "
@@ -30,7 +39,7 @@ class FioRunner:
     def run_job(
         self, jobpath, outpath, fio_shell_opts=[], fio_extra_opts=[], mock: bool = False
     ):
-        if not self.overwrite and os.path.exists(outpath):
+        if not self.options.overwrite and os.path.exists(outpath):
             print(f"Output file {outpath} already exists, enable overwrite to enable")
             return
         outdir = os.path.dirname(outpath)

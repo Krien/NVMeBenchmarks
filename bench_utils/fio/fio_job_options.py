@@ -52,12 +52,6 @@ class ZnsOption(FioOption):
         return [("zonemode", "zbd")]
 
 
-@dataclass
-class JsonOption(FioOption):
-    def to_opt(self) -> [(str, str)]:
-        return [("output-format", "json")]
-
-
 # Unary types
 @dataclass
 class DirectOption(FioOption):
@@ -96,7 +90,7 @@ class QDOption(FioOption):
     qd: int
 
     def to_opt(self) -> [(str, str)]:
-        return [("qd", f"{self.qd}")]
+        return [("iodepth", f"{self.qd}")]
 
 
 @dataclass
@@ -141,12 +135,14 @@ class OffsetOption(FioOption):
     def to_opt(self) -> [(str, str)]:
         return [("offset_increment", f"{self.offset}")]
 
+
 @dataclass
 class DelayOption(FioOption):
     delay: str
 
     def to_opt(self) -> [(str, str)]:
-        return [("start_delay", f"{self.delay}")]
+        return [("startdelay", f"{self.delay}")]
+
 
 @dataclass
 class StartupZoneResetOption(FioOption):

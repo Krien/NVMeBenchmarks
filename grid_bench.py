@@ -29,10 +29,12 @@ def main(
     lbaf: str,
     overwrite: bool,
     mock: bool,
+    dry_run: bool,
 ):
     # Setup tools
     job_gen = FioJobGenerator(overwrite)
-    fio = FioRunner(fio, overwrite)
+    fio_opts = FioRunnerOptions(overwrite=overwrite, parse_only=dry_run)
+    fio = FioRunner(fio, fio_opts)
     fio.LD_PRELOAD(f"{spdk_dir}/build/fio/spdk_nvme")
     nvme = NVMeRunnerCLI(device) if not mock else NVMeRunnerMock(device)
 
@@ -58,9 +60,8 @@ def main(
         JobOption(JobWorkload.SEQ_WRITE),
         DirectOption(True),
         GroupReportingOption(True),
-        JsonOption(),
         ThreadOption(True),
-        TimedOption(JOB_RUN, JOB_RAMP),
+        TimedOption(JOB_RAMP, JOB_RUN),
         NumaPinOption(numa_node),
     ]
     if zns:
@@ -88,9 +89,9 @@ def main(
     ]:
         # define job
         job = FioGlobalJob()
+        job.add_options(job_defaults)
+        job.add_options(io_uring_args)
         sjob = FioSubJob(f"qd{qd}")
-        sjob.add_options(job_defaults)
-        sjob.add_options(io_uring_args)
         sjob.add_options(
             [
                 QDOption(qd),
@@ -125,9 +126,9 @@ def main(
             (qd, bs, czone) for bs in bss for qd in qds for czone in [1]
         ]:
             job = FioGlobalJob()
+            job.add_options(job_defaults)
+            job.add_options(io_uring_args)
             sjob = FioSubJob(f"qd{qd}")
-            sjob.add_options(job_defaults)
-            sjob.add_options(io_uring_args)
             sjob.add_options(
                 [
                     QDOption(qd),
@@ -231,6 +232,7 @@ def main(
             spdk.setup()
             # run job
             fio.run_job(path.AbsPathJob(), path.AbsPathOut(), mock=mock)
+        spdk.reset()
 
 
 if __name__ == "__main__":
@@ -244,6 +246,7 @@ if __name__ == "__main__":
     parser.add_argument("-l", "--lbaf", type=str, required=True)
     parser.add_argument("--mock", type=bool, required=False, default=False)
     parser.add_argument("-o", "--overwrite", type=str, required=False, default=False)
+    parser.add_argument("--dry_run", type=bool, required=False, default=False)
     args = parser.parse_args()
 
     main(
@@ -254,4 +257,5 @@ if __name__ == "__main__":
         args.lbaf,
         args.overwrite,
         args.mock,
+        args.dry_run,
     )

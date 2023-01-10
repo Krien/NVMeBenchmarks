@@ -88,7 +88,6 @@ def main(
     job_defaults = [
         DirectOption(True),
         GroupReportingOption(True),
-        JsonOption(),
         ThreadOption(True),
         TimedOption(JOB_RAMP, JOB_RUN),
         NumaPinOption(numa_node),

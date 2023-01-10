@@ -10,10 +10,13 @@ class SPDKRunner:
         self.nvmes = {device: nvme_factory(device) for device in devices}
         self.options = options
 
-    def get_spdk_pcie_address(self, device):
+    def get_nvme_pcie_address(self, device):
         if not device in self.devices:
             raise "Device is not loaded"
-        return self.nvmes[device].get_pcie_address().replace(":", ".")
+        return self.nvmes[device].get_pcie_address()
+
+    def get_spdk_pcie_address(self, device):
+        return self.get_nvme_pcie_address(device).replace(":", ".")
 
     def get_spdk_ns(self, device):
         if not device in self.devices:
@@ -21,12 +24,12 @@ class SPDKRunner:
         return self.nvmes[device].get_ns()
 
     def get_spdk_traddress(self, device):
-        return f'"trtype=PCIe traddr={self.get_spdk_pcie_address(device)} ns={self.get_spdk_ns(device)}"'
+        return f"trtype=PCIe traddr={self.get_spdk_pcie_address(device)} ns={self.get_spdk_ns(device)}"
 
 
 class SPDKRunnerCLI(SPDKRunner):
     def setup(self):
-        device_addrs = [self.get_spdk_pcie_address(dev) for dev in self.devices]
+        device_addrs = [self.get_nvme_pcie_address(dev) for dev in self.devices]
         pcie_allowed = f'PCI_ALLOWED="{" ".join(device_addrs)}"'
         env_vars = pcie_allowed
         if "numa" in self.options:

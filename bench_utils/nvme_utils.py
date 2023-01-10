@@ -20,7 +20,7 @@ mock_nvme_database = {
         "max_open": 3,
         "min": 8192 * 2,
     },
-     "mockznsn2": {
+    "mockznsn2": {
         "ns": 2,
         "zoned": True,
         "lba": 8192,
@@ -29,7 +29,7 @@ mock_nvme_database = {
         "max_open": 3,
         "min": 8192 * 2,
     },
-     "mockznsn3": {
+    "mockznsn3": {
         "ns": 3,
         "zoned": True,
         "lba": 8192,
@@ -46,7 +46,7 @@ mock_nvme_database = {
         "address": "00:00:09.0",
         "min": 512,
     },
-     "mocknvmen1": {
+    "mocknvmen1": {
         "ns": 1,
         "zoned": False,
         "lba": 512,
@@ -104,7 +104,7 @@ class NVMeRunner:
         return address
 
     def get_max_open_zones(self):
-        if not is_zoned(self.device):
+        if not self.is_zoned():
             return -1
         max_open = 0
         with open(f"/sys/class/block/{self.device}/queue/max_open_zones", "r") as f:
