@@ -1,0 +1,21 @@
+[submodule "submodules/fio"]
+	path = submodules/fio
+	url = git@github.com:axboe/fio.git
+[submodule "submodules/spdk"]
+	path = submodules/spdk
+	url = git@github.com:spdk/spdk.git
+[submodule "submodules/rocksdb"]
+	path = submodules/rocksdb
+	url = git@github.com:facebook/rocksdb.git
+[submodule "submodules/zenfs"]
+	path = submodules/zenfs
+	url = git@github.com:westerndigitalcorporation/zenfs.git
+[submodule "submodules/nvme-cli"]
+	path = submodules/nvme-cli
+	url = git@github.com:linux-nvme/nvme-cli.git
+[submodule "submodules/libzbd"]
+	path = submodules/libzbd
+	url = git@github.com:westerndigitalcorporation/libzbd.git
+[submodule "submodules/f2fs-tools"]
+	path = submodules/f2fs-tools
+	url = git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs-tools.git
