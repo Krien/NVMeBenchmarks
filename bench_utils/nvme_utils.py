@@ -67,6 +67,9 @@ class NVMeRunner:
     def secure_erase(self):
         raise NotImplementedError
 
+    def finish_all_zones(self):
+        raise NotImplementedError
+
     def clean_device(self):
         if self.is_zoned():
             self.reset_zones()
@@ -103,6 +106,14 @@ class NVMeRunner:
             address = f.readline().strip()
         return address
 
+    def get_nr_zones(self):
+        if not self.is_zoned():
+            return -1
+        nr_zones = 0
+        with open(f"/sys/class/block/{self.device}/queue/nr_zones", "r") as f:
+            nr_zones = int(f.readline())
+        return nr_zones
+
     def get_max_open_zones(self):
         if not self.is_zoned():
             return -1
@@ -125,6 +136,9 @@ class NVMeRunnerCLI(NVMeRunner):
     def secure_erase(self):
         subprocess.check_call(f"nvme format -s 1 /dev/{self.device}", shell=True)
 
+    def finish_all_zones(self):
+        subprocess.check_call(f"nvme zns finish-zone -a /dev/{self.device}", shell=True)
+
 
 class NVMeRunnerMock(NVMeRunner):
     def reset_zones(self):
@@ -132,6 +146,9 @@ class NVMeRunnerMock(NVMeRunner):
 
     def secure_erase(self):
         print(f"nvme format -s 1 /dev/{self.device}")
+
+    def finish_all_zones(self):
+        print(f"nvme zns finish-zone -a /dev/{self.device}")
 
     def get_ns(self):
         if self.device in mock_nvme_database:

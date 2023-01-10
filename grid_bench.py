@@ -4,15 +4,15 @@ from bench_utils import *
 import argparse
 
 # Magic constants
-JOB_SIZE_ZNS: str = "20z"
-JOB_SIZE_NVME: str = "40G"
+JOB_SIZE_ZNS: str = "100%"
+JOB_SIZE_NVME: str = "100%"
 JOB_RAMP: str = "10s"
-JOB_RUN: str = "30s"
+JOB_RUN: str = "3m"
 
 # Grid
 JOB_QDS: list[int] = [1, 2, 4, 8, 16, 32, 64, 128, 256, 512]
 JOB_BSS: list[int] = [512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072]
-JOB_CZONES: list[int] = [1, 2, 3, 4, 5]
+JOB_CZONES: list[int] = [1, 2, 4, 8]
 
 # Out names
 SPDK_APPEND_OP: str = "append"
@@ -36,7 +36,7 @@ def main(
     fio_opts = FioRunnerOptions(overwrite=overwrite, parse_only=dry_run)
     fio = FioRunner(fio, fio_opts)
     fio.LD_PRELOAD(f"{spdk_dir}/build/fio/spdk_nvme")
-    nvme = NVMeRunnerCLI(device) if not mock else NVMeRunnerMock(device)
+    nvme = NVMeRunnerCLI(device) if not (mock or dry_run) else NVMeRunnerMock(device)
 
     # Investigate device
     zns = nvme.is_zoned()
@@ -49,11 +49,18 @@ def main(
         SPDKRunnerCLI(
             spdk_dir, [device], lambda dev: NVMeRunnerCLI(dev), {"numa": numa_node}
         )
-        if not mock
+        if not (mock or dry_run)
         else SPDKRunnerMock(
             spdk_dir, [device], lambda dev: NVMeRunnerMock(dev), {"numa": numa_node}
         )
     )
+
+    # Setup grid
+    qds = JOB_QDS
+    bss = [bs for bs in JOB_BSS if bs >= min_size]
+    czones = [czone for czone in JOB_CZONES if czone <= max_open_zones] if zns else [1]
+    if zns:
+        JOB_SIZE_ZNS = f"{nvme.get_nr_zones()//(czones[-1]+1)}z"
 
     # Setup default job args
     job_defaults = [
@@ -62,11 +69,13 @@ def main(
         GroupReportingOption(True),
         ThreadOption(True),
         TimedOption(JOB_RAMP, JOB_RUN),
+        HighTailLatencyOption(),
         NumaPinOption(numa_node),
     ]
     if zns:
         job_defaults.append(SizeOption(JOB_SIZE_ZNS))
         job_defaults.append(ZnsOption())
+        job_defaults.append(MaxOpenZonesOption(max_open_zones))
     else:
         job_defaults.append(SizeOption(JOB_SIZE_NVME))
 
@@ -78,10 +87,24 @@ def main(
     spdk_filename = spdk.get_spdk_traddress(device)
     spdk_args = [IOEngineOption(IOEngine.SPDK), TargetOption(spdk_filename)]
 
-    # Setup grid
-    qds = JOB_QDS
-    bss = [bs for bs in JOB_BSS if bs >= min_size]
-    czones = [czone for czone in JOB_CZONES if czone <= max_open_zones] if zns else [1]
+    # Fill device
+    fill_path = BenchPath(
+        IOEngine.IO_URING, model, lbaf, "prefill_grid", 1, 1, "128K"
+    ).AbsPathOut()
+    fio.run_job(
+        f"{PREDEFINED_JOB_PATH}/precondition_fill.fio",
+        fill_path,
+        [
+            f"FILENAME=/dev/{device}",
+            f"BW_PATH={fill_path}",
+            f"LOG_PATH={fill_path}",
+        ],
+        [
+            f"zonemode={'zbd' if zns else 'none'}",
+            f"loops=4",
+        ],
+        mock=mock,
+    )
 
     # io_uring grid search
     for (qd, bs, concurrent_zones) in [
@@ -102,7 +125,11 @@ def main(
         operation = "deadbeef"
         if zns:
             sjob.add_options(
-                [SchedulerOption(Scheduler.MQ_DEADLINE), OffsetOption(JOB_SIZE_ZNS)]
+                [
+                    SchedulerOption(Scheduler.MQ_DEADLINE),
+                    OffsetOption(JOB_SIZE_ZNS),
+                    JobMaxOpenZonesOption(1),
+                ]
             )
             operation = IO_URING_WRITE_MQ_OPTION
         else:
@@ -117,13 +144,14 @@ def main(
         # Write job file
         job_gen.generate_job_file(path.AbsPathJob(), job)
         # Prepare device
-        nvme.clean_device()
+        if zns:
+            nvme.finish_all_zones()
         # run job
         fio.run_job(path.AbsPathJob(), path.AbsPathOut(), mock=mock)
 
     if zns:
         for (qd, bs, concurrent_zones) in [
-            (qd, bs, czone) for bs in bss for qd in qds for czone in [1]
+            (qd, bs, czone) for bs in bss for qd in [1] for czone in czones
         ]:
             job = FioGlobalJob()
             job.add_options(job_defaults)
@@ -136,6 +164,7 @@ def main(
                     RequestSizeOption(bs),
                     SchedulerOption(Scheduler.NONE),
                     OffsetOption(JOB_SIZE_ZNS),
+                    JobMaxOpenZonesOption(1),
                 ]
             )
             job.add_job(sjob)
@@ -153,7 +182,8 @@ def main(
             # Write job file
             job_gen.generate_job_file(path.AbsPathJob(), job)
             # Prepare device
-            nvme.clean_device()
+            if zns:
+                nvme.finish_all_zones()
             # run job
             fio.run_job(path.AbsPathJob(), path.AbsPathOut(), mock=mock)
 
@@ -163,9 +193,9 @@ def main(
         (qd, bs, czone) for bs in bss for qd in qds for czone in czones
     ]:
         job = FioGlobalJob()
+        job.add_options(job_defaults)
+        job.add_options(spdk_args)
         sjob = FioSubJob(f"qd{qd}")
-        sjob.add_options(job_defaults)
-        sjob.add_options(spdk_args)
         sjob.add_options(
             [
                 QDOption(qd),
@@ -178,8 +208,8 @@ def main(
             sjob.add_options(
                 [
                     ZNSAppendOption(True),
-                    StartupZoneResetOption(True),
                     OffsetOption(JOB_SIZE_ZNS),
+                    JobMaxOpenZonesOption(1),
                 ]
             )
             operation = SPDK_APPEND_OP
@@ -195,27 +225,29 @@ def main(
         job_gen.generate_job_file(path.AbsPathJob(), job)
         # Prepare device
         spdk.reset()
-        nvme.clean_device()
+        # Prepare device
+        if zns:
+            nvme.finish_all_zones()
         spdk.setup()
         # run job
         fio.run_job(path.AbsPathJob(), path.AbsPathOut(), mock=mock)
 
     if zns:
         for (qd, bs, concurrent_zones) in [
-            (qd, bs, czone) for bs in bss for qd in qds for czone in [1]
+            (qd, bs, czone) for bs in bss for qd in [1] for czone in czones
         ]:
             job = FioGlobalJob()
+            job.add_options(job_defaults)
+            job.add_options(spdk_args)
             sjob = FioSubJob(f"qd{qd}")
-            sjob.add_options(job_defaults)
-            sjob.add_options(spdk_args)
             sjob.add_options(
                 [
                     QDOption(qd),
                     ConcurrentWorkerOption(concurrent_zones),
                     RequestSizeOption(bs),
                     ZNSAppendOption(False),
-                    StartupZoneResetOption(True),
                     OffsetOption(JOB_SIZE_ZNS),
+                    JobMaxOpenZonesOption(1),
                 ]
             )
             job.add_job(sjob)
@@ -228,7 +260,9 @@ def main(
             job_gen.generate_job_file(path.AbsPathJob(), job)
             # Prepare device
             spdk.reset()
-            nvme.clean_device()
+            # Prepare device
+            if zns:
+                nvme.finish_all_zones()
             spdk.setup()
             # run job
             fio.run_job(path.AbsPathJob(), path.AbsPathOut(), mock=mock)

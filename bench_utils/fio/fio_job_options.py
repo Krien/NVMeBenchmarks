@@ -52,6 +52,17 @@ class ZnsOption(FioOption):
         return [("zonemode", "zbd")]
 
 
+@dataclass
+class HighTailLatencyOption(FioOption):
+    def to_opt(self) -> [(str, str)]:
+        return [
+            (
+                "percentile_list",
+                "1:5:10:20:30:40:50:60:70:80:90:95:98:99:99.9:99.99:99.999:100",
+            )
+        ]
+
+
 # Unary types
 @dataclass
 class DirectOption(FioOption):
@@ -142,6 +153,22 @@ class DelayOption(FioOption):
 
     def to_opt(self) -> [(str, str)]:
         return [("startdelay", f"{self.delay}")]
+
+
+@dataclass
+class MaxOpenZonesOption(FioOption):
+    max_open_zones: int
+
+    def to_opt(self) -> [(str, str)]:
+        return [("max_open_zones", f"{self.max_open_zones}")]
+
+
+@dataclass
+class JobMaxOpenZonesOption(FioOption):
+    job_max_open_zones: int
+
+    def to_opt(self) -> [(str, str)]:
+        return [("job_max_open_zones", f"{self.job_max_open_zones}")]
 
 
 @dataclass
