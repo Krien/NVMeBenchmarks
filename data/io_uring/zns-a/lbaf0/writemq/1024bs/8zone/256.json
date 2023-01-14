@@ -1,0 +1,803 @@
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142297600, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142298624, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142299648, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142302720, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142300672, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142305792, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142306816, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142301696, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142303744, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142308864, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142309888, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142304768, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142310912, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142307840, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142312960, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142311936, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142313984, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142317056, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142315008, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142316032, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142318080, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142319104, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142320128, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142321152, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142322176, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142323200, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142324224, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142325248, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142326272, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142327296, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142328320, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142329344, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142330368, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142331392, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142332416, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142333440, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142334464, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142335488, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142336512, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142337536, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142338560, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142339584, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142340608, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142341632, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142342656, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142343680, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142344704, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142345728, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142346752, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142347776, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142348800, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142349824, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142350848, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142351872, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142352896, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142353920, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142354944, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142355968, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142356992, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142358016, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142359040, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142360064, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142361088, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142362112, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142363136, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142364160, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142365184, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142366208, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142367232, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142368256, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142369280, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142370304, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142371328, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142372352, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142373376, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142374400, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142375424, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142376448, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142377472, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142378496, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142379520, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142380544, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142381568, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142382592, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142383616, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142384640, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142385664, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142386688, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142387712, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142388736, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142389760, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142390784, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142391808, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142392832, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142393856, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142394880, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142395904, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142396928, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142397952, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142398976, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142400000, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142401024, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142402048, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142403072, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142404096, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142405120, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142406144, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142407168, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142408192, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142409216, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142410240, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142411264, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142412288, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142413312, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142414336, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142415360, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142416384, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142417408, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142418432, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142419456, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142420480, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142421504, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142422528, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142423552, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142424576, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142425600, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142426624, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142427648, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142428672, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142429696, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142430720, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142431744, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142432768, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142433792, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142434816, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142435840, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142436864, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142437888, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142438912, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142439936, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142440960, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142441984, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142443008, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142444032, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142445056, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142446080, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142447104, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142448128, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142449152, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142450176, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142451200, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142452224, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142453248, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142454272, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142455296, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142456320, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142457344, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142458368, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142459392, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142460416, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142461440, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142462464, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142463488, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142464512, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142465536, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142466560, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142467584, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142468608, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142469632, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142470656, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142471680, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142472704, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142473728, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142474752, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142475776, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142476800, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142477824, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142478848, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142479872, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142480896, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142481920, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142482944, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142483968, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142484992, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142486016, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142487040, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142488064, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142489088, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142490112, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142491136, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142492160, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142493184, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142494208, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142495232, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142496256, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142497280, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142498304, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142499328, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142500352, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142501376, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142502400, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142503424, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142504448, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142505472, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142506496, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142507520, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142508544, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142509568, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142510592, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142511616, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142512640, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142513664, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142514688, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142515712, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142516736, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142517760, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142518784, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142519808, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142520832, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142521856, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142522880, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142523904, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142524928, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142525952, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142526976, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142528000, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142529024, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142530048, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142531072, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142532096, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142533120, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142534144, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142535168, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142536192, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142537216, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142538240, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142539264, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142540288, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142541312, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142542336, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142543360, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142544384, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142545408, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142546432, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142547456, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142548480, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142549504, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142550528, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142551552, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142552576, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142553600, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142554624, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142555648, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142556672, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=215142557696, buflen=1024
+fio: pid=710934, err=5/file:io_u.c:1846, func=io_u error, error=Input/output error
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739634688, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739635712, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739636736, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739637760, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739638784, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739639808, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739640832, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739641856, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739642880, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739643904, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739644928, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739645952, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739646976, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739648000, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739649024, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739650048, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739651072, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739652096, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739653120, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739654144, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739655168, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739656192, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739657216, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739658240, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739659264, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739660288, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739661312, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739662336, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739663360, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739664384, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739665408, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739666432, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739667456, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739668480, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739669504, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739670528, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739671552, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739672576, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739673600, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739674624, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739675648, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739676672, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739677696, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739678720, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739679744, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739680768, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739681792, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739682816, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739683840, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739684864, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739685888, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739686912, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739687936, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739688960, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739689984, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739691008, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739692032, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739693056, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739694080, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739695104, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739696128, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739697152, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739698176, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739699200, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739700224, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739701248, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739702272, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739703296, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739704320, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739705344, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739706368, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739707392, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739708416, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739709440, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739710464, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739711488, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739712512, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739713536, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739714560, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739715584, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739716608, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739717632, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739718656, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739719680, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739720704, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739721728, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739722752, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739723776, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739724800, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739725824, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739726848, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739727872, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739728896, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739729920, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739730944, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739731968, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739732992, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739734016, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739735040, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739736064, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739737088, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739738112, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739739136, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739740160, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739741184, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739742208, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739743232, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739744256, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739745280, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739746304, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739747328, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739748352, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739749376, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739750400, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739751424, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739752448, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739753472, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739754496, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739755520, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739756544, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739757568, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739758592, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739759616, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739760640, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739761664, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739762688, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739763712, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739764736, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739765760, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739766784, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739767808, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739768832, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739769856, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739770880, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739771904, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739772928, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739773952, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739774976, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739776000, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739777024, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739778048, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739779072, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739780096, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739781120, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739782144, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739783168, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739784192, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739785216, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739786240, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739787264, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739788288, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739789312, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739790336, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739791360, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739792384, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739793408, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739794432, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739795456, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739796480, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739797504, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739798528, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739799552, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739800576, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739801600, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739802624, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739803648, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739804672, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739805696, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739806720, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739807744, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739808768, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739809792, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739810816, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739811840, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739812864, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739813888, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739814912, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739815936, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739816960, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739817984, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739819008, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739820032, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739821056, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739822080, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739823104, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739824128, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739825152, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739826176, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739827200, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739828224, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739829248, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739830272, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739831296, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739832320, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739833344, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739834368, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739835392, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739836416, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739837440, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739838464, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739839488, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739840512, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739841536, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739842560, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739843584, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739844608, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739845632, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739846656, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739847680, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739848704, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739849728, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739850752, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739851776, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739852800, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739853824, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739854848, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739855872, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739856896, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739857920, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739858944, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739859968, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739860992, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739862016, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739863040, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739864064, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739865088, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739866112, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739867136, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739868160, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739869184, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739870208, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739871232, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739872256, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739873280, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739874304, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739875328, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739876352, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739877376, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739878400, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739879424, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739880448, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739881472, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739882496, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739883520, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739884544, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739885568, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739886592, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739887616, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739888640, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739889664, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739890688, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739891712, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739892736, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739893760, buflen=1024
+fio: io_u error on file /dev/nvme8n7: Input/output error: write offset=859739894784, buflen=1024
+fio: pid=710931, err=5/file:io_u.c:1846, func=io_u error, error=Input/output error
+{
+  "fio version" : "fio-3.32",
+  "timestamp" : 1673557394,
+  "timestamp_ms" : 1673557394591,
+  "time" : "Thu Jan 12 22:03:14 2023",
+  "global options" : {
+    "rw" : "write",
+    "direct" : "1",
+    "group_reporting" : "1",
+    "thread" : "1",
+    "time_based" : "1",
+    "ramp_time" : "10s",
+    "runtime" : "3m",
+    "percentile_list" : "1:5:10:20:30:40:50:60:70:80:90:95:98:99:99.9:99.99:99.999:100",
+    "numa_cpu_nodes" : "1",
+    "numa_mem_policy" : "bind:1",
+    "size" : "100z",
+    "zonemode" : "zbd",
+    "max_open_zones" : "14",
+    "ioengine" : "io_uring",
+    "filename" : "/dev/nvme8n7",
+    "fixedbufs" : "1",
+    "registerfiles" : "1",
+    "fixedbufs" : "1",
+    "sqthread_poll" : "1"
+  },
+  "jobs" : [
+    {
+      "jobname" : "qd256",
+      "groupid" : 0,
+      "error" : 5,
+      "eta" : 0,
+      "elapsed" : 191,
+      "job options" : {
+        "iodepth" : "256",
+        "numjobs" : "8",
+        "bs" : "1024",
+        "ioscheduler" : "mq-deadline",
+        "offset_increment" : "100z",
+        "job_max_open_zones" : "1"
+      },
+      "read" : {
+        "io_bytes" : 0,
+        "io_kbytes" : 0,
+        "bw_bytes" : 0,
+        "bw" : 0,
+        "iops" : 0.000000,
+        "runtime" : 0,
+        "total_ios" : 0,
+        "short_ios" : 0,
+        "drop_ios" : 0,
+        "slat_ns" : {
+          "min" : 0,
+          "max" : 0,
+          "mean" : 0.000000,
+          "stddev" : 0.000000,
+          "N" : 0
+        },
+        "clat_ns" : {
+          "min" : 0,
+          "max" : 0,
+          "mean" : 0.000000,
+          "stddev" : 0.000000,
+          "N" : 0
+        },
+        "lat_ns" : {
+          "min" : 0,
+          "max" : 0,
+          "mean" : 0.000000,
+          "stddev" : 0.000000,
+          "N" : 0
+        },
+        "bw_min" : 0,
+        "bw_max" : 0,
+        "bw_agg" : 0.000000,
+        "bw_mean" : 0.000000,
+        "bw_dev" : 0.000000,
+        "bw_samples" : 0,
+        "iops_min" : 0,
+        "iops_max" : 0,
+        "iops_mean" : 0.000000,
+        "iops_stddev" : 0.000000,
+        "iops_samples" : 0
+      },
+      "write" : {
+        "io_bytes" : 7503192064,
+        "io_kbytes" : 7327336,
+        "bw_bytes" : 41677685,
+        "bw" : 40700,
+        "iops" : 40692.366230,
+        "runtime" : 180029,
+        "total_ios" : 7325806,
+        "short_ios" : 0,
+        "drop_ios" : 0,
+        "slat_ns" : {
+          "min" : 0,
+          "max" : 0,
+          "mean" : 0.000000,
+          "stddev" : 0.000000,
+          "N" : 0
+        },
+        "clat_ns" : {
+          "min" : 10129707212,
+          "max" : 190174647459,
+          "mean" : 100038038151.679169,
+          "stddev" : 52020951823.287735,
+          "N" : 7327336,
+          "percentile" : {
+            "1.000000" : 11878268928,
+            "5.000000" : 17112760320,
+            "10.000000" : 17112760320,
+            "20.000000" : 17112760320,
+            "30.000000" : 17112760320,
+            "40.000000" : 17112760320,
+            "50.000000" : 17112760320,
+            "60.000000" : 17112760320,
+            "70.000000" : 17112760320,
+            "80.000000" : 17112760320,
+            "90.000000" : 17112760320,
+            "95.000000" : 17112760320,
+            "98.000000" : 17112760320,
+            "99.000000" : 17112760320,
+            "99.900000" : 17112760320,
+            "99.990000" : 17112760320,
+            "99.999000" : 17112760320,
+            "100.000000" : 17112760320
+          }
+        },
+        "lat_ns" : {
+          "min" : 178665,
+          "max" : 125471584,
+          "mean" : 44381055.480945,
+          "stddev" : 9001678.304550,
+          "N" : 7327336
+        },
+        "bw_min" : 35800,
+        "bw_max" : 62822,
+        "bw_agg" : 100.000000,
+        "bw_mean" : 45627.670879,
+        "bw_dev" : 738.251735,
+        "bw_samples" : 2533,
+        "iops_min" : 35800,
+        "iops_max" : 62822,
+        "iops_mean" : 45627.670879,
+        "iops_stddev" : 738.252120,
+        "iops_samples" : 2533
+      },
+      "trim" : {
+        "io_bytes" : 0,
+        "io_kbytes" : 0,
+        "bw_bytes" : 0,
+        "bw" : 0,
+        "iops" : 0.000000,
+        "runtime" : 0,
+        "total_ios" : 0,
+        "short_ios" : 0,
+        "drop_ios" : 0,
+        "slat_ns" : {
+          "min" : 0,
+          "max" : 0,
+          "mean" : 0.000000,
+          "stddev" : 0.000000,
+          "N" : 0
+        },
+        "clat_ns" : {
+          "min" : 0,
+          "max" : 0,
+          "mean" : 0.000000,
+          "stddev" : 0.000000,
+          "N" : 0
+        },
+        "lat_ns" : {
+          "min" : 0,
+          "max" : 0,
+          "mean" : 0.000000,
+          "stddev" : 0.000000,
+          "N" : 0
+        },
+        "bw_min" : 0,
+        "bw_max" : 0,
+        "bw_agg" : 0.000000,
+        "bw_mean" : 0.000000,
+        "bw_dev" : 0.000000,
+        "bw_samples" : 0,
+        "iops_min" : 0,
+        "iops_max" : 0,
+        "iops_mean" : 0.000000,
+        "iops_stddev" : 0.000000,
+        "iops_samples" : 0
+      },
+      "sync" : {
+        "total_ios" : 0,
+        "lat_ns" : {
+          "min" : 0,
+          "max" : 0,
+          "mean" : 0.000000,
+          "stddev" : 0.000000,
+          "N" : 0
+        }
+      },
+      "job_runtime" : 1270242,
+      "usr_cpu" : 97.588019,
+      "sys_cpu" : 0.007951,
+      "ctx" : 142489,
+      "majf" : 0,
+      "minf" : 0,
+      "iodepth_level" : {
+        "1" : 0.100000,
+        "2" : 0.100000,
+        "4" : 0.100000,
+        "8" : 0.100000,
+        "16" : 0.100000,
+        "32" : 0.100000,
+        ">=64" : 99.998280
+      },
+      "iodepth_submit" : {
+        "0" : 0.000000,
+        "4" : 0.000000,
+        "8" : 0.000000,
+        "16" : 0.000000,
+        "32" : 0.000000,
+        "64" : 0.000000,
+        ">=64" : 0.000000
+      },
+      "iodepth_complete" : {
+        "0" : 0.000000,
+        "4" : 99.999891,
+        "8" : 0.000000,
+        "16" : 0.000000,
+        "32" : 0.000000,
+        "64" : 0.000000,
+        ">=64" : 0.100000
+      },
+      "latency_ns" : {
+        "2" : 0.000000,
+        "4" : 0.000000,
+        "10" : 0.000000,
+        "20" : 0.000000,
+        "50" : 0.000000,
+        "100" : 0.000000,
+        "250" : 0.000000,
+        "500" : 0.000000,
+        "750" : 0.000000,
+        "1000" : 0.000000
+      },
+      "latency_us" : {
+        "2" : 0.000000,
+        "4" : 0.000000,
+        "10" : 0.000000,
+        "20" : 0.000000,
+        "50" : 0.000000,
+        "100" : 0.000000,
+        "250" : 0.000000,
+        "500" : 0.000000,
+        "750" : 0.000000,
+        "1000" : 0.000000
+      },
+      "latency_ms" : {
+        "2" : 0.000000,
+        "4" : 0.000000,
+        "10" : 0.000000,
+        "20" : 0.000000,
+        "50" : 0.000000,
+        "100" : 0.000000,
+        "250" : 0.000000,
+        "500" : 0.000000,
+        "750" : 0.000000,
+        "1000" : 0.000000,
+        "2000" : 0.000000,
+        ">=2000" : 100.020885
+      },
+      "latency_depth" : 256,
+      "latency_target" : 0,
+      "latency_percentile" : 100.000000,
+      "latency_window" : 0
+    }
+  ],
+  "disk_util" : [
+    {
+      "name" : "nvme8n7",
+      "read_ios" : 96,
+      "write_ios" : 7706413,
+      "read_merges" : 0,
+      "write_merges" : 29170,
+      "read_ticks" : 6,
+      "write_ticks" : 59289354,
+      "in_queue" : 59289360,
+      "util" : 100.000000
+    }
+  ]
+}
