@@ -1,0 +1,24 @@
+; -- CREATED ON 2023-01-06 13:33:19.586544 ---
+[global]
+
+[qd8]
+rw=write
+direct=1
+group_reporting=1
+output-format=json
+thread=1
+time_based=1
+ramp_time=30s
+runtime=10s
+numa_cpu_nodes=3
+numa_mem_policy=bind:3
+size=20z
+zonemode=zbd
+ioengine=spdk
+filename="trtype=PCIe traddr=00.88.00.0 ns=64"
+qd=8
+numjobs=1
+bs=32768
+zone_append=1
+initial_zone_reset=1
+offset_increment=20z
