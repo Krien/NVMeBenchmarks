@@ -147,7 +147,10 @@ def main(
         if zns:
             nvme.finish_all_zones()
         # run job
-        fio.run_job(path.AbsPathJob(), path.AbsPathOut(), mock=mock)
+        try:
+            fio.run_job(path.AbsPathJob(), path.AbsPathOut(), mock=mock)
+        except:
+            print(f"Failed for qd={qd}, bs={bs}, concurrent_zones={concurrent_zones}")
 
     if zns:
         for (qd, bs, concurrent_zones) in [
@@ -185,7 +188,12 @@ def main(
             if zns:
                 nvme.finish_all_zones()
             # run job
-            fio.run_job(path.AbsPathJob(), path.AbsPathOut(), mock=mock)
+            try:
+                fio.run_job(path.AbsPathJob(), path.AbsPathOut(), mock=mock)
+            except:
+                print(
+                    f"Failed for qd={qd}, bs={bs}, concurrent_zones={concurrent_zones}"
+                )
 
     # SPDK
     spdk.setup()
@@ -230,7 +238,10 @@ def main(
             nvme.finish_all_zones()
         spdk.setup()
         # run job
-        fio.run_job(path.AbsPathJob(), path.AbsPathOut(), mock=mock)
+        try:
+            fio.run_job(path.AbsPathJob(), path.AbsPathOut(), mock=mock)
+        except:
+            print(f"Failed for qd={qd}, bs={bs}, concurrent_zones={concurrent_zones}")
 
     if zns:
         for (qd, bs, concurrent_zones) in [
@@ -265,7 +276,13 @@ def main(
                 nvme.finish_all_zones()
             spdk.setup()
             # run job
-            fio.run_job(path.AbsPathJob(), path.AbsPathOut(), mock=mock)
+            try:
+                fio.run_job(path.AbsPathJob(), path.AbsPathOut(), mock=mock)
+            except:
+                print(
+                    f"Failed for qd={qd}, bs={bs}, concurrent_zones={concurrent_zones}"
+                )
+
         spdk.reset()
 
 
