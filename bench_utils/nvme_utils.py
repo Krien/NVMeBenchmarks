@@ -10,6 +10,7 @@ mock_nvme_database = {
         "address": "00:88:00.0",
         "max_open": 3,
         "min": 8192 * 2,
+        "nr_zones": 900,
     },
     "mockznsn1": {
         "ns": 1,
@@ -19,6 +20,7 @@ mock_nvme_database = {
         "address": "00:88:00.0",
         "max_open": 3,
         "min": 8192 * 2,
+        "nr_zones": 900,
     },
     "mockznsn2": {
         "ns": 2,
@@ -28,6 +30,7 @@ mock_nvme_database = {
         "address": "00:88:00.0",
         "max_open": 3,
         "min": 8192 * 2,
+        "nr_zones": 900,
     },
     "mockznsn3": {
         "ns": 3,
@@ -37,6 +40,7 @@ mock_nvme_database = {
         "address": "00:88:00.0",
         "max_open": 3,
         "min": 8192 * 2,
+        "nr_zones": 900,
     },
     "mocknvmen0": {
         "ns": 0,
@@ -174,6 +178,11 @@ class NVMeRunnerMock(NVMeRunner):
         if self.device in mock_nvme_database:
             return mock_nvme_database[self.device]["address"]
         return NVMeRunner.get_pcie_address(self)
+
+    def get_nr_zones(self):
+        if self.device in mock_nvme_database:
+            return mock_nvme_database[self.device]["nr_zones"]
+        return NVMeRunner.get_max_open_zones(self)
 
     def get_max_open_zones(self):
         if self.device in mock_nvme_database:
