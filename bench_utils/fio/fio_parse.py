@@ -24,6 +24,15 @@ class FioOutput:
     clat_stdef: int
     slat_mean: int
     slat_stdef: int
+    iops_mean_read: int
+    iops_stddev_read: int
+    lat_mean_read: int
+    lat_stdef_read: int
+    clat_mean_read: int
+    clat_stdef_read: int
+    slat_mean_read: int
+    slat_stdef_read: int
+
 
 
 def stub_fio_lat():
@@ -33,8 +42,14 @@ def stub_fio_lat():
 def parse_data_from_json(json_output):
     # Parse main field
     write_dat = {}
+    read_dat = {}
     try:
         write_dat = json_output["jobs"][0]["write"]
+    except:
+        print("Incorrect FIO format")
+        raise "Incorrect FIO format"
+    try:
+        read_dat = json_output["jobs"][0]["read"]
     except:
         print("Incorrect FIO format")
         raise "Incorrect FIO format"
@@ -42,6 +57,10 @@ def parse_data_from_json(json_output):
     lat = write_dat["lat_ns"] if "lat_ns" in write_dat else stub_fio_lat()
     clat = write_dat["clat_ns"] if "clat_ns" in write_dat else stub_fio_lat()
     slat = write_dat["slat_ns"] if "slat_ns" in write_dat else stub_fio_lat()
+    
+    lat_read = read_dat["lat_ns"] if "lat_ns" in read_dat else stub_fio_lat()
+    clat_read = read_dat["clat_ns"] if "clat_ns" in read_dat else stub_fio_lat()
+    slat_read = read_dat["slat_ns"] if "slat_ns" in read_dat else stub_fio_lat()
     # Nice Python format
     return FioOutput(
         write_dat["iops_mean"],
@@ -52,6 +71,15 @@ def parse_data_from_json(json_output):
         clat["stddev"],
         slat["mean"],
         slat["stddev"],
+
+        read_dat["iops_mean"],
+        read_dat["iops_stddev"],
+        lat_read["mean"],
+        lat_read["stddev"],
+        clat_read["mean"],
+        clat_read["stddev"],
+        slat_read["mean"],
+        slat_read["stddev"],
     )
 
 
