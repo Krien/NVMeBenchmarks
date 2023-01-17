@@ -3,6 +3,22 @@ import math
 import json
 from dataclasses import dataclass
 from ..path_utils import BenchPath
+from enum import Enum
+
+
+class FioOperation(Enum):
+    WRITE = 1
+    READ = 2
+    TRIM = 3
+
+
+def fio_operation_to_string(operation: FioOperation) -> str:
+    if operation == FioOperation.WRITE:
+        return "write"
+    elif operation == FioOperation.READ:
+        return "read"
+    else:
+        return "trim"
 
 
 def get_json(path):
@@ -19,72 +35,46 @@ class FioOutput:
     iops_mean: int
     iops_stddev: int
     lat_mean: int
-    lat_stdef: int
+    lat_stddev: int
     clat_mean: int
-    clat_stdef: int
+    clat_stddev: int
     slat_mean: int
-    slat_stdef: int
-    iops_mean_read: int
-    iops_stddev_read: int
-    lat_mean_read: int
-    lat_stdef_read: int
-    clat_mean_read: int
-    clat_stdef_read: int
-    slat_mean_read: int
-    slat_stdef_read: int
-
+    slat_stddev: int
 
 
 def stub_fio_lat():
     return {"mean": -1, "stddev": -1}
 
 
-def parse_data_from_json(json_output):
+def parse_data_from_json(json_output, operation: FioOperation) -> FioOutput:
     # Parse main field
-    write_dat = {}
-    read_dat = {}
+    dat = {}
     try:
-        write_dat = json_output["jobs"][0]["write"]
-    except:
-        print("Incorrect FIO format")
-        raise "Incorrect FIO format"
-    try:
-        read_dat = json_output["jobs"][0]["read"]
+        dat = json_output["jobs"][0][fio_operation_to_string(operation)]
     except:
         print("Incorrect FIO format")
         raise "Incorrect FIO format"
     # Fallback
-    lat = write_dat["lat_ns"] if "lat_ns" in write_dat else stub_fio_lat()
-    clat = write_dat["clat_ns"] if "clat_ns" in write_dat else stub_fio_lat()
-    slat = write_dat["slat_ns"] if "slat_ns" in write_dat else stub_fio_lat()
-    
-    lat_read = read_dat["lat_ns"] if "lat_ns" in read_dat else stub_fio_lat()
-    clat_read = read_dat["clat_ns"] if "clat_ns" in read_dat else stub_fio_lat()
-    slat_read = read_dat["slat_ns"] if "slat_ns" in read_dat else stub_fio_lat()
+    lat = dat["lat_ns"] if "lat_ns" in dat else stub_fio_lat()
+    clat = dat["clat_ns"] if "clat_ns" in dat else stub_fio_lat()
+    slat = dat["slat_ns"] if "slat_ns" in dat else stub_fio_lat()
     # Nice Python format
     return FioOutput(
-        write_dat["iops_mean"],
-        write_dat["iops_stddev"],
+        dat["iops_mean"],
+        dat["iops_stddev"],
         lat["mean"],
         lat["stddev"],
         clat["mean"],
         clat["stddev"],
         slat["mean"],
         slat["stddev"],
-
-        read_dat["iops_mean"],
-        read_dat["iops_stddev"],
-        lat_read["mean"],
-        lat_read["stddev"],
-        clat_read["mean"],
-        clat_read["stddev"],
-        slat_read["mean"],
-        slat_read["stddev"],
     )
 
 
-def parse_fio_file(fio_data_path_definition: BenchPath):
-    return parse_data_from_json(get_json(f"{fio_data_path_definition.AbsPathOut()}"))
+def parse_fio_file(fio_data_path_definition: BenchPath, operation: FioOperation):
+    return parse_data_from_json(
+        get_json(f"{fio_data_path_definition.AbsPathOut()}"), operation
+    )
 
 
 def divide_by_1000(x):
