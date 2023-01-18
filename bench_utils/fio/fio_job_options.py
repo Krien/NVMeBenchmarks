@@ -146,6 +146,14 @@ class OffsetOption(FioOption):
     def to_opt(self) -> [(str, str)]:
         return [("offset_increment", f"{self.offset}")]
 
+@dataclass
+class FixedOffsetOption(FioOption):
+    offset: str
+
+    def to_opt(self) -> [(str, str)]:
+        return [("offset", f"{self.offset}")]
+
+
 
 @dataclass
 class DelayOption(FioOption):
@@ -154,6 +162,12 @@ class DelayOption(FioOption):
     def to_opt(self) -> [(str, str)]:
         return [("startdelay", f"{self.delay}")]
 
+@dataclass
+class FlowOption(FioOption):
+    flow: int
+
+    def to_opt(self) -> [(str, str)]:
+        return [("flow", f"{self.flow}")]
 
 @dataclass
 class MaxOpenZonesOption(FioOption):
@@ -232,7 +246,7 @@ class JobOption(FioOption):
                     JobWorkload.SEQ_WRITE: "write",
                     JobWorkload.RAN_WRITE: "writerand",
                     JobWorkload.SEQ_READ: "read",
-                    JobWorkload.RAN_READ: "readrand",
+                    JobWorkload.RAN_READ: "randread",
                 }.get(self.workload, "read"),
             )
         ]
