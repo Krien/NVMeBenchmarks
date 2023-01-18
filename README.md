@@ -11,7 +11,7 @@ This repository contains benchmarks and benchmark data for ZNS:
 This benchmarking tooling/data is used in [TODO name] To ensure the work is reproducible we noted all relevant data. The benchmarks that were run for this paper can be found in `paper_results/run_jobs.sh` and the raw I/O jobs that were run for this paper can be found in `jobs/data/io_uring/zns-a` and `jobs/data/spdk/zns-a`. The resulting data can be found in `data/data/io_uring/zns-a` and `data/data/spdk/zns-a`. To continue, tool versions are noted down in the git submodules and OS/Hardware is maintained in `paper_results/specs.md`. Lastly, the plots can be found in `paper_results/gen_plots.sh`
 
 
-## Dependancies/installation
+## Dependencies/installation
 
 We took great care to insure you do not need to install the plot dependencies on the hardware that you will use to run tests. Please follow the instructions for the relevant tool.
 
@@ -44,7 +44,7 @@ jupyter nbextension enable --py --sys-prefix widgetsnbextension
 # Directory structure
 
 * All tools are maintained in `.`.
-* paper_data contains paper relevant runs/data
+* paper_results contains paper relevant runs/data
 * All data is maintained in `data` and organized as `data/engine/model_name/namespace_format/operation/concurrent_zones/queue_depth.json`
 * All run fio jobs are maintained in `jobs` and organized as `jobs/engine/model_name/namespace_format/operation/concurrent_zones/queue_depth.fio`
 * Generic/common jobs are in `predefined_jobs`
