@@ -17,7 +17,7 @@ We took great care to insure you do not need to install the plot dependencies on
 
 ### For running the benchmarks
 
-Please use the instructions from `./install.sh` and use the exact versions of the tools specified.
+Please use the instructions from `./scripts/install.sh` and use the exact versions of the tools specified.
 You do not need any of the python dependencies listed in the "requirements.txt" to run the code, just Python >= 3.8.
 
 ### For plotting (as done in the paper)
