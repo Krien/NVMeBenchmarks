@@ -2,10 +2,6 @@
 
 In this repository we maintain a set of benchmarks for NVMe devices. Notably we do a grid search over various parameters (Queue depth, block size, concurrent zones in the case of ZNS) with the help of Fio. Further on, in data we have stored the performance of a number of devices. We also come with a set of plotting tools to visualise the data.
 
-# Parameters used for each NVMe device
-Each NVMe device is tested with different block sizes and queue depths.
-By default all tests are run with queue depths of 1,2,4,8,16,32,64,128,256 and 512. Block sizes are tested based on the pagesize of the device. It tests the following page sizes: 512,1KiB,2KiB,4KiB,8KiB,16KiB,32KiB,64KiB and 132KiB. However, it skips all page sizes smaller than the page size supported by the device. Finally, all devices are tested with different storage engines.
-
 # Storage engines
 
 NVMeBenchmarks currently tests with two storage engines: `SPDK` and `io_uring`.
