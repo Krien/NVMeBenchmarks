@@ -1,0 +1,30 @@
+; -- CREATED ON 2023-01-16 22:39:21.295070 ---
+[global]
+direct=1
+thread=1
+time_based=1
+ramp_time=10s
+runtime=1m
+percentile_list=1:5:10:20:30:40:50:60:70:80:90:95:98:99:99.9:99.99:99.999:100
+numa_cpu_nodes=3
+numa_mem_policy=bind:3
+zonemode=zbd
+max_open_zones=3
+ioengine=spdk
+filename=trtype=PCIe traddr=00.88.00.0 ns=1
+
+[read_4096]
+iodepth=1
+bs=4096
+rw=randread
+size=200z
+flow=50
+
+[write_1_16384]
+iodepth=1
+bs=16384
+rw=write
+size=200z
+offset=200z
+flow=-50
+zone_append=1
