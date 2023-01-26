@@ -52,6 +52,7 @@ jupyter nbextension enable --py --sys-prefix widgetsnbextension
 * example_runs and example_plots contain examples of running tests and generating plots respectively
 * Utils for running benchmarks is maintained in `bench_utils`
 * Utils for plotting is maintained in `plot_utils`
+* `tools/` contains the tracing tool to generate heatmaps of ZNS activity for zones
 
 
 # About testing NVMe ZNS
