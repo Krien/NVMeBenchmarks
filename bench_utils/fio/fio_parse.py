@@ -36,11 +36,13 @@ class FioOutput:
     iops_stddev: int
     lat_mean: int
     lat_stddev: int
+    lat_p95: int
     clat_mean: int
     clat_stddev: int
+    clat_p95: int
     slat_mean: int
     slat_stddev: int
-
+    slat_p95: int
 
 def stub_fio_lat():
     return {"mean": -1, "stddev": -1}
@@ -64,10 +66,13 @@ def parse_data_from_json(json_output, operation: FioOperation) -> FioOutput:
         dat["iops_stddev"],
         lat["mean"],
         lat["stddev"],
+        lat["percentile"]["95.000000"] if "percentile" in lat else -1,
         clat["mean"],
         clat["stddev"],
+        clat["percentile"]["95.000000"] if "percentile" in clat else -1,
         slat["mean"],
         slat["stddev"],
+        slat["percentile"]["95.000000"] if "percentile" in slat else -1,
     )
 
 
