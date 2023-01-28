@@ -48,11 +48,11 @@ def stub_fio_lat():
     return {"mean": -1, "stddev": -1}
 
 
-def parse_data_from_json(json_output, operation: FioOperation) -> FioOutput:
+def parse_data_from_json(json_output, operation: FioOperation, job = 0) -> FioOutput:
     # Parse main field
     dat = {}
     try:
-        dat = json_output["jobs"][0][fio_operation_to_string(operation)]
+        dat = json_output["jobs"][job][fio_operation_to_string(operation)]
     except:
         print("Incorrect FIO format")
         raise "Incorrect FIO format"
