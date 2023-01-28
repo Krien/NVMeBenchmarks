@@ -1,0 +1,522 @@
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234626560, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234630656, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736586924032, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736586928128, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736586932224, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533107712, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533111808, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234634752, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234638848, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234642944, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234647040, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533115904, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234651136, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736586936320, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736586940416, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533120000, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234655232, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234659328, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234663424, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234667520, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234671616, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533124096, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533128192, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1930587865088, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234675712, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736586944512, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1930587869184, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533132288, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234679808, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234683904, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234688000, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1930587873280, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234692096, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533136384, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1930587877376, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1930587881472, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736586948608, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736586952704, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234696192, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736586956800, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234700288, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234704384, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533140480, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736586960896, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234708480, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1930587885568, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736586964992, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533144576, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738846208, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736586969088, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738850304, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=485331386368, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533148672, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1930587889664, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1930587893760, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234712576, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533152768, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234716672, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738854400, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=485331390464, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234720768, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738858496, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234724864, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736586973184, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738862592, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738866688, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736586977280, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533156864, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234728960, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736586981376, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=485331394560, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736586985472, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736586989568, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1930587897856, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738870784, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736586993664, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738874880, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=485331398656, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234733056, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=485331402752, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533160960, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1930587901952, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736586997760, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=485331406848, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=485331410944, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533165056, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533169152, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1930587906048, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1930587910144, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533173248, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533177344, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736587001856, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533181440, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738878976, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234737152, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=485331415040, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=485331419136, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1930587914240, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234741248, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234745344, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533185536, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234749440, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1930587918336, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=27917410304, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533189632, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738883072, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=485331423232, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234753536, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=485331427328, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738887168, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234757632, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1930587922432, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234761728, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1930587926528, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738891264, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1930587930624, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736587005952, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234765824, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738895360, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736587010048, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=485331431424, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533193728, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738899456, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736587014144, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738903552, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738907648, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234769920, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738911744, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533197824, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1930587934720, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738915840, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738919936, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234774016, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736587018240, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234778112, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738924032, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=485331435520, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=27917414400, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=485331439616, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=27917418496, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738928128, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=27917422592, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1930587938816, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533201920, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736587022336, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=27917426688, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234782208, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234786304, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533206016, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=485331443712, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=485331447808, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=27917430784, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533210112, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738932224, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736587026432, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533214208, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234790400, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=27917434880, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234794496, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=485331451904, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533218304, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736587030528, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738936320, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533222400, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736587034624, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738940416, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738944512, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1930587942912, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738948608, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738952704, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=27917438976, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=27917443072, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738956800, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533226496, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738960896, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=27917447168, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=485331456000, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=27917451264, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1930587947008, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1930587951104, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533230592, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738964992, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=485331460096, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738969088, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=27917455360, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=485331464192, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533234688, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738973184, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736587038720, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736587042816, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533242880, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533238784, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234798592, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=27917459456, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1930587955200, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=27917463552, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738977280, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=27917467648, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533246976, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1930587959296, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736587046912, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=485331468288, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234802688, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736587051008, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533251072, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=485331472384, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234806784, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738981376, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=27917471744, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738985472, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736587055104, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234810880, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=485331480576, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1930587963392, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=485331476480, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=485331484672, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=27917475840, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736587059200, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738989568, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1930587971584, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1930587967488, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736587063296, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1930587975680, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1930587979776, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1930587983872, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533255168, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736587067392, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738993664, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801738997760, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=485331488768, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1930587987968, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736587071488, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=485331492864, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234814976, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1930587992064, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234819072, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736587075584, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1930587996160, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1801739001856, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234823168, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=485331496960, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234827264, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=910533259264, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1930588000256, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=485331501056, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=27917484032, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=27917479936, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=736587079680, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234831360, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=27917488128, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234835456, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=485331505152, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=1037234839552, buflen=4096
+fio: io_u error on file /dev/nvme6n2: Input/output error: write offset=485331509248, buflen=4096
+fio: pid=103160, err=5/file:io_u.c:1846, func=io_u error, error=Input/output error
+{
+  "fio version" : "fio-3.32",
+  "timestamp" : 1674603843,
+  "timestamp_ms" : 1674603843252,
+  "time" : "Tue Jan 24 23:44:03 2023",
+  "global options" : {
+    "ioengine" : "io_uring",
+    "fixedbufs" : "1",
+    "sqthread_poll" : "1",
+    "registerfiles" : "1",
+    "direct" : "1",
+    "offset" : "0",
+    "size" : "100%",
+    "filename" : "/dev/nvme6n2",
+    "zonemode" : "zbd",
+    "rw" : "randrw",
+    "rwmixread" : "75",
+    "thread" : "1",
+    "time_based" : "1",
+    "runtime" : "20m",
+    "ramp_time" : "5"
+  },
+  "jobs" : [
+    {
+      "jobname" : "rw",
+      "groupid" : 0,
+      "error" : 5,
+      "eta" : 2147483647,
+      "elapsed" : 1,
+      "job options" : {
+        "name" : "rw",
+        "iodepth" : "256",
+        "numjobs" : "1",
+        "bs" : "4096",
+        "lat_percentiles" : "1",
+        "percentile_list" : "50:75:90:95:99:99.9:99.999"
+      },
+      "read" : {
+        "io_bytes" : 8716288,
+        "io_kbytes" : 8512,
+        "bw_bytes" : 77135292,
+        "bw" : 75327,
+        "iops" : 18831.858407,
+        "runtime" : 113,
+        "total_ios" : 2128,
+        "short_ios" : 0,
+        "drop_ios" : 0,
+        "slat_ns" : {
+          "min" : 0,
+          "max" : 0,
+          "mean" : 0.000000,
+          "stddev" : 0.000000,
+          "N" : 0
+        },
+        "clat_ns" : {
+          "min" : 0,
+          "max" : 0,
+          "mean" : 0.000000,
+          "stddev" : 0.000000,
+          "N" : 0
+        },
+        "lat_ns" : {
+          "min" : 0,
+          "max" : 0,
+          "mean" : 0.000000,
+          "stddev" : 0.000000,
+          "N" : 0
+        },
+        "bw_min" : 0,
+        "bw_max" : 0,
+        "bw_agg" : 0.000000,
+        "bw_mean" : 0.000000,
+        "bw_dev" : 0.000000,
+        "bw_samples" : 0,
+        "iops_min" : 0,
+        "iops_max" : 0,
+        "iops_mean" : 0.000000,
+        "iops_stddev" : 0.000000,
+        "iops_samples" : 0
+      },
+      "write" : {
+        "io_bytes" : 1949696,
+        "io_kbytes" : 1904,
+        "bw_bytes" : 17253946,
+        "bw" : 16849,
+        "iops" : 6460.176991,
+        "runtime" : 113,
+        "total_ios" : 730,
+        "short_ios" : 0,
+        "drop_ios" : 0,
+        "slat_ns" : {
+          "min" : 0,
+          "max" : 0,
+          "mean" : 0.000000,
+          "stddev" : 0.000000,
+          "N" : 0
+        },
+        "clat_ns" : {
+          "min" : 0,
+          "max" : 0,
+          "mean" : 0.000000,
+          "stddev" : 0.000000,
+          "N" : 0
+        },
+        "lat_ns" : {
+          "min" : 0,
+          "max" : 0,
+          "mean" : 0.000000,
+          "stddev" : 0.000000,
+          "N" : 0
+        },
+        "bw_min" : 0,
+        "bw_max" : 0,
+        "bw_agg" : 0.000000,
+        "bw_mean" : 0.000000,
+        "bw_dev" : 0.000000,
+        "bw_samples" : 0,
+        "iops_min" : 0,
+        "iops_max" : 0,
+        "iops_mean" : 0.000000,
+        "iops_stddev" : 0.000000,
+        "iops_samples" : 0
+      },
+      "trim" : {
+        "io_bytes" : 0,
+        "io_kbytes" : 0,
+        "bw_bytes" : 0,
+        "bw" : 0,
+        "iops" : 0.000000,
+        "runtime" : 0,
+        "total_ios" : 0,
+        "short_ios" : 0,
+        "drop_ios" : 0,
+        "slat_ns" : {
+          "min" : 0,
+          "max" : 0,
+          "mean" : 0.000000,
+          "stddev" : 0.000000,
+          "N" : 0
+        },
+        "clat_ns" : {
+          "min" : 0,
+          "max" : 0,
+          "mean" : 0.000000,
+          "stddev" : 0.000000,
+          "N" : 0
+        },
+        "lat_ns" : {
+          "min" : 0,
+          "max" : 0,
+          "mean" : 0.000000,
+          "stddev" : 0.000000,
+          "N" : 0
+        },
+        "bw_min" : 0,
+        "bw_max" : 0,
+        "bw_agg" : 0.000000,
+        "bw_mean" : 0.000000,
+        "bw_dev" : 0.000000,
+        "bw_samples" : 0,
+        "iops_min" : 0,
+        "iops_max" : 0,
+        "iops_mean" : 0.000000,
+        "iops_stddev" : 0.000000,
+        "iops_samples" : 0
+      },
+      "sync" : {
+        "total_ios" : 0,
+        "lat_ns" : {
+          "min" : 0,
+          "max" : 0,
+          "mean" : 0.000000,
+          "stddev" : 0.000000,
+          "N" : 0
+        }
+      },
+      "job_runtime" : 112,
+      "usr_cpu" : 64.285714,
+      "sys_cpu" : 1.785714,
+      "ctx" : 23,
+      "majf" : 0,
+      "minf" : 1,
+      "iodepth_level" : {
+        "1" : 0.524843,
+        "2" : 0.734780,
+        "4" : 0.419874,
+        "8" : 0.314906,
+        "16" : 0.559832,
+        "32" : 1.119664,
+        ">=64" : 96.326102
+      },
+      "iodepth_submit" : {
+        "0" : 0.000000,
+        "4" : 0.000000,
+        "8" : 0.000000,
+        "16" : 0.000000,
+        "32" : 0.000000,
+        "64" : 0.000000,
+        ">=64" : 0.000000
+      },
+      "iodepth_complete" : {
+        "0" : 0.000000,
+        "4" : 99.961612,
+        "8" : 0.000000,
+        "16" : 0.000000,
+        "32" : 0.000000,
+        "64" : 0.000000,
+        ">=64" : 0.100000
+      },
+      "latency_ns" : {
+        "2" : 0.000000,
+        "4" : 0.000000,
+        "10" : 0.000000,
+        "20" : 0.000000,
+        "50" : 0.000000,
+        "100" : 0.000000,
+        "250" : 0.000000,
+        "500" : 0.000000,
+        "750" : 0.000000,
+        "1000" : 0.000000
+      },
+      "latency_us" : {
+        "2" : 0.000000,
+        "4" : 0.000000,
+        "10" : 0.000000,
+        "20" : 0.000000,
+        "50" : 0.000000,
+        "100" : 0.000000,
+        "250" : 0.000000,
+        "500" : 0.000000,
+        "750" : 0.000000,
+        "1000" : 0.000000
+      },
+      "latency_ms" : {
+        "2" : 0.000000,
+        "4" : 0.000000,
+        "10" : 0.000000,
+        "20" : 0.000000,
+        "50" : 0.000000,
+        "100" : 0.000000,
+        "250" : 0.000000,
+        "500" : 0.000000,
+        "750" : 0.000000,
+        "1000" : 0.000000,
+        "2000" : 0.000000,
+        ">=2000" : 0.000000
+      },
+      "latency_depth" : 256,
+      "latency_target" : 0,
+      "latency_percentile" : 100.000000,
+      "latency_window" : 0
+    }
+  ],
+  "disk_util" : [
+    {
+      "name" : "nvme6n2",
+      "read_ios" : 2148,
+      "write_ios" : 497,
+      "read_merges" : 0,
+      "write_merges" : 0,
+      "read_ticks" : 1106,
+      "write_ticks" : 387,
+      "in_queue" : 1493,
+      "util" : 35.443038
+    }
+  ]
+}
