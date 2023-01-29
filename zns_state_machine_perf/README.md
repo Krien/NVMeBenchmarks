@@ -28,12 +28,12 @@ cat /sys/block/<dev>/device/address # Copy this value to traddr
 sudo PCI_ALLOWED=<traddr> ../submodules/spdk/scripts/setup.sh
 ```
 
-# tools
+# Tools
 
 - `close_test`: measure performance of close operation, prints cost of closing implicitly and explicitly opened zones - and writing a closed zone. 
-- `explicit_versus_implicit`: maesure performance of writing/appending to an implicitly/explicitly opened zone
+- `explicit_versus_implicit`: measure performance of writing/appending to an implicitly/explicitly opened zone
 - `finish_test`: measure finish latency (partial zones) and resetting finished zones
-- `partial_zone_reset`: maesure latency of resesetting (partial) zones
-- `pure_read_test`: maesure random read latency (sanity)
+- `partial_zone_reset`: measure latency of resetting (partial) zones
+- `pure_read_test`: measure random read latency (sanity)
 - `pure_reset`: measure latency of resetting full zones
 - `reset_inteference`: measure interference effects between resets and writes/appends/random reads
