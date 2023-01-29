@@ -28,7 +28,7 @@ cat /sys/block/<dev>/device/address # Copy this value to traddr
 sudo PCI_ALLOWED=<traddr> ../submodules/spdk/scripts/setup.sh
 ```
 
-# tools
+# Tools
 
 - `close_test`: measure performance of close operation, prints cost of closing implicitly and explicitly opened zones - and writing a closed zone. 
 - `explicit_versus_implicit`: measure performance of writing/appending to an implicitly/explicitly opened zone
