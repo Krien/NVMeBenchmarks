@@ -36,4 +36,7 @@ sudo PCI_ALLOWED=<traddr> ../submodules/spdk/scripts/setup.sh
 - `partial_zone_reset`: measure latency of resetting (partial) zones
 - `pure_read_test`: measure random read latency (sanity)
 - `pure_reset`: measure latency of resetting full zones
-- `reset_inteference`: measure interference effects between resets and writes/appends/random reads
+- `reset_inteference_writes`: measure interference effects between resets and writes
+- `reset_inteference_appends`: measure interference effects between resets and appends
+- `reset_inteference_reads`: measure interference effects between resets and random reads
+
