@@ -3,7 +3,7 @@
 if(DEFINED $ENV{SPDK_DIR})
    set(SPDK_DIR "$ENV{SPDK_DIR}")
 else()
-   set(SPDK_DIR "/home/krijn/opt/spdk")
+   set(SPDK_DIR "../submodules/spdk")
 endif()
 message("looking for SPDK in ${SPDK_DIR}")
  
