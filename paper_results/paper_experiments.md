@@ -1,0 +1,192 @@
+# Append and write performance
+
+## How to reproduce?
+
+```bash
+python3 ./grid_bench.py -d <device with lbaf 512 byte pages> -m zns-a -f=<fio_binary> -s=<spdk_dir> -l lbaf0  -o=1
+python3 ./grid_bench.py -d <device with lbaf 4KiB byte pages> -m zns-a -f=<fio_binary> -s=<spdk_dir> -l lbaf2  -o=1
+```
+
+## Where is the data?
+
+Data for lbaf with 512 byte pages is stored in :
+
+- `data/spdk/zns-a/lbaf0/append`: all data for appends with SPDK
+- `data/spdk/zns-a/lbaf0/write`: all data for SPDK with writes
+- `data/io_uring/zns-a/lbaf0/write`: all data for io_uring with none scheduler
+- `data/io_uring/zns-a/lbaf0/writemq`: all data for io_uring with mq-deadline scheduler
+
+Data for lbaf with 4KiB byte pages is stored in :
+
+- `data/spdk/zns-a/lbaf2/append`: all data for appends with SPDK
+- `data/spdk/zns-a/lbaf2/write`: all data for SPDK with writes
+- `data/io_uring/zns-a/lbaf2/write`: all data for io_uring with none scheduler
+- `data/io_uring/zns-a/lbaf2/writemq`: all data for io_uring with mq-deadline scheduler
+
+In aforementioned directories data is stosed in `<request size in bytes>bs/1zone/1.json`.
+For example to retrievi 16KiB appends for lbaf2 open `data/spdk/zns-a/lbaf2/append/16384bs/1zone/1.json`.
+
+# Intra-zone performance
+
+## How to reproduce?
+
+```bash
+python3 ./grid_bench.py -d <device with lbaf 4KiB byte pages> -m zns-a -f=<fio_binary> -s=<spdk_dir> -l lbaf2  -o=1
+python3 ./grid_bench_rand_read.py -d <device with lbaf 4KiB byte pages> -m zns-a -f=<fio_binary> -s=<spdk_dir> -l lbaf2  -o=1
+```
+
+## Where is the data?
+
+- `data/spdk/zns-a/lbaf2/append/<request size>bs/1zone/<queue depth>.json`: all data for appends
+- `data/io_uring/zns-a/lbaf2/writemq/<request size>bs/1zone/<queue depth>.json`: all data for writes with mq-deadline
+- `data/spdk/zns-a/lbaf2/randread/<request size>bs/1zone/<queue depth>.json`: all data for concurrent random reads
+Request sizes are specified in bytes and deph in integers. For example appending at queue depth 32 with 16KiB requests is found at `data/spdk/zns-a/lbaf2/append/16384bs/1zone/32.json`
+
+# Inter-zone performance
+
+## How to reproduce?
+
+```bash
+python3 ./grid_bench.py -d <device with lbaf 4KiB byte pages> -m zns-a -f=<fio_binary> -s=<spdk_dir> -l lbaf2  -o=1
+python3 ./grid_bench_rand_read.py -d <device with lbaf 4KiB byte pages> -m zns-a -f=<fio_binary> -s=<spdk_dir> -l lbaf2  -o=1
+python3 ./grid_bench_spdk_14zones.py -d <device with lbaf 4KiB byte pages> -m zns-a -f=<fio_binary> -s=<spdk_dir> -l lbaf2  -o=1
+```
+
+## Where is the data?
+
+- `data/spdk/zns-a/lbaf2/append/<request size>bs/<number of concurrent zones>zone/1.json`: all data for concurrent appends
+- `data/spdk/zns-a/lbaf2/write/<request size>bs/<number of concurrent zones>zone/1.json`: all data for concurrent writes
+- `data/spdk/zns-a/lbaf2/randread/<request size>bs/<number of concurrent zones>zone/1.json`: all data for concurrent random reads
+
+Request sizes are specified in bytes and concurrent zones in integers. For example appending to 14 concurrent zones with 8KiB requests is found at `data/spdk/zns-a/lbaf2/append/8192bs/14zone/1.json`
+
+# Finish and reset performance
+
+## How to reproduce?
+
+Follow build instructions at `../zns_state_machine_perf`. Then run:
+
+```bash
+sudo ./bin/partial_zone_reset -t <traddr> > data/custom/zns/partial_reset/run<x>
+sudo ./bin/partial_zone_reset -t <traddr> > data/custom/zns/partial_reset/run<x+1>
+
+sudo ./bin/finish_test -t <traddr> > data/custom/zns/partial_finish/run<x>
+sudo ./bin/finish_test -t <traddr> > data/custom/zns/partial_reset/run<x+1>
+...
+```
+
+## Where is the data?
+
+Partial reset data is aint `data/custom/zns/partial_reset/`. Note that run1, run2, and run3 were run with only some zones and some occupancies (e.g. 100 zones with 25\%). Most usable data is in run4.
+Finish data is in `data/custom/zns/partial_finish`. The runs were large, so they are packed in "zips" extract with e.g. `unzip`.
+
+# The cost of opening and closing zones
+
+## How to reproduce?
+
+Follow build instructions at `../zns_state_machine_perf`. Then run:
+
+```bash
+sudo ./bin/close_test -t <traddr> > data/custom/zns/open_close/run<x>
+sudo ./bin/explicit_versus_implicit -t <traddr> > data/custom/zns/explicit_versus_implicit/run<x>
+sudo ./bin/pure_read -t <traddr> > data/custom/zns/pure_read/run<x> # We want the open data
+sudo ./bin/reset_inteference_reads -t <traddr> > data/custom/zns/inteference/read_reset # We want the open dataq
+sudo ./bin/reset_inteference_appends -t <traddr> > data/custom/zns/inteference/append_reset # We want the open data
+sudo ./bin/reset_inteference_writes -t <traddr> > data/custom/zns/inteference/write_reset # We want the open data
+```
+
+## Where is the data?
+
+Close data is in `data/custom/zns/open_close/run1` and `data/custom/zns/open_close/run2`.
+Open data we reuse from our other tests: `data/custom/zns-a/inteference/write_reset_inteference_fill_opens`,
+`data/custom/zns-a/inteference/append_reset_inteference_fill_opens`, `data/custom/zns-a/inteference/read_reset_inteference_fill_open`, and `data/custom/zns-a/inteference/read_reset_inteference_fill_open`.
+
+Fill open was retrieved by grepping `open` and catting it to a different file (git clutter). e.g.
+
+```bash
+grep "open," data/custom/zns/inteference/run > data/custom/zns-a/inteference/read_reset_inteference_fill_open
+```
+
+Data about implicitly opening a zone and difference between writing/appending to such a zone is encoded in `data/custom/zns/explicit_versus_implicit/`. As this file was too large we did surgery on the file:
+
+```bash
+# This explicit_versus_implicit is too large for git, we splice it and only use a part (e.g. for run2 we did)
+cd data/custom/zns/explicit_versus_implicit/
+grep append_implicit_opened run2 > run2_append_implicitly_opened
+grep write_implicit_opened run2 > run2_write_implicitly_opened
+grep "append_implicit," run2 | tail -n 100000 > run2_append_implicit
+grep "write_implicit," run2 | tail -n 100000 > run2_write_implicit
+grep "write_explicit," run2 | tail -n 100000 > run2_write_explicit
+grep "append_explicit," run2 | tail -n 100000 > run2_append_explicit
+```
+
+## Write/append inteference on random reads
+
+## How to reproduce?
+
+```bash
+cd hardcoded_tests
+vim mix_rate_inteference.sh 
+# Alter all PCIe addresses. Change PCIe at tests with a "ordinary NVMe" comment to the PCIe of an ordinary NVMe, and the other to a PCIe of a ZNS drive. Be sure to also set the namespaces and possiby incorrect paths for SPDK/fio.
+./mix_rate_inteference
+```
+
+## Where is the data?
+
+- `data/custom/zns-a/rate_inteference/zns_{write_rate_limit}_{qd}`: data for ZNS with writes
+- `data/custom/zns-a/rate_inteference/zns_appends_{write_rate_limit}_{qd}`: data for ZNS with appends
+- `data/custom/zns-a/rate_inteference/nvme_{write_rate_limit}_{qd}`: data for NVMe with writes
+
+Set `write_rate_limit` to a number in MiB - e.g. 500MiB to 500 - and set qd to queue depth as an integer - e.g. 32. For example to see the effect of appends rate limited to 250MiB/s on random reads issued at queue depth 32, check `data/custom/zns-a/rate_inteference/zns_appends_250_32`.
+
+# Reset inteference
+
+## How to reproduce
+
+Follow build instructions at `../zns_state_machine_perf`. Then run:
+
+```bash
+sudo ./bin/reset_inteference_reads -t <traddr> > data/custom/zns/inteference/read_reset
+sudo ./bin/reset_inteference_appends -t <traddr> > data/custom/zns/inteference/append_reset
+sudo ./bin/reset_inteference_writes -t <traddr> > data/custom/zns/inteference/write_reset
+
+sudo ./bin/pure_read -t <traddr> > data/custom/zns/pure_read/run<x> # We want random read baseline
+```
+
+## Where is the data?
+
+Data is in `data/custom/zns/inteference/`:
+
+- `append_reset_inteference_fill_opens`: Opens when preparing
+- `append_reset_inteference_fill_appends`: Appends when preparing (used as baseline without interference)
+- `append_reset_inteference_appends`: Appends during resets
+- `append_reset_inteference_resets`: Resets during appends
+- `read_reset_inteference_fill_open`: Opens when preparing
+- `read_reset_inteference_reads`: Reads during resets
+- `read_reset_inteference_resets`: Resets during reads
+- `write_reset_inteference_fill_opens`: Opens when preparing
+- `write_reset_inteference_fill_writes`: Writes when preparing (used as baseline without interference)
+- `write_reset_inteference_resets`: Writes during resets
+- `write_reset_inteference_writes`: Resets during writes
+
+It war retrieved from the runs with `greps` and `tails` as the were too large for Github:
+
+```bash
+pushd .
+cd data/custom/zns/inteference/ 
+(grep "reset" append_reset | head -n 100000) > append_reset_inteference_resets
+(grep "append_int" append_reset | head -n 100000) > append_reset_inteference_appends
+(grep "append," append_reset | head -n 100000) > append_reset_inteference_fill_appends
+(grep "open," append_reset | head -n 100000) > append_reset_inteference_fill_opens
+(grep "open," write_reset | head -n 100000) > write_reset_inteference_fill_opens
+(grep "write," write_reset | head -n 100000) > write_reset_inteference_fill_writes
+(grep "write_int" write_reset | head -n 100000) > write_reset_inteference_writes
+(grep "reset" write_reset | head -n 100000) > write_reset_inteference_reset
+(grep "reset" read_reset | head -n 100000) > read_reset_inteference_resets
+(grep "read_int" read_reset | head -n 100000) > read_reset_inteference_reads
+(grep "open" read_reset | head -n 100000) > read_reset_inteference_fill_open
+(grep append_int append_reset | head -n 100000) > append_reset_inteference_appends
+popd
+cd data/custom/zns/pure_read/
+(grep "read" run<x> | head -n 100000) > fil
+```
