@@ -120,7 +120,7 @@ grep "write_explicit," run2 | tail -n 100000 > run2_write_explicit
 grep "append_explicit," run2 | tail -n 100000 > run2_append_explicit
 ```
 
-## Write/append inteference on random reads
+# Write/append inteference on random reads
 
 ## How to reproduce?
 
@@ -169,7 +169,7 @@ Data is in `data/custom/zns/inteference/`:
 - `write_reset_inteference_resets`: Writes during resets
 - `write_reset_inteference_writes`: Resets during writes
 
-It war retrieved from the runs with `greps` and `tails` as the were too large for Github:
+It war retrieved from the runs with `greps` and `tails` as the original files were too large for Github:
 
 ```bash
 pushd .
