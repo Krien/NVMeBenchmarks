@@ -20,7 +20,7 @@ def plot_throughput():
 
     # Data is in ../data/zbdench
     xfs_iops = [103.926, 56.749]
-    f2fs_iops = [103.926, 56.749] # TEMP VALUES
+    f2fs_iops = [98.813, 59.926]
     f2fs_zns_iops = [94.406, 81.127]
     zenfs_iops = [103.913, 92.196]
 
