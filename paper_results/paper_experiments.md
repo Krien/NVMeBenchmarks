@@ -190,3 +190,55 @@ popd
 cd data/custom/zns/pure_read/
 (grep "read" run<x> | head -n 100000) > fil
 ```
+
+## RocksDB Benchmark
+
+This benchmark reproduces the result of Bjørling, Matias, et al. "ZNS: Avoiding the Block Interface Tax for Flash-based SSDs." USENIX Annual Technical Conference. 2021. (Figure 6). Therefore, we make use of their provided benchmarking setup at [zbdbench](https://github.com/westerndigitalcorporation/zbdbench). It has detailed instructions on setup and running, however we modify it slightly and therefore depict our modifications, and how we run it.
+
+### Modifications
+
+We make two main modifications:
+
+1. Change the number of keys to 1.3 billion (from 3.8 billion) to scale with our device. The diff of the changes are:
+```bash
+diff --git a/benchs/usenix_atc_2021_zns_eval.py b/benchs/usenix_atc_2021_zns_eval.py
+index 3fce92d..e07c068 100644
+--- a/benchs/usenix_atc_2021_zns_eval.py
++++ b/benchs/usenix_atc_2021_zns_eval.py
+@@ -24,7 +24,8 @@ class Run(Bench):
+     # Original run on a 2TB ZNS SSD: (3.8B)
+     # scale_num = 3800000000
+     # The current state of ZenFS creates a bit more space amplification
+-    scale_num = 3300000000
++    # scale_num = 3300000000
++    scale_num = 1300000000
+```
+2. As F2FS with ZNS requires a conventional (randomly writable) block device, the benchmark sets up a `nullblk` (250GiB in size), which we reduce to only be 10GiB in order to reduce data on the nullblk to only metadata and increase traffic to the ZNS device. The diff of the changes are:
+```bash
+diff --git a/benchs/usenix_atc_2021_zns_eval.py b/benchs/usenix_atc_2021_zns_eval.py
+index 3fce92d..4e8786e 100644
+--- a/benchs/usenix_atc_2021_zns_eval.py
++++ b/benchs/usenix_atc_2021_zns_eval.py
+@@ -209,6 +210,8 @@ class Run(Bench):
+
+     def create_f2fs_nullblk_dev(self, dev, container):
+         dev_config_path = self.create_new_nullblk_dev_config_path()
++        with open(os.path.join(dev_config_path, 'size') , "w") as f:
++            f.write("10240")
+```
+
+### Running
+
+With all required perquisites set up, we run as follows. Note, we do not have libraries (libzbd) installed globally and tools such as `db_bench` also not installed globally, therefore we pass the `LD_PRELOAD` and `PATH` for the respective install locations. This is not required when installing everything globally. Furthermore, we use a python virtual environment with installed packages, which is also not required with global installations. The benchmark will run respective benchmarks, depending on if the device is a ZNS or not, therefore the command is the same, only requiring the device name to be changed.
+
+```bash
+sudo LD_PRELOAD="/home/nty/local/lib/libzbd.so.2" env "PATH=$PATH" venv/bin/python3 ./run.py -d /dev/nvme4n1 -c no -b usenix_atc_2021_zns_eval
+```
+
+### Where to find the data
+
+All generated data is in `data/zbdbench/` for each of the file systems evaluated.
+
+### Plots
+
+While the `zbdbench` framework has a plotting script, we have our own script , located in `analysis/zbdbench.py` to generate our figures. The values from the resulting data are coded into the script.
