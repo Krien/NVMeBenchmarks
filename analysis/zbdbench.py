@@ -33,8 +33,8 @@ def plot_throughput():
     # ax.bar_label(rects2, padding=3, fmt="%.1f")
 
     ax.bar(x - 0.15, xfs_iops, width=0.1, capsize=3, color="#117733", label="xfs") 
-    ax.bar(x - 0.05, f2fs_iops, width=0.1, capsize=3, color="#999933", label="F2FS") 
-    ax.bar(x + 0.05, f2fs_zns_iops, width=0.1, capsize=3, color="#88CCEE", label="F2FS (ZNS)") 
+    ax.bar(x - 0.05, f2fs_iops, width=0.1, capsize=3, color="#88CCEE", label="F2FS") 
+    ax.bar(x + 0.05, f2fs_zns_iops, width=0.1, capsize=3, color="#999933", label="F2FS (ZNS)") 
     ax.bar(x + 0.15, zenfs_iops, width=0.1, capsize=3, color="#CC6677", label="ZenFS")
 
     fig.tight_layout()
