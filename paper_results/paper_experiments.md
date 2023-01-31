@@ -200,8 +200,8 @@ This benchmark reproduces the result of Bjørling, Matias, et al. "ZNS: Avoiding
 We make two main modifications:
 
 1. Change the number of keys to 1.3 billion (from 3.8 billion) to scale with our device. The diff of the changes are:
-    ```bash
-    diff --git a/benchs/usenix_atc_2021_zns_eval.py b/benchs/usenix_atc_2021_zns_eval.py
+```bash
+diff --git a/benchs/usenix_atc_2021_zns_eval.py b/benchs/usenix_atc_2021_zns_eval.py
 index 3fce92d..e07c068 100644
 --- a/benchs/usenix_atc_2021_zns_eval.py
 +++ b/benchs/usenix_atc_2021_zns_eval.py
@@ -212,10 +212,10 @@ index 3fce92d..e07c068 100644
 -    scale_num = 3300000000
 +    # scale_num = 3300000000
 +    scale_num = 1300000000
-    ```
+```
 2. As F2FS with ZNS requires a conventional (randomly writable) block device, the benchmark sets up a `nullblk` (250GiB in size), which we reduce to only be 10GiB in order to reduce data on the nullblk to only metadata and increase traffic to the ZNS device. The diff of the changes are:
-    ```bash
-    diff --git a/benchs/usenix_atc_2021_zns_eval.py b/benchs/usenix_atc_2021_zns_eval.py
+```bash
+diff --git a/benchs/usenix_atc_2021_zns_eval.py b/benchs/usenix_atc_2021_zns_eval.py
 index 3fce92d..4e8786e 100644
 --- a/benchs/usenix_atc_2021_zns_eval.py
 +++ b/benchs/usenix_atc_2021_zns_eval.py
@@ -225,7 +225,7 @@ index 3fce92d..4e8786e 100644
          dev_config_path = self.create_new_nullblk_dev_config_path()
 +        with open(os.path.join(dev_config_path, 'size') , "w") as f:
 +            f.write("10240")
-    ```
+```
 
 ### Running
 
