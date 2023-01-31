@@ -1,107 +1,129 @@
-# zns.trace
+# zns-tools
 
-This directory contains the tools for tracing a particular ZNS device, and generating heatmaps for various access aspects for each zone. The below figure illustrates the tracing of the number of individual zone reset commands issued during a workload with F2FS and RocksDB.
+This repository contains several tools for evaluating file system usage of ZNS devices. We provide an example for each of the tools in the `examples/` directory, showing how to run each tool and what information will be available in the output.
 
-![example-fig](example/figs/nvme0n2-2022_09_07_10_20_AM.dat/z_reset_ctr_map-heatmap.png)
+## Compiling and Running
 
-## Running
-
-To run the tracing, simply provide the script with a ZNS device to trace, and press `Ctrl-C` when to stop tracing (or send a SIGINT). The script will stop the `bpftrace`, prepare the data, and generate the plots in the `figs/` directory, containing the device name and a timestamp (the exact same naming is used for the collected data file and the generated figures). Later we explain what type of data we collect, which correspond to the respective generated heatmaps. After stopping the tracing of a particular device, it will ask if there are comments to embed in the data file. We recommend adding comments here of the command that was being run and traced, as it becomes difficult in the future to remember the exact command and device configuration for a particular data file. These comments are then added into the data file and in a `README.md` file of the generated figures in its respective `figs/<data>/` directory. If there are no comments, simply hit enter when prompted, and if comments are multi-line, simply add `\n` in the prompt (or other formatters such as tabs with `\t`, the comment is redirected with `printf` to the output files).
+Compiling will check system requirements and notify of any missing/unsupported header files.
 
 ```bash
-./zns.trace nvme2n1
+sh ./autogen.sh
+./configure
+make
+
+# Install or use executables in src/ 
+sudo make install
 ```
 
-The python plotting script will directly be called, however if for some reason you have data that has not been plotted you can run the python script itself with `python3 plot.py`. **Note** however, that it takes the zone size and number of zones as arguments, and therefore attempts to create figures for all data with these values. If a figure for a particular data file already exists, this data will be skipped an no new figure is generated. Therefore, in the case there are multiple data files without figures, and with different ZNS devices, simply move the files from different devices to a temporary directory and plot only data for one device at a time. Since it does not regenerate existing figures, this way you can iteratively generate figures for all data files. Or move generated data and files to different directories, we do not have an effective way to integrate this for everyone, therefore this part involves individual configuration.
+Note, `zns.fpbench` has the possibility to run with multi-streams, which requires our F2FS Kernel build with multi-streams to be installed (see more [here](https://github.com/nicktehrany/f2fs)). By default this support is disabled in the tools, to enabled it run `./configure --enable-multi-streams` instead.
 
-**NOTE,** the script has the sector size hardcoded to 512B, for 4K sector size change the define to `SECTOR_SHIFT 12`.
+## Examples
 
-## BPF Errors
+In the `examples/` directory we provide an execution for each of the tools, and detail what the output will look like. For more detail on running and understanding output, consult the respective manuals in `man` (or using man `zns.<tool_name>` if installed on system).
 
-If the following error about the `REQ_OP_MASK` show up, change all usages of it to `0x99`.
+## File Mapping Tools
+
+The `src/` directory contains several tools for identifying and mapping out F2FS file allocation.
+
+### zns.fiemap
+
+`zns.fiemap` is a tool that uses the `ioctl()` call to extract mappings for a file, and map these to the zones on a ZNS device. Since current ZNS support in file systems relies on LFS, with F2FS, this tools aims at showcasing the data placement of files and their fragmentation. With `FIEMAP`, a single contiguous extent, which physically has consecutive addresses, is returned. We use this to find all extents of a file, and show their location. Extents can, especially over time as they are updated and the file system runs GC, end up spread across multiple zones, be in random order in zones, and be split it up into a large number of smaller extents. We provide an example output for a small run to locate data on a ZNS, located in the `examples/zns.fiemap.md`. For more details see the manual in `zns.fiemap.8`
 
 ```bash
-./trace.bt:23:52-63: ERROR: Macro recursion limit reached: REQ_OP_MASK, ((1<<REQ_OP_BITS)-1)
-$cmd = (((struct request *)arg1)->cmd_flags & REQ_OP_MASK);
-~~~~~~~~~~~
-./trace.bt:23:52-63: ERROR: syntax error, unexpected end of file
-$cmd = (((struct request *)arg1)->cmd_flags & REQ_OP_MASK);
-~~~~~~~~~~~
+# Run: zns.fiemap -f [file path to locate]
+sudo ./zns.fiemap -f /mnt/f2fs/file_to_locate
 ```
 
-The changes are:
+We need to run with `sudo` since the program is required to open file descriptors on devices (which can only be done with privileges). The possible flags for `zns.fiemap` are
 
 ```bash
-user@stosys:~/src/zns-tools/zns.trace$ git diff trace.bt
-diff --git a/zns.trace/trace.bt b/zns.trace/trace.bt
-index 120f356..bd69f4b 100644
---- a/zns.trace/trace.bt
-+++ b/zns.trace/trace.bt
-@@ -20,7 +20,7 @@ BEGIN {
-
- k:nvme_setup_cmd / ((struct request *)arg1)->q->disk->disk_name == str($1) / {
-     $nvme_cmd = (struct nvme_command *)*(arg1+sizeof(struct request));
--    $cmd = (((struct request *)arg1)->cmd_flags & REQ_OP_MASK);
-+    $cmd = (((struct request *)arg1)->cmd_flags & 0x99);
-     $opcode = (uint8)$nvme_cmd->rw.opcode;
-
-     $secnum = ((struct request *)arg1)->__sector;
-@@ -88,7 +88,7 @@ k:nvme_setup_cmd / ((struct request *)arg1)->q->disk->disk_name == str($1) / {
- k:nvme_complete_rq / ((struct request *)arg0)->q->disk->disk_name == str($1) / {
-     $nvme_cmd = (struct nvme_command *)*(arg0+sizeof(struct request));
-     $opcode = (uint8)$nvme_cmd->rw.opcode;
--    $cmd = (((struct request *)arg0)->cmd_flags & REQ_OP_MASK);
-+    $cmd = (((struct request *)arg0)->cmd_flags & 0x99);
-
-     if($cmd == REQ_OP_ZONE_RESET || (($cmd == REQ_OP_DRV_OUT && $opcode == nvme_cmd_zone_mgmt_send) && $nvme_cmd->zms.zsa == NVME_ZONE_RESET)) {
-         $cmdid = ((struct request *)arg0)->tag;
+sudo ./zns.fiemap [flags]
+-f [file_name]: The file to be mapped (Required)
+-h:             Show the help menu
+-s:             Show holes in between extents
+-w:             Show Extent Flags
+-l:             Set the logging level [1-2] (Default 0)
+-i:             Show info prints with the results
 ```
 
-## Requirements
+### zns.segmap
 
-The main requirements is for the Kernel to be built with `BPF` enabled, and [`bpftrace`](https://github.com/iovisor/bpftrace) to be installed. See their [install manual](https://github.com/iovisor/bpftrace/blob/master/INSTALL.md) for an installation guide. For plotting we provide a `requirements.txt` file with libs to install. Run `pip install -r requirements.txt` to install them. If there are version errors for `numpy` during installing, using an older `numpy` version is typically fine, as utilize only the very basics of it.
-
-
-## Data Maps
-
-We have several maps to trace different counters of commands. The maps are mainly indexed by the zone LBA start (ZLBAS).
-
-### Write, Append, and Read counter
-
-We firstly count the write, append, and read operations that are issued to a zone, irrespective of the I/O size. This purely counts the number of commands. We treat append and write as the same, and therefore represent these with the same map key 0x01 (which is 1), that corresponds to the `nvme_command_write` value. Reads are represented by the `nvme_command_read` 0x02 (or 2) value. Indexes in the map are firstly by the zlbas, followed by the nvme_command (0x01 or 0x02), and contain an integer value on the number of each operation.
+`zns.segmap` similarly to `zns.fiemap`, takes extents of files and maps these to segments on the ZNS device. The aim being to locate data placement across segments, with fragmentation, as well as indicating good/bad hotness classification. The tool calls `fiemap` on all files in a directory and maps these in LBA order to the segments on the device. Since there are thousands of segments, we recommend analyzing zones individually, for which the tool provides the option for, or depicting zone ranges. The directory to be mapped is typically the mount location of the file system, however any subdirectory of it can also be mapped, e.g., if there is particular interest for locating WAL files only for a database, such as with RocksDB.
 
 ```bash
-z_rw_ctr_map[$zlbas, $nvme_command] = int64
+# Run: zns.fiemap -d [dir to map]
+sudo ./zns.fiemap -d /mnt/f2fs/
 ```
 
-### Data counter
-
-Similar to the operation counter, we keep track of how much data is written/read in total. Again, this is indexed by the zlbas and the nvme_command (0x01 for write and append or 0x02 for read), and we maintain an integer value in 512B sectors.
+Again, it requires to be run with root privileges. Possible flags are:
 
 ```bash
-z_data_map[$zlbas, $nvme_command] = int64 (in 512B sectors)
+-d [dir]:   Mounted dir to map [Required]
+-h:         Show this help
+-l [0-2]:   Set the logging level
+-p:         Resolve segment information from procfs
+-i:         Resolve inlined file data in inodes
+-w:         Show extent flags (Currently only for logging with -l 2)
+-s [uint]:  Set the starting zone to map. Default zone 1.
+-z [uint]:  Only show this single zone
+-e [uint]:  Set the ending zone to map. Default last zone.
+-s:         Show segment statistics (requires -p to be enabled)
+-o:         Show only segment statistics (automatically enables -s flag)
 ```
 
-### Zone Reset counter
+The `-i` flag is meant for very small files that have their data inlined into the inode. If this flag is enabled, extents will show up with a `SIZE: 0`, indicating the data is inlined in the inode.
+**Note,** running this on large files (several GB) can take several minutes to run, as it collects each individual extent, which at that point can be hundreds of thousands, and then needs to map these to zones by sorting the extents and collecting statistics. These are very resource heavy, therefore we recommend using this for smaller setups to understand initial mappings of file data.
 
-We track how many times a zone is reset with a simple counter map that is indexed by only the zlbas. **Note** that the code contains a check for `REQ_OP_DRV_OUT`, which is used for the zone reset command if the device is in passthrough mode (e.g., when using qemu with a backing image). See the source code of [blkdev.h](https://github.com/torvalds/linux/blob/v5.19/include/linux/blkdev.h#L223-#L227) for info.
+### zns.imap
+
+`zns.imap` is meant to get some information from the F2FS setup. It locates and prints the inode a file, and can furthermore print the contents of the F2FS superblock and checkpoint area. We recommend running this in the verbose logging to get more information, as this tool is merely meant for information on F2FS layout.
 
 ```bash
-z_reset_ctr_map[$zlbas] = int64
+sudo ./src/zns.imap -f /mnt/f2fs/LOG -l 1
 ```
 
-### Zone Reset All counter
-
-In case a `REQ_OP_ZONE_RESET_ALL` is issued, instead of looping in `bpftrace` and increasing each zone reset counter map, we maintain an integer for all resets. The increasing of zone reset counters can therefore be done in parsing easily, avoiding the addition of BPF overheads.
+Possible flags are:
 
 ```bash
-reset_all_ctr = int64
+-f [file]:       Input file retrieve inode for [Required]
+-l [Int, 0-1]:   Log Level to print (Default 0)
+-s:              Show the superblock
+-c:              Show the checkpoint
 ```
 
-### Zone Reset Latency
+### zns.fpbench
 
-In addition to counting the zone reset operations, we measure the zone reset latency. For this we firstly store the system time (in nsecs) at the time of the `nvme_setup_cmd` call, and update this value by the difference of the current time at the completion of the request, at `nvme_complete_rq`. In order to make sure we are matching commands correctly to each other, we maintain two maps that are indexed by the cmdid, maintaining a current timestamp in one (at the time of command issuance), and the zlbas in the other. From this we construct the reset latency into a new map when the command completes, where we match cmdid and the difference of issuance timestamp and current timestamp, and place these in a new `zone reset counter` map. The zone reset counter is used so that we can have the latency of each individual zone reset call in the same map, even if a zone is reset multiple times. The intermediate maps are cleared in the end as we have all the information needed in the newly created map.
+`zns.fpbench` is a benchmarking framework that is used for identifying the F2FS placement decisions based on the provided write hint from the benchmark. It writes the file with the specified size, in units of the specified block size, and sets the write hint with `fcntl()`. Concurrently repeating the workload is possible to run the same exact workload on different file names, hence allowing lockless concurrent writing. After writing, all files have extents located, the extents mapped to segments, and segment information retrieved, focusing on the heat classification that the segment was assigned.
 
 ```bash
-reset_lat_map[$zlbas, @z_reset_ctr_map[$zlbas]] = int64 (in nsecs)
+sudo ./src/zns.fpbench -f /mnt/f2fs/bench_file -s 2M -b 4K -w 5 -n 3
 ```
+
+Possible flags are:
+
+```bash
+-f [file]:       Filename for the benchmark [Required]
+-l [Int, 0-3]:   Log Level to print (Default 0)
+-s:              File size (Default 4096B)
+-b:              Block size in which to submit I/Os (Default 4096B)
+-w:              Read/Write Hint (Default 0)
+                     RWH_WRITE_LIFE_NOT_SET = 0
+                     RWH_WRITE_LIFE_NONE = 1
+                     RWH_WRITE_LIFE_SHORT = 2
+                     RWH_WRITE_LIFE_MEDIUM = 3
+                     RWH_WRITE_LIFE_LONG = 4
+                     RWH_WRITE_LIFE_EXTREME = 5
+-h:              Show this help
+-n:              Number of jobs to concurrently execute the benchmark
+-c:              Call fsync() after each block written
+-d:              Use O_DIRECT for file writes
+-m               Map the file to a particular stream
+```
+
+The benchmark is simple and is meant for only testing the adherence of F2FS with write hints if I/O is buffered and an `fsync()` is called on each file. For more advanced benchmarks, with asynchronous I/O, different engines and more possible configuration, use `fio` (which also supports write hints with the `--write_hint=short` flag). We provide the workloads we run with `fio` in the [f2fs-zns-workloads](https://github.com/nicktehrany/f2fs-zns-workloads) repo.
+
+## zns.trace
+
+In the `zns.trace/` directory, we provide a framework to trace activity on zns devices across its different zones using BPF, collecting information on number of read/write operations to each zone, amount of data read/written in each zone, and reset statistics, including reset latency per zone. After collecting tracing statistics, zns.trace automatically generates heatmaps for each collected statistic, depicting the information for each zone in a comprehensible manner. The below figure illustrates the number of zone reset commands issued to the respective zones on the ZNS device.
+
+![example-fig](zns.trace/example/figs/nvme0n2-2022_09_07_10_20_AM.dat/z_reset_ctr_map-heatmap.png)
