@@ -1,0 +1,50 @@
+#! /bin/bash
+
+set -e
+
+if [ $# != 1 ]; then
+    echo "Usage: $0 <device (e.g., nvme0n2)>"
+    exit 1
+fi
+
+DEV=$1
+MOUNT="/mnt/f2fs"
+
+if [[ "$(cat /sys/block/$DEV/queue/zoned)" == "host-managed" ]]; then
+    ZONED=1
+    DEV=$(sudo ./nullblk_create 4096 10240)
+    ZNS=$1
+    export DEV
+    export ZONED
+    export ZNS
+
+    sudo nvme zns reset-zone /dev/${ZNS} -a
+    echo mq-deadline | sudo tee /sys/block/${ZNS}/queue/scheduler > /dev/null
+    sudo env "PATH=${PATH}" mkfs.f2fs -f -m -c /dev/${ZNS} /dev/${DEV}
+    sudo mkdir -p /mnt/f2fs
+    sudo mount -t f2fs /dev/${DEV} ${MOUNT}
+    sudo chown -R ${USER} /mnt/f2fs
+else
+    ZONED=0
+    [[ ! -z "$(lsblk | grep "${DEV}" | awk '{print $7}')" ]] && sudo umount /dev/${DEV}
+
+    # Don't want prior runs to trigger GC early for fair comparison to ZNS
+    sudo env "PATH=${PATH}" nvme format --force /dev/${DEV}
+    sudo env "PATH=${PATH}" mkfs.f2fs -f /dev/${DEV}
+    sudo mkdir -p /mnt/f2fs
+    sudo mount -t f2fs /dev/${DEV} ${MOUNT}
+    sudo chown -R ${USER} /mnt/f2fs
+fi
+
+DIR=data-$DEV-$(date +"%Y_%m_%d_%I_%M_%p")
+
+mkdir -p ${DIR}
+
+sudo env "DATA=${DIR}" ${FIO_HOME}/fio --output-format=json --output=${DIR}/data.json job.fio
+
+sudo umount /dev/${DEV}
+
+if [[ "${ZONED}" == "1" ]]; then
+    DEV_ID=$(echo "${DEV: -1}")
+    sudo ./nullblk_delete $DEV_ID
+fi
