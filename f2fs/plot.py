@@ -84,13 +84,13 @@ def plot_bw(nvme_data, zns_data):
         total_bw = 0
 
     nvme_bw_np = np.asarray(nvme_bw)
-    nvme_bw_fmt = np.nanmean(np.pad(nvme_bw_np.astype(float), (0, 4 - nvme_bw_np.size%4), mode='constant', constant_values=np.NaN).reshape(-1, 4), axis=1)
+    nvme_bw_fmt = np.nanmean(np.pad(nvme_bw_np.astype(float), (0, 3 - nvme_bw_np.size%3), mode='constant', constant_values=np.NaN).reshape(-1, 3), axis=1)
     nvme_x_np = np.asarray(nvme_bw_x)
-    nvme_x_fmt = np.nanmean(np.pad(nvme_x_np.astype(float), (0, 4 - nvme_x_np.size%4), mode='constant', constant_values=np.NaN).reshape(-1, 4), axis=1)
+    nvme_x_fmt = np.nanmean(np.pad(nvme_x_np.astype(float), (0, 3 - nvme_x_np.size%3), mode='constant', constant_values=np.NaN).reshape(-1, 3), axis=1)
     zns_bw_np = np.asarray(zns_bw)
-    zns_bw_fmt = np.nanmean(np.pad(zns_bw_np.astype(float), (0, 4 - zns_bw_np.size%4), mode='constant', constant_values=np.NaN).reshape(-1, 4), axis=1)
+    zns_bw_fmt = np.nanmean(np.pad(zns_bw_np.astype(float), (0, 3 - zns_bw_np.size%3), mode='constant', constant_values=np.NaN).reshape(-1, 3), axis=1)
     zns_x_np = np.asarray(zns_bw_x)
-    zns_x_fmt = np.nanmean(np.pad(zns_x_np.astype(float), (0, 4 - zns_x_np.size%4), mode='constant', constant_values=np.NaN).reshape(-1, 4), axis=1)
+    zns_x_fmt = np.nanmean(np.pad(zns_x_np.astype(float), (0, 3 - zns_x_np.size%3), mode='constant', constant_values=np.NaN).reshape(-1, 3), axis=1)
 
     fig, ax = plt.subplots()
     
