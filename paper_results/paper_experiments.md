@@ -128,11 +128,16 @@ grep "append_explicit," run2 | tail -n 100000 > run2_append_explicit
 cd hardcoded_tests
 vim mix_rate_inteference.sh 
 # Alter all PCIe addresses. Change PCIe at tests with a "ordinary NVMe" comment to the PCIe of an ordinary NVMe, and the other to a PCIe of a ZNS drive. Be sure to also set the namespaces and possiby incorrect paths for SPDK/fio.
-./mix_rate_inteference
+./mix_rate_inteference.sh
+
+# Data directory is hardcoded, change
+./rate_heavyload.sh
 ```
 
 ## Where is the data?
 
+- `data/custom/zns-a/long2/`: data for long heavy load inteference runs on ZNS
+- `data/custom/zns-a/long3/`: data for long heavy load inteference runs on NVMe
 - `data/custom/zns-a/rate_inteference/zns_{write_rate_limit}_{qd}`: data for ZNS with writes
 - `data/custom/zns-a/rate_inteference/zns_appends_{write_rate_limit}_{qd}`: data for ZNS with appends
 - `data/custom/zns-a/rate_inteference/nvme_{write_rate_limit}_{qd}`: data for NVMe with writes
