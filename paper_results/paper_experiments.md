@@ -247,3 +247,27 @@ All generated data is in `data/zbdbench/` for each of the file systems evaluated
 ### Plots
 
 While the `zbdbench` framework has a plotting script, we have our own script , located in `analysis/zbdbench.py` to generate our figures. The values from the resulting data are coded into the script.
+
+## F2FS Performance
+
+This benchmark compares the sustainable bandwidth of F2FS on a conventional SSD and F2FS with ZNS.
+
+### Running
+
+The script for running is in the `f2fs/` directory of this repo. To run simply run:
+
+```bash
+./bench <device>
+```
+
+It will check if the device is zoned and if so create a 10GB nullblk device for F2FS metadata. If the device is conventional it will directly create F2FS on it and mount. Benchmarks are automatically run as well. If scaling is required for differently sized devices (we have 1TiB size on conventional and ZNS), change the `size` in the `job.fio` file.
+
+### Generating Plots
+
+We provide a plotting script in the same `f2fs/` folder. Run it with python by passing the respective directories where the data of the runs is present. It requires the data for the normal nvme to be passed with `-n` and for the ZNS with `-z`. The command to generate the figure with the provided data is (It will display the average bandwidth over all sample points):
+
+```bash
+python3 plot.py -n data-nvme0n1-2023_02_01_03_59_PM -z data-nullb0-2023_02_01_05_47_PM
+NVMe Avg. BW (MiB/s): 719.3110879225421
+ZNS  Avg. BW (MiB/s): 637.3276811690266
+```
