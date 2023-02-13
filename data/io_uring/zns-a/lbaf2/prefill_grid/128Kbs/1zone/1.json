@@ -21,7 +21,7 @@
         "rw" : "write",
         "thread" : "1",
         "ioengine" : "io_uring",
-        "write_bw_log" : "/home/krijn/target/NVMeBenchmarks/bench_utils/../data/io_uring/zns-a/lbaf0/prefill_grid/128Kbs/1zone/1.json",
+        "write_bw_log" : "/home/anon/target/NVMeBenchmarks/bench_utils/../data/io_uring/zns-a/lbaf0/prefill_grid/128Kbs/1zone/1.json",
         "log_avg_msec" : "10ms",
         "filename" : "/dev/nvme8n7",
         "fixedbufs" : "1",

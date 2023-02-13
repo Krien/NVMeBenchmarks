@@ -27,8 +27,8 @@
         "bs" : "8192",
         "iodepth" : "4",
         "rw" : "write",
-        "write_bw_log" : "/home/krijn/target/NVMeBenchmarks/bench_utils/../data/spdk/zns-a/lbaf0/concurrent_namespaces_write_write/8192bs/1zone/4.json",
-        "write_lat_log" : "/home/krijn/target/NVMeBenchmarks/bench_utils/../data/spdk/zns-a/lbaf0/concurrent_namespaces_write_write/8192bs/1zone/4.json",
+        "write_bw_log" : "/home/anon/target/NVMeBenchmarks/bench_utils/../data/spdk/zns-a/lbaf0/concurrent_namespaces_write_write/8192bs/1zone/4.json",
+        "write_lat_log" : "/home/anon/target/NVMeBenchmarks/bench_utils/../data/spdk/zns-a/lbaf0/concurrent_namespaces_write_write/8192bs/1zone/4.json",
         "log_avg_msec" : "10ms",
         "filename" : "trtype=PCIe traddr=0000.88.00.0 ns=2",
         "zone_append" : "1"

@@ -34,8 +34,8 @@ fio: terminating on signal 2
         "iodepth" : "4",
         "rw" : "write",
         "ioscheduler" : "mq-deadline",
-        "write_bw_log" : "/home/krijn/target/NVMeBenchmarks/bench_utils/../data/io_uring/zns-a/lbaf0/concurrent_namespaces_write_write/8192bs/1zone/4.json",
-        "write_lat_log" : "/home/krijn/target/NVMeBenchmarks/bench_utils/../data/io_uring/zns-a/lbaf0/concurrent_namespaces_write_write/8192bs/1zone/4.json",
+        "write_bw_log" : "/home/anon/target/NVMeBenchmarks/bench_utils/../data/io_uring/zns-a/lbaf0/concurrent_namespaces_write_write/8192bs/1zone/4.json",
+        "write_lat_log" : "/home/anon/target/NVMeBenchmarks/bench_utils/../data/io_uring/zns-a/lbaf0/concurrent_namespaces_write_write/8192bs/1zone/4.json",
         "log_avg_msec" : "10ms",
         "filename" : "/dev/nvme8n7"
       },
