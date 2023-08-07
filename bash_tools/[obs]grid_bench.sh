@@ -1,8 +1,9 @@
 #!/bin/bash
+#! OBSOLETE: Old version of ../grid_bench.py !#
 
 set -e
 
-DIR=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd);
+DIR=$(cd $(dirname "${BASH_SOURCE[0]}") && cd .. && pwd);
 cd "$DIR" || exit;
 
 # ... Setup tooling ...
