@@ -1,9 +1,9 @@
 # Artifact structure
 
 In this artifact evaluation we first explain the setup, explain how to get the NVMe info, and then explain all evaluations.
-For each evaluation we show how to reproduce the results, where the data is stored of the evaluation (will be overwritten if you evaluate) and the scripts needed to plot the result.
+For each evaluation we show how to reproduce the results and where the data is stored of the evaluation (will be overwritten if you evaluate).
 
-All plots are also  available in `./artifact_plots.ipynb` for a more interactive experience.
+All plots are available in `./artifact_plots.ipynb`. The plot name should match the section headers of the artifact steps.
 
 We recommend running all experiments with `nohup` as they can take a while.
 
@@ -111,8 +111,6 @@ Data for lbaf with 4KiB byte pages is stored in :
 In aforementioned directories data is stored in `<request size in bytes>bs/1zone/1.json`.
 For example to retrieve 16KiB appends for lbaf2 open `data/spdk/zns-a/lbaf2/append/16384bs/1zone/1.json`.
 
-## How to plot?
-
 # Scalability: Intra-zone versus inter-zone performance
 
 ## Intra-zone
@@ -149,8 +147,6 @@ python3 ./grid_bench_spdk_14zones.py -d <device with lbaf 4KiB byte pages> -m zn
 - `data/spdk/zns-a/lbaf2/randread/<request size>bs/<number of concurrent zones>zone/1.json`: all data for concurrent random reads
 
 Request sizes are specified in bytes and concurrent zones in integers. For example appending to 14 concurrent zones with 8KiB requests is found at `data/spdk/zns-a/lbaf2/append/8192bs/14zone/1.json`
-
-## How to plot?
 
 # Zone State Machine Transition Costs
 
@@ -200,8 +196,6 @@ sed -i 's/zone_cnt = zone_cnt - 1/zone_count = 100/g' zns_state_machine_perf.cpp
 
 Most usable data is in run4.
 Finish data is in `data/custom/zns/partial_finish`. The runs were large, so they are packed in "zips" extract with e.g. `unzip` to investigate (NOT needed for the plots).
-
-### How to plot
 
 ## The cost of opening and closing zones
 
@@ -262,8 +256,6 @@ popd
 
 Set `write_rate_limit` to a number in MiB - e.g., 500MiB to 500 - and set qd to queue depth as an integer - e.g. 32. For example to see the effect of appends rate limited to 250MiB/s on random reads issued at queue depth 32, check `data/custom/zns-a/rate_inteference/zns_appends_250_32`.
 
-## How to plot?
-
 # Reset inteference
 
 ## Install
@@ -317,10 +309,6 @@ popd
 cd data/custom/zns/pure_read/
 (grep "read" run<x> | head -n 100000) > fil
 ```
-
-### How to plot?
-
-.
 
 ## RocksDB Benchmark (not used in final paper)
 
