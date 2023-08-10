@@ -4,6 +4,7 @@ In this artifact evaluation we first explain the setup, explain how to get the N
 For each evaluation we show how to reproduce the results and where the data is stored of the evaluation (will be overwritten if you evaluate).
 
 All plots are available in `./artifact_plots.ipynb`. The plot name should match the section headers of the artifact steps.
+Note that all steps in the notebook NEED to be done in order.
 
 We recommend running all experiments with `nohup` as they can take a while.
 
@@ -169,34 +170,6 @@ Run to get the traddr:
 cat /sys/block/<nvme with 4k pages>/address
 ```
 
-## Finish and Reset Latency Costs
-
-### How to reproduce?
-
-```bash
-# With x up to the number of runs
-sudo ./bin/partial_zone_reset -t <traddr> > data/custom/zns/partial_reset/run<x>
-sudo ./bin/partial_zone_reset -t <traddr> > data/custom/zns/partial_reset/run<x+1>
-...
-
-sudo ./bin/finish_test -t <traddr> > data/custom/zns/partial_finish/run<x>
-sudo ./bin/finish_test -t <traddr> > data/custom/zns/partial_reset/run<x+1>
-...
-```
-
-### Where is the data?
-
-Partial reset data is aint `data/custom/zns/partial_reset/`. Note that run1, run2, and run3 were run with only some zones and some occupancies (e.g. 100 zones with 25\%).
-This can be done as well with:
-
-```
-sed -i 's/zone_cnt = zone_cnt - 1/zone_count = 100/g' zns_state_machine_perf.cpp
-# Rebuild benchmarks
-```
-
-Most usable data is in run4.
-Finish data is in `data/custom/zns/partial_finish`. The runs were large, so they are packed in "zips" extract with e.g. `unzip` to investigate (NOT needed for the plots).
-
 ## The cost of opening and closing zones
 
 ### How to reproduce?
@@ -235,6 +208,34 @@ grep "write_implicit," run2 | tail -n 100000 > run2_write_implicit
 grep "write_explicit," run2 | tail -n 100000 > run2_write_explicit
 grep "append_explicit," run2 | tail -n 100000 > run2_append_explicit
 ```
+
+## Finish and Reset Latency Costs
+
+### How to reproduce?
+
+```bash
+# With x up to the number of runs
+sudo ./bin/partial_zone_reset -t <traddr> > data/custom/zns/partial_reset/run<x>
+sudo ./bin/partial_zone_reset -t <traddr> > data/custom/zns/partial_reset/run<x+1>
+...
+
+sudo ./bin/finish_test -t <traddr> > data/custom/zns/partial_finish/run<x>
+sudo ./bin/finish_test -t <traddr> > data/custom/zns/partial_reset/run<x+1>
+...
+```
+
+### Where is the data?
+
+Partial reset data is aint `data/custom/zns/partial_reset/`. Note that run1, run2, and run3 were run with only some zones and some occupancies (e.g. 100 zones with 25\%).
+This can be done as well with:
+
+```
+sed -i 's/zone_cnt = zone_cnt - 1/zone_count = 100/g' zns_state_machine_perf.cpp
+# Rebuild benchmarks
+```
+
+Most usable data is in run4.
+Finish data is in `data/custom/zns/partial_finish`. The runs were large, so they are packed in "zips" extract with e.g. `unzip` to investigate (NOT needed for the plots).
 
 # I/O inteference on random reads
 
