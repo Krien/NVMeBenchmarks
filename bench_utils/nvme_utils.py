@@ -134,14 +134,15 @@ class NVMeRunner:
 
 
 class NVMeRunnerCLI(NVMeRunner):
+    NVME_PATH="./submodules/nvme-cli/.build/nvme"
     def reset_zones(self):
-        subprocess.check_call(f"nvme zns reset-zone -a /dev/{self.device}", shell=True)
+        subprocess.check_call(f"${NVME_PATH} zns reset-zone -a /dev/{self.device}", shell=True)
 
     def secure_erase(self):
-        subprocess.check_call(f"nvme format -s 1 /dev/{self.device}", shell=True)
+        subprocess.check_call(f"${NVME_PATH} format -s 1 /dev/{self.device}", shell=True)
 
     def finish_all_zones(self):
-        subprocess.check_call(f"nvme zns finish-zone -a /dev/{self.device}", shell=True)
+        subprocess.check_call(f"${NVME_PATH} zns finish-zone -a /dev/{self.device}", shell=True)
 
 
 class NVMeRunnerMock(NVMeRunner):
