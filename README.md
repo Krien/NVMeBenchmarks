@@ -8,7 +8,7 @@ This repository contains benchmarks and benchmark data for ZNS:
 
 # Artifact evaluation
 
-This benchmarking tooling/data is used in [TODO name] to ensure the work is reproducible.
+This benchmarking tooling/data is used in [IEEE Cluster 2023](https://ieeexplore.ieee.org/abstract/document/10319951) to ensure the work is reproducible.
 To run the artifacts see [artifact_evaluation](./artifacts/artifact_evaluation.md) and all of the raw data see [data](./data).
 
 ## Dependencies/installation
