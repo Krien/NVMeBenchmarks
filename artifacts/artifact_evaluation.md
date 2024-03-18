@@ -90,7 +90,7 @@ If none are available with either 4k or 512, it is possible to reformat NVMe dev
 
 ```bash
 python3 ./grid_bench.py -d <device with lbaf 512 byte pages> -m zns-a -f=./submodules/fio/fio -s=./submodules/spdk -l lbaf0  -o=1
-python3 ./grid_bench.py -d <device with lbaf 4KiB byte pages> -m zns-a /submodules/fio/fio -s=./submodules/spdk -l lbaf2  -o=1
+python3 ./grid_bench.py -d <device with lbaf 4KiB byte pages> -m zns-a -f=./submodules/fio/fio -s=./submodules/spdk -l lbaf2  -o=1
 ```
 
 ## Where is the data?
