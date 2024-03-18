@@ -58,7 +58,7 @@ set(SPDK_LIBRARY_DEPENDENCIES
     ${SPDK_DIR}/dpdk/build/lib/librte_eal.a ${SPDK_DIR}/dpdk/build/lib/librte_mempool.a  ${SPDK_DIR}/dpdk/build/lib/librte_telemetry.a
     ${SPDK_DIR}/dpdk/build/lib/librte_ring.a  ${SPDK_DIR}/dpdk/build/lib/librte_kvargs.a ${SPDK_DIR}/dpdk/build/lib/librte_bus_pci.a
     ${SPDK_DIR}/dpdk/build/lib/librte_pci.a  ${SPDK_DIR}/dpdk/build/lib/librte_vhost.a  ${SPDK_DIR}/dpdk/build/lib/librte_power.a
-    isal.a uuid numa dl rt
+    ${SPDK_DIR}/isa-l/.libs/libisal.a uuid numa dl rt
 )
 
 #set(SPDK_LIBRARY_DEPENDENCIES
@@ -66,7 +66,6 @@ set(SPDK_LIBRARY_DEPENDENCIES
 #   "${SPDK_LINK_LIBRARIES}"
 #   -Wl,--no-whole-archive
 #   "${DPDK_LINK_LIBRARIES}"    "${SYS_STATIC_LIBRARIES}"
-#    /usr/local/lib/librte_log.a /usr/local/lib/librte_cryptodev.a
 #)
 
 message("${SPDK_LIBRARY_DEPENDENCIES}")
