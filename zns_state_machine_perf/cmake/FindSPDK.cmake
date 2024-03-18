@@ -1,10 +1,6 @@
 
 # Override to use different location for SPDK.
-if(DEFINED $ENV{SPDK_DIR})
-   set(SPDK_DIR "$ENV{SPDK_DIR}")
-else()
-   set(SPDK_DIR "../submodules/spdk")
-endif()
+set(SPDK_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../submodules/spdk")
 message("looking for SPDK in ${SPDK_DIR}")
  
 find_package(PkgConfig REQUIRED)
@@ -49,11 +45,27 @@ endforeach()
 list(APPEND SPDK_LINK_LIBRARIES "${SPDK_ENV_DPDK_VAR}")
 list(REMOVE_ITEM DPDK_LINK_LIBRARIES "${SPDK_ENV_DPDK_VAR}" ${SPDK_LINK_LIBRARIES})
 list(TRANSFORM SYS_STATIC_LIBRARIES REPLACE "isal" "${SYS_STATIC_LIBRARY_DIRS}/libisal.a")
- 
+
+message("${SPDK_DIR}/build/lib/spdk_log.a")
+
 set(SPDK_LIBRARY_DEPENDENCIES
-   -Wl,--whole-archive
-   "${SPDK_LINK_LIBRARIES}"
-   -Wl,--no-whole-archive
-   "${DPDK_LINK_LIBRARIES}"
-   "${SYS_STATIC_LIBRARIES}"
+    -Wl,--whole-archive
+    ${SPDK_DIR}/build/lib/libspdk_log.a ${SPDK_DIR}/build/lib/libspdk_env_dpdk.a ${SPDK_DIR}/build/lib/libspdk_nvme.a
+    ${SPDK_DIR}/build/lib/libspdk_util.a ${SPDK_DIR}/build/lib/libspdk_sock.a ${SPDK_DIR}/build/lib/libspdk_json.a
+    ${SPDK_DIR}/build/lib/libspdk_vfio_user.a ${SPDK_DIR}/build/lib/libspdk_rpc.a ${SPDK_DIR}/build/lib/libspdk_jsonrpc.a 
+    ${SPDK_DIR}/build/lib/libspdk_trace.a
+    -Wl,--no-whole-archive
+    ${SPDK_DIR}/dpdk/build/lib/librte_eal.a ${SPDK_DIR}/dpdk/build/lib/librte_mempool.a  ${SPDK_DIR}/dpdk/build/lib/librte_telemetry.a
+    ${SPDK_DIR}/dpdk/build/lib/librte_ring.a  ${SPDK_DIR}/dpdk/build/lib/librte_kvargs.a ${SPDK_DIR}/dpdk/build/lib/librte_bus_pci.a
+    ${SPDK_DIR}/dpdk/build/lib/librte_pci.a  ${SPDK_DIR}/dpdk/build/lib/librte_vhost.a  ${SPDK_DIR}/dpdk/build/lib/librte_power.a
+    ${SPDK_DIR}/isa-l/.libs/libisal.a uuid numa dl rt
 )
+
+#set(SPDK_LIBRARY_DEPENDENCIES
+#   -Wl,--whole-archive
+#   "${SPDK_LINK_LIBRARIES}"
+#   -Wl,--no-whole-archive
+#   "${DPDK_LINK_LIBRARIES}"    "${SYS_STATIC_LIBRARIES}"
+#)
+
+message("${SPDK_LIBRARY_DEPENDENCIES}")

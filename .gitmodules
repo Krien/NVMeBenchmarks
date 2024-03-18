@@ -16,9 +16,6 @@
 [submodule "submodules/libzbd"]
 	path = submodules/libzbd
 	url = git@github.com:westerndigitalcorporation/libzbd.git
-[submodule "submodules/f2fs-tools"]
-	path = submodules/f2fs-tools
-	url = git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs-tools.git
 [submodule "submodules/zbdbench"]
 	path = submodules/zbdbench
 	url = https://github.com/westerndigitalcorporation/zbdbench
