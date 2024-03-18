@@ -12,8 +12,9 @@ Experiments and plots can be run on seperate machines.
 
 ### For running the benchmarks
 
-The experiments are only tested on Ubuntu 20 with Linux 5.17. Please run `./setup_deps.sh` and use the exact versions of the tools specified.
-You do not need any of the python dependencies listed in the "requirements.txt" to run the code, just Python >= 3.8.
+The experiments are only tested on Ubuntu 20 with Linux 5.17. We do not guarantee functionality on other OS configurations.
+To setup the dependencies of our framework, please run [./setup_deps.sh](./setup_deps.sh).
+To use the tools it the dependencies in  [requirements.txt](./requirements.txt) are not needed, the only requirement is Python >= 3.8. The requirement file is for the notebooks.
 
 ### For plotting (as done in the paper)
 
@@ -51,7 +52,7 @@ jupyter nbextension enable --py --sys-prefix widgetsnbextension
 * All benchmark data is maintained in [data](./data) and organized in the following format `data/engine/model_name/namespace_format/operation/concurrent_zones/queue_depth.json`
 * All run fio jobs are maintained in [jobs](./jobs) and organized in the following format `jobs/engine/model_name/namespace_format/operation/concurrent_zones/queue_depth.fio`
 * Generic/common jobs are stored in [predefined_jobs](./predefined_jobs)
-* Analysis contains `Jupyter Notebooks` for investigating/exploring the data
+* [analysis](./analysis) contains `Jupyter Notebooks` for investigating/exploring the data
 * [example_runs](example_runs) and [example_plots](example_plots) contain examples of running tests and generating plots respectively
 * Utils for running Python benchmarks are maintained in [bench_utils](./bench_utils/)
 * Utils for plotting in Python are maintained in [plot_utils](./plot_utils)
